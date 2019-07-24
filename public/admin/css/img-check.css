@@ -1,0 +1,17 @@
+/*.list-image {
+	width: 300px;
+	height: 300px;
+}*/
+
+.check
+{
+    opacity:0.5;
+    border-color: red;
+}
+
+.img-check{
+	max-height: 150px;
+}
+
+
+
