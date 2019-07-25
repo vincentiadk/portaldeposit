@@ -53,7 +53,7 @@ class UserWC extends Controller
     $req['created_by'] = Auth::user()->id;
     $req['created_at'] = now();
     $req['group_id'] = 1;
-    $pass = Str::random(8);
+    $pass = Str::random(6);
     $req['password'] = bcrypt($pass);
     $data = ['name'=>$req['name'],'email'=>$req['email'],'pass'=>$pass]; 
 
@@ -83,7 +83,7 @@ class UserWC extends Controller
 
     $req['name'] = $user->name;
 
-    $pass = Str::random(8);
+    $pass = Str::random(6);
     $data = ['name'=>$req['name'],'email'=>$req['email'],'pass'=>$pass]; 
 
     $res = $this->reset_password($data);
@@ -111,7 +111,7 @@ class UserWC extends Controller
 
     Mail::send('mail-regis', $data, function($message) use($data)
     {
-        $message->to($data['email'])->subject('Akun Perpustakaan Nasional Republik Indonesia');
+        $message->to($data['email'])->subject('Akun Portal Deposit Perpustakaan Nasional Republik Indonesia');
     });
     return 1;
   }

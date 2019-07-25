@@ -155,7 +155,7 @@ class DepositWC extends Controller
               $file->storeAs('public/deposit/deposit'.$result_id, $file_name);
               $gal = new Galery();
               $gal->file_name = $file_name;
-              $gal->table_name = 'news';
+              $gal->table_name = 'publication';
               $gal->foreign_id = $result_id;
               $gal->created_by = Auth::user()->id;
               $gal->created_at = now();
