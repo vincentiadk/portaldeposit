@@ -176,7 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         
         //Laravel\Passport\PassportServiceProvider::class,
-        Yajra\Oci8\Oci8ServiceProvider::class,
+       // Yajra\Oci8\Oci8ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],

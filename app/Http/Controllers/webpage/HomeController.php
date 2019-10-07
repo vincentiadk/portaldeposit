@@ -21,7 +21,7 @@ class HomeController extends Controller
     $data['event'] = $this->eventNewest();
     $data['allgalerys'] = $this->allGalery();
     $data['sliders'] = $this->getSlider();
-    
+    $data['depositNewest'] = $this->depositNewest();
     return view('webpage.home', $data);
 	}
 
@@ -50,15 +50,6 @@ class HomeController extends Controller
 
   private function publikasiNewest()
   {
-
- /*  $data = Collection::latest()->where('noinduk_deposit', '!=', null)
-    ->whereIn('catalog_id',function($query){
-      $query->select('catalogs.id')->from('catalogs')
-      ->join('catalog_ruas','catalog_ruas.catalogid','=','catalogs.id')
-      ->where('tag','520')->whereRaw('LENGTH(value) > 10 ');
-    }
-    )->take(12)->get(); */
-
    $data = Catalog::whereIn('id',function($query){
       $query->select('catalogs.id')->from('catalogs')
       ->join('catalog_ruas','catalog_ruas.catalogid','=','catalogs.id')
@@ -67,16 +58,12 @@ class HomeController extends Controller
       ->where('coverurl','!=',null)
       ->where('tag','520')->whereRaw('LENGTH(value) > 10 ');
     })->latest()->take(16)->get();
- 
- /* $data = Catalog::whereHas('collections',function($query){
-    $query->where('noinduk_deposit','!=',null);
-  })->where(function($query){
-    $query->select('catalogs')->join('catalog_ruas','catalog_ruas.catalogid','=','catalogs.id')
-    ->where('tag','520')->whereRaw('LENGTH(value) > 10 ');
-  })
-  ->where('coverurl','!=',null)->latest()->take(16)->get();*/
     return $data;
 	}
+  private function depositNewest(){
+    $data = Collection::where('noinduk_deposit','!=',null)->latest()->take(10)->get();
+    return $data;
+  }
 
   private function eventNewest()
   {
