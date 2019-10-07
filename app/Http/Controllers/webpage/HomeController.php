@@ -61,7 +61,9 @@ class HomeController extends Controller
     return $data;
 	}
   private function depositNewest(){
-    $data = Collection::where('noinduk_deposit','!=',null)->latest()->take(10)->get();
+    $collectionArray = Collection::where('noinduk_deposit','!=',null)->select('catalog_id')->groupby('catalog_id','createdate')->latest()->take(20)->get()->toArray();
+    $catIds = array_column($collectionArray,'catalog_id');
+    $data = Catalog::whereIn('id',$catIds)->get();
     return $data;
   }
 
