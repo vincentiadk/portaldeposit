@@ -51,7 +51,7 @@
                     @endif
                   </div>
                   <div class="post-classic-title">
-                    <h6><a href="/{{$data['slug']}}"><b>{{substr(preg_replace('#<[^>]+>#', ' ', $data['title']), 0, 60)}}
+                    <h6><a href="/{{$data['slug']}}"><b>{!!substr(preg_replace('#<[^>]+>#', ' ', $data['title']), 0, 60)!!}
                       @if(strlen($data['title']) > 60) ... @endif
                     </b></a>
                     </h6>

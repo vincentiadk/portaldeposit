@@ -1,28 +1,5 @@
 @extends('webpage.layouts.app')
 @section('content')
-  <!-- Swiper-->
-  <!-- <section>
-    <div class="swiper-container swiper-slider swiper-slider_fullwidth bg-gray-dark" data-simulate-touch="false" data-loop="true" data-autoplay="5000" style="height:50vh;" >
-      <div class="swiper-wrapper">
-        @foreach($sliders as $slider)
-        <div class="swiper-slide" data-slide-bg="/storage/slider/{{$slider->file_name}}">
-          <div class="swiper-slide-caption text-right">
-            <div class="container">
-              <div class="row justify-content-center justify-content-xxl-end">
-                <div class="col-lg-10 col-xxl-7">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        @endforeach
-      </div>
-      <div class="swiper-pagination"></div>
-      <div class="swiper-button-prev linear-icon-chevron-left"></div>
-      <div class="swiper-button-next linear-icon-chevron-right"></div>
-    </div>
-  </section> -->
-
   <section class="section-lg bg-default" style="padding-top: 0px; padding-bottom: 0px;">
       <div class="swiper-container swiper-slider swiper-slider-custom" data-simulate-touch="false" data-loop="true" data-autoplay="5000" style="height:50vh;">
         <div class="swiper-wrapper">
@@ -31,18 +8,6 @@
             <div class="swiper-slide-caption"></div>
           </div>
           @endforeach
-          <!-- <div class="swiper-slide" data-slide-bg="{{asset('webpage/images/slider2.jpg')}}">
-            <div class="swiper-slide-caption"></div>
-          </div>
-          <div class="swiper-slide" data-slide-bg="{{asset('webpage/images/slider3.jpg')}}">
-            <div class="swiper-slide-caption"></div>
-          </div>
-          <div class="swiper-slide" data-slide-bg="{{asset('webpage/images/slide-4.jpg')}}">
-            <div class="swiper-slide-caption"></div>
-          </div>
-          <div class="swiper-slide" data-slide-bg="{{asset('webpage/images/slide-5.jpg')}}">
-            <div class="swiper-slide-caption"></div>
-          </div> -->
         </div>
         <!-- Swiper Pagination-->
         <div class="swiper-pagination"></div>
@@ -51,13 +16,59 @@
       </div>
   </section>
 
-
+<section class="section-xl bg-gray-lighter text-center" style="padding-top:50px">
+    <div class="container">
+      <div class="row justify-content-xl-center row-50">
+        <div class="col-xl-9">
+          <h3>Koleksi Deposit Terbaru</h3>
+        </div>
+      </div><br>
+      <div class="row row-60">
+        <div class="owl-carousel" data-items="1" data-sm-items="2" data-xl-items="6" data-dots="true" data-nav="false" data-stage-padding="15" data-margin="30" data-mouse-drag="false" data-loop="true" data-autoplay="true">
+          @foreach ($depositNewest as $data) 
+          @php $col = $data->collections->where('noinduk_deposit','!=',null)->first();  @endphp
+          <div class="owl-item pricing-table">
+            <article class="post-classic post-minimal " style="width:100%;">
+              @if($data->coverurl != null)
+                <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/{{$data->worksheet->name}}/{{$data->coverurl}}" style="min-height:200px; max-height:200px; min-width:160px; max-width:160px"/>
+              @else
+                <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" style="min-height:200px; max-height:200px; min-width:160px; max-width:160px"/>
+              @endif
+              <div class="post-classic-title" style="height: 66px;">
+                <p style="text-align: left; font-size:13px ;">
+                  <a href="/wajibserah/terbitan/{{$data->id}}">
+                    <b>
+                        {{$data['title']}}
+                    </b>
+                  </a>
+                </p>
+              </div>
+              <div class="post-meta" style="height: 66px;"> 
+                <div class="group" style="text-align: justify; font-size:12px">
+                  <p class="post-classic-body"> 
+                     @if(!empty($col) && $col->master_publisher)
+                    <a href="/wajibserah/detail?id={{$col->publisher_id}}">
+                      {{$col->master_publisher->publisher_name}}
+                      {{$data->publishyear}}
+                       
+                    </a>
+                     @endif
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+          @endforeach
+        </div>
+      </div>  
+    </div>
+  </section>
 
   <section class="section-xl bg-gray-lighter text-center" style="padding-top:50px">
     <div class="container">
       <div class="row justify-content-xl-center row-50">
         <div class="col-xl-9">
-          <h3>Koleksi Deposit Terbaru</h3>
+          <h3>Koleksi Berabstrak</h3>
         </div>
       </div><br>
       <div class="row row-60">
@@ -74,8 +85,8 @@
               <div class="post-classic-title" style="height: 36px;">
                 <p style="text-align: left; font-size:13px ;">
                   <a href="/wajibserah/terbitan/{{$data->id}}">
-                    <b>{{substr(preg_replace('#<[^>]+>#', ' ', $data['title']), 0, 30)}}
-                        @if(strlen($data['title']) > 30)... @endif
+                    <b>{{substr(preg_replace('#<[^>]+>#', ' ', $data['title']), 0, 40)}}
+                        @if(strlen($data['title']) > 40)... @endif
                     </b>
                   </a>
                 </p>
