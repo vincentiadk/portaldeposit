@@ -270,7 +270,7 @@ class WajibserahController extends Controller
    if($search!=""){
      $data->where(DB::raw('lower(publisher_name)'),'LIKE',strtolower('%'.$search.'%'));
    }
-    return $data->paginate(24)->appends(\Request::only(['search','type','propinsi','page']))->setPath('');
+    return $data->paginate(45)->appends(\Request::only(['search','type','propinsi','page']))->setPath('');
   }
 
   private function getCollection($page, $search, $id){

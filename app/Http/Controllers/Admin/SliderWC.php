@@ -22,7 +22,7 @@ class SliderWC extends Controller
   function update(Request $request){
 
     $files_error=0;
-
+    $status=0;
   	if ($request->has('delete_id')) {
       	foreach ($request->delete_id as $did) {
         	$file = Galery::find($did);
@@ -33,13 +33,13 @@ class SliderWC extends Controller
        
   	    }
 	}
-
 	if($request->hasFile('files'))
   	{
+
      	$files = $request->file('files');
       	$format = array('jpg','jpeg','png');
       	foreach ($files as $file) {
-        	if ($file->getSize()> 10000000) {
+        	if ($file->getSize() > 100000000) {
           		$files_error++;
         	}
         	else if (!in_array($file->getClientOriginalExtension(), $format)) {
@@ -54,9 +54,10 @@ class SliderWC extends Controller
           		$gal->created_by = Auth::user()->id;
           		$gal->created_at = now();
           		$gal->save();
+              $status=1;
         	}
       	}
   	}
-    return back()->with(["status"=>1,'files_error'=>$files_error]);
+    return back()->with(["status"=>$status,'files_error'=>$files_error]);
   }
 }
