@@ -108,7 +108,7 @@ class HomeController extends Controller
 
     private function publication()
     {
-        $data = Publication::latest()->take(6)->get();
+        $data = Publication::where('is_status','published')->latest()->take(6)->get();
         return $data;
     }
 }
