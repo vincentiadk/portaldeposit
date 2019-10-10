@@ -160,7 +160,7 @@
                 <span class="section-title uppercase white">Koleksi Deposit Terbaru</span>
                 <div class="testmonial_slider">
                     <ul class="slides">
-                        @foreach ($depositNewest->chunk(4) as $depost4) 
+                        @foreach($depositNewest->chunk(4) as $depost4) 
                         <li>
                            @foreach($depost4->chunk(2) as $depost2)
                            <div class="row">
@@ -173,6 +173,11 @@
                             if(preg_match('/[$]a(.*?)[$]/',$titles, $match)==1) 
                             {
                                 $title = trim($match[1]);
+                            } else if(preg_match('/[$]a(.*)/',',$titles, $match)==1) {
+                                        $title = trim($match[1]);
+                                    }
+                            } else {
+                            $title = $data->title;
                             }
                             @endphp
 
@@ -216,13 +221,14 @@
                 <aside>
                     <div class="widget">
                         <ul class="recent-posts">
-                            @foreach ($news as $new)
-                            @php $image = $new->images()->where('table_name','news')->first() @endphp
+                            @foreach($news as $new)
+                            @php $image = $new->images()->where("table_name","news")->first()
+                            @endphp
                             <li><a href="/{{$new->slug}}">
                                 @if($image)
-                                <img data-src="/storage/berita/berita{{$new->id}}/{{$image->file_name}}" alt="{!!$new->title!!}" class="lazy">
+                                <img data-src="/storage/berita/berita{{$new->id}}/{{$image->file_name}}" alt="{!!$new->title!!}" class="lazy" style="width:50px; height:50px;">
                                 @else 
-                                <img data-src=" {{asset('webpage/images/noimage.png')}} " alt="{!!$new->title!!}" class="lazy">
+                                <img data-src=" {{asset('/webpage/images/noimage.png')}} " alt="{!!$new->title!!}" class="lazy" style="width:50px; height:50px;">
                                 @endif
                                 {!!$new->title!!}</a>
                                 <div class="clear">
@@ -302,14 +308,14 @@
     <div class="container">
         <div class="row">
             @foreach($publication as $pub)
-            @php $image = $new->images()->where('table_name','publication')->first() @endphp
+            @php $image = $pub->images()->where("table_name","publication")->first() @endphp
             <div class="span2">
                 @if($image)
                 <img data-src="/storage/deposit/deposit{{$pub->id}}/{{$image->file_name}}" class="lazy" />
                 @else
                 <img data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" class=" lazy" />
                 @endif
-                <p><strong>Title Publikasi</strong></p>
+                <p><strong>{{$pub->title}}</strong></p>
             </div>
             @endforeach
         </div>

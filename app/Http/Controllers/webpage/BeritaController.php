@@ -41,12 +41,19 @@ class BeritaController extends Controller
   private function newsNewest(Request $req)
   {
 
-    $data = News::with('createdBy')->orderBy('created_at', 'desc')->where('status', 'published');
+  /*  $data = News::with('createdBy')->orderBy('created_at', 'desc')->where('status', 'published');
     if ($req->type != "") $data->where('type', $req->type);
     $data->where(DB::raw('lower(title)'), 'like', '%'.strtolower($req->search).'%');
     $data =collect($data->Paginate(10));
     
-    return (object) $data->all();
+    return (object) $data->all(); */
+
+
+    $data = News::where('status','published');
+    if ($req->type != "") $data->where('type', $req->type);
+    $data->where(DB::raw('lower(title)'), 'like', '%'.strtolower($req->search).'%');
+    $data->latest()->take(5)->get();
+    return $data;
   }
 
   //view detail berita

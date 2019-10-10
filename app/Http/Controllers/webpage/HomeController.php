@@ -23,7 +23,7 @@ class HomeController extends Controller
         $data['sliders'] = $this->getSlider();
         $data['depositNewest'] = $this->depositNewest();
         $data['publication']= $this->publication();
-        return view('web.home', $data);
+        return view('web.home', compact($data));
     }
 
     public function faq()
@@ -45,7 +45,7 @@ class HomeController extends Controller
 
     private function newsNewest()
     {
-        $data = News::where('status', 'published')->orderby('created_at', 'desc')->take(3)->get();
+        $data = News::where('status', 'published')->latest()->take(5)->get();
         return $data;
     } 
 
