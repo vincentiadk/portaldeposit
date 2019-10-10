@@ -18,10 +18,14 @@ class BeritaController extends Controller
         if ($req->type != "") {
            $newest =  $newest->where('type', $req->type);
            $datas['type'] = $req->type;
+        } else {
+            $datas['type'] = "";
         }
         if ($req->search != "") {
             $newest = $newest->where(DB::raw('lower(title)'), 'like', '%'.strtolower($req->search).'%');
             $datas['search'] = $req->search;
+        } else {
+             $datas['search'] = "";
         }
         $newest = $newest->latest()->paginate(5);
         $datas['galery'] = $this->allGalery();

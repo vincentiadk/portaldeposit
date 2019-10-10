@@ -69,7 +69,7 @@
                     <select name="type" class="form-input">
                         <option value="" @if($datas['type'] == "") selected @endif>Seluruh Berita</option>
                         <option value="event" @if($datas['type'] == "event") selected @endif>Kegiatan</option>
-                        <option value="deposit" @if($datas'[type'] == "deposit") selected @endif>Deposit</option>
+                        <option value="deposit" @if($datas['type'] == "deposit") selected @endif>Deposit</option>
                     </select>
                 </div>
                 <input placeholder="Type something" type="text" class="input-medium search-query">
