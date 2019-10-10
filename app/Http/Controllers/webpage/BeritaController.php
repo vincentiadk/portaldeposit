@@ -14,16 +14,14 @@ class BeritaController extends Controller
   //view berita
     public function berita(Request $req)
     {
-       // $newest = $this->newsNewest($req);
-       
         $newest = News::where('status','published');
         if ($req->type != "") {
-            $newest->where('type', $req->type);
+           $newest =  $newest->where('type', $req->type);
         }
         if ($req->search != "") {
-            $newest->where(DB::raw('lower(title)'), 'like', '%'.strtolower($req->search).'%');
+            $newest = $newest->where(DB::raw('lower(title)'), 'like', '%'.strtolower($req->search).'%');
         }
-        $newest->latest()->paginate(5);
+        $newest = $newest->latest()->paginate(5);
         $datas['galery'] = $this->allGalery();
         return view('web.berita',compact('datas','newest'));
     }
