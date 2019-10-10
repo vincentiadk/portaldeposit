@@ -2476,7 +2476,8 @@ img.alignright{
 .mini-layout.fluid,  .mini-layout .mini-layout-body {
 	background:rgba(255,255,255,0);
 	color:#fff;
-
+  height: auto;
+  padding-bottom: 20px;
 }
 .mini-layout{
 	margin-bottom:0px;
