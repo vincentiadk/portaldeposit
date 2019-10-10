@@ -168,7 +168,9 @@
                             @foreach($depost2 as $data)
                             @php 
                             $cols = $data->collections->where('noinduk_deposit','!=',null);
-                            $col = $cols[0];
+                            if($cols->count() > 0){
+                                $col = $cols->first();
+                            }
                             $titles = $data->catalog_ruas->where('tag','245')->first()->value;
                             $isbns = $data->catalog_ruas->where('tag','020')->first();
                             $issns = $data->catalog_ruas->where('tag','022')->first();
@@ -186,18 +188,18 @@
                             $title = str_replace(['/',':'], '',$title);
 
                             if($isbns){
-                                if(preg_match('/[$]a(.*?)[$]/',$isbns, $match)==1) 
+                                if(preg_match('/[$]a(.*?)[$]/',$isbns->value, $match)==1) 
                                 {
                                     $isbn = trim($match[1]);
-                                } else if(preg_match('/[$]a(.*)/', $isbns, $match)==1) {
+                                } else if(preg_match('/[$]a(.*)/', $isbns->value, $match)==1) {
                                     $isbn = trim($match[1]);
                                 }
                             }
 
                             if($issns){
-                                if(preg_match('/[$]a(.*?)[$]/',$issns, $match)==1) {
+                                if(preg_match('/[$]a(.*?)[$]/',$issns->value, $match)==1) {
                                     $issn = trim($match[1]);
-                                } else if(preg_match('/[$]a(.*)/', $issns, $match)==1) {
+                                } else if(preg_match('/[$]a(.*)/', $issns->value, $match)==1) {
                                     $issn = trim($match[1]);
                                 }
                             }
@@ -213,20 +215,26 @@
                                     @endif
                                 </div>
                                 <div class="mini-layout-body white_section">
-                                    <a href="/wajibserah/terbitan/{{$data->id}}"><h3>{{$title}}</h3></a>
+                                    <a href="/wajibserah/terbitan/{{$data->id}}">
+                                        <h3>
+                                            {{ $title }}
+                                        </h3>
+                                    </a>
                                     <p class="left">
                                         @if(!empty($col) && $col->master_publisher)
                                         <a href="/wajibserah/detail?id={{$col->publisher_id}}" style="color: rgba(255, 255, 255, 0.7)">
                                             {{$col->master_publisher->publisher_name}} - {{$data->publishyear}}
                                         </a>
-                                        @endif {{ $data->worksheet->name }}
+                                        @endif 
+                                        <br/>
+                                        <i class="icon-info">{{ $data->worksheet->name }}</i>
                                         @if($isbn != "")
-                                        <i>ISBN {{ $isbn }} </i>
+                                        <i class="icon-barcode"> ISBN {{ $isbn }} </i>
                                         @endif
                                         @if($issn != "")
-                                        <i>ISSN {{ $issn }} </i>
+                                        <i class="icon-barcode"> ISSN {{ $issn }} </i>
                                         @endif
-                                        {{ $cols->count() }}  Copy  
+                                        <i class="icon-book"> {{ $cols->count() }}  Copy  </i>
                                         <br/>
                                     Tgl Terima <span class="date"><i class="icon-calendar"></i> {{ $col->createdate }} </span> 
                                     </p>
