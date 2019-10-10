@@ -174,10 +174,10 @@
                             {
                                 $title = trim($match[1]);
                             } else if(preg_match('/[$]a(.*)/',',$titles, $match)==1) {
-                                        $title = trim($match[1]);
-                                    }
-                            } else {
-                            $title = $data->title;
+                                    $title = trim($match[1]);
+                            }
+                            else {
+                                $title = $data->title;
                             }
                             @endphp
 
