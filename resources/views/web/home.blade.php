@@ -162,8 +162,9 @@
                     <ul class="slides">
                      @foreach ($depositNewest->chunk(4) as $depost4) 
                      <li>
-                        @foreach($depost4->chunk(2) as $data)
-                        @php $col = $data->collections->where('noinduk_deposit','!=',null)->first();  @endphp
+                        @foreach($depost4 as $data)
+                        @php $col = $data->collections->where('noinduk_deposit','!=',null)->first(); $i=0; @endphp
+                        @if($i < 2)
                         <div class="row">
                             <div class="mini-layout fluid span6 ebook">
                                 <div class="mini-layout-sidebar">
@@ -185,6 +186,10 @@
                                 </div>
                             </div>
                         </div>
+                        @php $i++ @endphp
+                        @else 
+                        @php $i=0; @endphp
+                        @endif
                         @endforeach
                     </li>
                     @endforeach
