@@ -3,7 +3,7 @@
 <section id="intro">
     <div class="container">
         <div class="row">
-         <div class="span12">
+           <div class="span12">
             <!-- start flexslider -->
             <div class="flexslider">
                 <ul class="slides">
@@ -116,23 +116,6 @@
                         </div>
                         <div class="span4">
                             <div class="features">
-
-                                <div class="icon">
-                                    <i class="icon-bg-dark icon-circled icon-facetime-video icon-5x"></i>
-                                </div>
-                                <div class="features_content">
-                                    <h3>ISRC</h3>
-                                    <p class="left">
-                                        International Standart Record Code (ISRC) adalah kode pelacakan musik yang memverifikasi informasi rekaman terkait, termasuk nama artis, judul lagu, judul album, label nama, UPC (Universal Product Code). Kode ISRC digunakan untuk mengidentifikasi lagu individual di album
-                                    </p>
-                                    <a href="https://isrc.perpusnas.go.id" target="_blank"> <span class="btn btn-primary btn-rounded" target="_blank"><i class="icon-angle-right"></i> Go To Site</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="span4">
-                            <div class="features">
                                 <div class="icon">
                                     <i class="icon-bg-green icon-circled icon-suitcase icon-5x"></i>
                                 </div>
@@ -141,8 +124,24 @@
                                     <p class="left">
                                         Sistem untuk penyerahan dan penghimpunan KCKR secara online
                                     </p>
-                                    <a href="https://isrc.perpusnas.go.id" target="_blank">    
+                                    <a href="https://edeposit.perpusnas.go.id" target="_blank">    
                                         <span class="btn btn-primary btn-rounded" ><i class="icon-angle-right"></i> Go To Site</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="span4">
+                                <div class="features">
+                                    <div class="icon">
+                                        <i class="icon-bg-dark icon-circled icon-facetime-video icon-5x"></i>
+                                    </div>
+                                    <div class="features_content">
+                                        <h3>ISRC</h3>
+                                        <p class="left">
+                                            International Standart Record Code (ISRC) adalah kode pelacakan musik yang memverifikasi informasi rekaman terkait, termasuk nama artis, judul lagu, judul album, label nama, UPC (Universal Product Code). Kode ISRC digunakan untuk mengidentifikasi lagu individual di album
+                                        </p>
+                                        <a href="https://isrc.perpusnas.go.id" target="_blank"> <span class="btn btn-primary btn-rounded" target="_blank"><i class="icon-angle-right"></i> Go To Site</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -162,8 +161,8 @@
                     <ul class="slides">
                         @foreach($depositNewest->chunk(6) as $depost4) 
                         <li>
-                           @foreach($depost4->chunk(3) as $depost2)
-                            <div class="row">
+                         @foreach($depost4->chunk(3) as $depost2)
+                         <div class="row">
 
                             @foreach($depost2 as $data)
                             @php 
@@ -178,71 +177,71 @@
                             {
                                 $title = trim($match[1]);
                             } else if(preg_match('/[$]a(.*)/', $titles, $match)==1) {
-                                $title = trim($match[1]);
-                            }
-                            else {
-                                $title = $data->title;
-                            }
-                            $title = str_replace(['/',':'], '',$title);
+                            $title = trim($match[1]);
+                        }
+                        else {
+                        $title = $data->title;
+                    }
+                    $title = str_replace(['/',':'], '',$title);
 
-                            if($isbns){
-                                if(preg_match('/[$]a(.*?)[$]/',$isbns, $match)==1) 
-                                {
-                                    $isbn = trim($match[1]);
-                                } else if(preg_match('/[$]a(.*)/', $isbns, $match)==1) {
-                                    $isbn = trim($match[1]);
-                                }
-                            }
+                    if($isbns){
+                    if(preg_match('/[$]a(.*?)[$]/',$isbns, $match)==1) 
+                    {
+                        $isbn = trim($match[1]);
+                    } else if(preg_match('/[$]a(.*)/', $isbns, $match)==1) {
+                    $isbn = trim($match[1]);
+                }
+            }
 
-                            if($issns){
-                                if(preg_match('/[$]a(.*?)[$]/',$issns, $match)==1) {
-                                    $issn = trim($match[1]);
-                                } else if(preg_match('/[$]a(.*)/', $issns, $match)==1) {
-                                    $issn = trim($match[1]);
-                                }
-                            }
+            if($issns){
+            if(preg_match('/[$]a(.*?)[$]/',$issns, $match)==1) {
+            $issn = trim($match[1]);
+        } else if(preg_match('/[$]a(.*)/', $issns, $match)==1) {
+        $issn = trim($match[1]);
+    }
+}
 
-                            @endphp
+@endphp
 
-                            <div class="mini-layout fluid span4 ebook">
-                                <div class="mini-layout-sidebar">
-                                    @if($data->coverurl != null)
-                                    <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/{{$data->worksheet->name}}/{{$data->coverurl}}" />
-                                    @else
-                                    <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" />
-                                    @endif
-                                </div>
-                                <div class="mini-layout-body white_section">
-                                    <a href="/wajibserah/terbitan/{{$data->id}}"><h3>{{$title}}</h3></a>
-                                    <p class="left">
-                                        @if(!empty($col) && $col->master_publisher)
-                                        <a href="/wajibserah/detail?id={{$col->publisher_id}}" style="color: rgba(255, 255, 255, 0.7)">
-                                            {{$col->master_publisher->publisher_name}} - {{$data->publishyear}}
-                                        </a>
-                                        @endif {{ $data->worksheet->name }}
-                                        @if($isbn != "")
-                                        <i>ISBN {{ $isbn }} </i>
-                                        @endif
-                                        @if($issn != "")
-                                        <i>ISSN {{ $issn }} </i>
-                                        @endif
-                                        {{ $cols->count() }}  Copy  
-                                        <br/>
-                                    Tgl Terima <span class="date"><i class="icon-calendar"></i> {{ $col->createdate }} </span> 
-                                    </p>
-                                </div>
-                            </div>
-
-                            @endforeach
-                            </div>
-                        @endforeach
-                        </li>
-                    @endforeach
-                    </ul>
-                </div>
-            </div>
-        </div>
+<div class="mini-layout fluid span4 ebook">
+    <div class="mini-layout-sidebar">
+        @if($data->coverurl != null)
+        <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/{{$data->worksheet->name}}/{{$data->coverurl}}" />
+        @else
+        <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" />
+        @endif
     </div>
+    <div class="mini-layout-body white_section">
+        <a href="/wajibserah/terbitan/{{$data->id}}"><h3>{{$title}}</h3></a>
+        <p class="left">
+            @if(!empty($col) && $col->master_publisher)
+            <a href="/wajibserah/detail?id={{$col->publisher_id}}" style="color: rgba(255, 255, 255, 0.7)">
+                {{$col->master_publisher->publisher_name}} - {{$data->publishyear}}
+            </a>
+            @endif {{ $data->worksheet->name }}
+            @if($isbn != "")
+            <i>ISBN {{ $isbn }} </i>
+            @endif
+            @if($issn != "")
+            <i>ISSN {{ $issn }} </i>
+            @endif
+            {{ $cols->count() }}  Copy  
+            <br/>
+            Tgl Terima <span class="date"><i class="icon-calendar"></i> {{ $col->createdate }} </span> 
+        </p>
+    </div>
+</div>
+
+@endforeach
+</div>
+@endforeach
+</li>
+@endforeach
+</ul>
+</div>
+</div>
+</div>
+</div>
 </section>
 
 <section>
@@ -343,12 +342,12 @@
             @php $image = $pub->images()->where("table_name","publication")->first(); @endphp
             <div class="span2">
                 <a href="/publication/{{$pub->id}}">
-                @if($image)
-                <img data-src="/storage/deposit/deposit{{$pub->id}}/{{$image->file_name}}" class="lazy ebook" />
-                @else
-                <img data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" class="lazy ebook" />
-                @endif
-                <p><strong>{{ $pub->title }}</strong></p>
+                    @if($image)
+                    <img data-src="/storage/deposit/deposit{{$pub->id}}/{{$image->file_name}}" class="lazy ebook" />
+                    @else
+                    <img data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" class="lazy ebook" />
+                    @endif
+                    <p><strong>{{ $pub->title }}</strong></p>
                 </a>
             </div>
             @endforeach
