@@ -22,12 +22,6 @@
 								<option value="Pemerintah" @if($type == "Pemerintah") selected @endif>Pemerintah</option>
 								<option value="Swasta" @if($type == "Swasta") selected @endif>Swasta</option>
 							</select>
-							<select name="propinsi" clas="input-medium">
-								<option value="">Seluruh Propinsi</option>
-								@foreach($props as $prop)
-								<option value="{{$prop->code}}" @if($prop->code==$propinsi) selected @endif>{{$prop->namapropinsi}}</option>
-								@endforeach
-							</select>
 							<input placeholder="Ketik Sesuatu.." type="text" name="search" class="input-medium search-query" value="{{$search}}">
 							<button type="submit" class="btn btn-flat btn-color">Search</button>
 						</form>
@@ -36,7 +30,7 @@
 			</div>
 		</div>
 		@foreach($data->chunk(4) as $dat4)
-		<div class="row">
+		<div class="row-fluid">
 			@foreach($dat4 as $dat)
 			@php 
 				$cols = $dat->collections->where('noinduk_deposit','!=',null);
@@ -74,7 +68,7 @@
 					}
 				}
 			@endphp
-			<div class="mini-layout fluid span4 ebook">
+			<div class="mini-layout fluid span3 ebook">
 				<div class="mini-layout-sidebar">
 					@if($dat->coverurl != null)
 					<img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/{{$dat->worksheet->name}}/{{$dat->coverurl}}" />
@@ -82,20 +76,20 @@
 					<img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" />
 					@endif
 				</div>
-				<div class="mini-layout-body white_section">
-					<a href="/wajibserah/terbitan/{{$dat->id}}">
-						<h3>
+				<div class="mini-layout-body">
+					<a href="/wajibserah/terbitan/{{$dat->id}}" >
+						<h3 style="color:#000">
 							{{ $title }}
 						</h3>
 					</a>
-					<p class="left">
+					<p class="left"  style="color:#000">
 						@if(!empty($col) && $col->master_publisher)
-						<a href="/wajibserah/detail?id={{$col->publisher_id}}" style="color: rgba(255, 255, 255, 0.7)">
-							{{$col->master_publisher->publisher_name}} - {{$data->publishyear}}
+						<a href="/wajibserah/detail?id={{$col->publisher_id}}"  style="color:#000">
+							{{$col->master_publisher->publisher_name}} - {{$dat->publishyear}}
 						</a>
 						@endif 
 						<br/>
-						<i class="icon-info">{{ $data->worksheet->name }}</i>
+						<i class="icon-info">{{ $dat->worksheet->name }}</i>
 						@if($isbn != "")
 						<i class="icon-barcode"> ISBN {{ $isbn }} </i>
 						@endif
@@ -111,7 +105,8 @@
 			@endforeach
 		</div>
 		@endforeach
+		{{$data->links()}}
 	</div>
-{{$data->links()}}
+
 </section>
 @endsection
