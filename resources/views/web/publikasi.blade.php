@@ -52,7 +52,7 @@
 			@endforeach
 		</div>
 		@endforeach
-		{{$pub->links()}}
+		{{$data->links()}}
 	</div>
 </section>
 @endsection

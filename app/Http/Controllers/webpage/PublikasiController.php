@@ -50,7 +50,7 @@ class PublikasiController extends Controller
     $data['allgalerys'] = $this->allGalery();
     // dd(count($data['allgalery']));
 
-    return view('webp.publikasi', $data);
+    return view('web.publikasi', $data);
 	}
 
   public function detailpublikasi($id)
@@ -75,7 +75,7 @@ class PublikasiController extends Controller
       });
     }
   
-    return $data->paginate(16);
+    return $data->paginate(18);
   }
 
   private function getDetailById($id){
