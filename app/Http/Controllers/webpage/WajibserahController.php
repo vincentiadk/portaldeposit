@@ -62,7 +62,7 @@ class WajibserahController extends Controller
     $data['kolprop'] = $this->getCountByProvinsi();
     $data['props'] = $this->getPropinsi();
 
-    return view('webpage.wajibserah', $data);
+    return view('web.wajibserah', $data);
   }
   
   public function detailwajibserah(Request $request)
