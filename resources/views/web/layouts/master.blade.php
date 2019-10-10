@@ -18,7 +18,7 @@
   <link href="/assets/css/font-awesome.css" rel="stylesheet">
   <link href="/assets/css/animate.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700" rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
   <link href="/assets/css/style.css" rel="stylesheet">
   <link href="/assets/color/color1.css" rel="stylesheet">
 

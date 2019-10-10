@@ -23,7 +23,7 @@ class HomeController extends Controller
         $data['sliders'] = $this->getSlider();
         $data['depositNewest'] = $this->depositNewest();
         $data['publication']= $this->publication();
-        return view('web.home', compact($data));
+        return view('web.home', $data);
     }
 
     public function faq()

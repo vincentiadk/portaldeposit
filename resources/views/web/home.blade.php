@@ -160,58 +160,63 @@
                 <span class="section-title uppercase white">Koleksi Deposit Terbaru</span>
                 <div class="testmonial_slider">
                     <ul class="slides">
-                        @foreach($depositNewest->chunk(4) as $depost4) 
+                        @foreach($depositNewest->chunk(6) as $depost4) 
                         <li>
-                           @foreach($depost4->chunk(2) as $depost2)
-                           <div class="row">
+                           @foreach($depost4->chunk(3) as $depost2)
+                            <div class="row">
 
                             @foreach($depost2 as $data)
                             @php 
-                            $col = $data->collections->where('noinduk_deposit','!=',null)->first();
+                            $cols = $data->collections->where('noinduk_deposit','!=',null);
+                            $col = $cols[0];
                             $titles = $data->catalog_ruas->where('tag','245')->first()->value;
                             $title = "";
                             if(preg_match('/[$]a(.*?)[$]/',$titles, $match)==1) 
                             {
                                 $title = trim($match[1]);
-                            } else if(preg_match('/[$]a(.*)/',',$titles, $match)==1) {
-                                    $title = trim($match[1]);
+                            } else if(preg_match('/[$]a(.*)/', $titles, $match)==1) {
+                                $title = trim($match[1]);
                             }
                             else {
                                 $title = $data->title;
                             }
                             @endphp
 
-                            <div class="mini-layout fluid span6 ebook">
+                            <div class="mini-layout fluid span4 ebook">
                                 <div class="mini-layout-sidebar">
                                     @if($data->coverurl != null)
-                                    <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/{{$data->worksheet->name}}/{{$data->coverurl}}"/>
+                                    <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/{{$data->worksheet->name}}/{{$data->coverurl}}" />
                                     @else
                                     <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" />
                                     @endif
                                 </div>
                                 <div class="mini-layout-body white_section">
-                                    <h3>{{$title}}</h3>
+                                    <a href="/wajibserah/terbitan/{{$data->id}}"><h3>{{$title}}</h3></a>
                                     <p class="left">
                                         @if(!empty($col) && $col->master_publisher)
                                         <a href="/wajibserah/detail?id={{$col->publisher_id}}">
                                             {{$col->master_publisher->publisher_name}} - {{$data->publishyear}}
                                         </a>
                                         @endif
-                                    </p>
+                                        {{ $cols->count() }}  Copy 
+                                        <br/>
                                     Tgl Terima <span class="date"><i class="icon-calendar"></i> {{$col->createdate}} </span> 
+                                    </p>
+                                    
+
                                 </div>
                             </div>
 
                             @endforeach
-                        </div>
+                            </div>
                         @endforeach
-                    </li>
+                        </li>
                     @endforeach
-                </ul>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </section>
 
 <section>
@@ -312,9 +317,9 @@
             @php $image = $pub->images()->where("table_name","publication")->first(); @endphp
             <div class="span2">
                 @if($image)
-                <img data-src="/storage/deposit/deposit{{$pub->id}}/{{$image->file_name}}" class="lazy" />
+                <img data-src="/storage/deposit/deposit{{$pub->id}}/{{$image->file_name}}" class="lazy ebook" />
                 @else
-                <img data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" class="lazy" />
+                <img data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" class="lazy ebook" />
                 @endif
                 <p><strong>{{ $pub->title }}</strong></p>
             </div>
