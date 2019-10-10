@@ -50,7 +50,7 @@ class PublikasiController extends Controller
     $data['allgalerys'] = $this->allGalery();
     // dd(count($data['allgalery']));
 
-    return view('webpage.publikasi', $data);
+    return view('webp.publikasi', $data);
 	}
 
   public function detailpublikasi($id)
