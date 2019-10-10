@@ -184,6 +184,7 @@
                                 $title = $data->title;
                             }
                             $title = str_replace(['/',':'], '',$title);
+
                             if($isbns){
                                 if(preg_match('/[$]a(.*?)[$]/',$isbns, $match)==1) 
                                 {
@@ -192,6 +193,7 @@
                                     $isbn = trim($match[1]);
                                 }
                             }
+
                             if($issns){
                                 if(preg_match('/[$]a(.*?)[$]/',$issns, $match)==1) {
                                     $issn = trim($match[1]);
@@ -217,19 +219,17 @@
                                         <a href="/wajibserah/detail?id={{$col->publisher_id}}" style="color: rgba(255, 255, 255, 0.7)">
                                             {{$col->master_publisher->publisher_name}} - {{$data->publishyear}}
                                         </a>
-                                        @endif &nsbnp; {{$data->worksheet->name}}
-                                        @if($isbn!="")
-                                        <i>ISBN {{$isbn}} </i>
+                                        @endif {{ $data->worksheet->name }}
+                                        @if($isbn != "")
+                                        <i>ISBN {{ $isbn }} </i>
                                         @endif
-                                        @if($issn!="")
-                                        <i>ISSN {{$issn}} </i>
+                                        @if($issn != "")
+                                        <i>ISSN {{ $issn }} </i>
                                         @endif
                                         {{ $cols->count() }}  Copy  
                                         <br/>
-                                    Tgl Terima <span class="date"><i class="icon-calendar"></i> {{$col->createdate}} </span> 
+                                    Tgl Terima <span class="date"><i class="icon-calendar"></i> {{ $col->createdate }} </span> 
                                     </p>
-                                    
-
                                 </div>
                             </div>
 
