@@ -2531,4 +2531,6 @@ section#intro{
 .slides .row{
 	margin-left:0px;
 }
-
+article.blog-post img {
+  margin-bottom:5px;
+}
