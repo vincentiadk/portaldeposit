@@ -2534,3 +2534,39 @@ section#intro{
 article.blog-post img {
   margin-bottom:5px;
 }
+
+
+                    Pgination       
+-------------------------------------------------------------*/
+#pagination {
+  margin-top: 60px;
+}
+.pagination li {
+  float: left;
+  margin-right: 4px;
+}
+.pagination li a, .pagination li a:hover, .pagination li.active a, .pagination li.disabled, .pagination li.page_of {
+  background: #fff;
+  border: 1px solid #DDDDDD;
+  color: #444444;
+  display: inline-block;
+  font-size: 13px;
+  line-height: 42px;
+  height: 43px;
+  min-width: 43px;
+  padding: 0 11px;
+  text-align: center;
+}
+.pagination li.page_of {
+  margin-right: 4px;
+}
+.pagination li.next_pagination > a, .pagination li.prev_pagination > a {
+  color: #aaa;
+}
+.pagination li a:hover, .pagination li.active a, .pagination li.next_pagination > a:hover, .pagination li.prev_pagination > a:hover {
+  background: #1ccdca;
+  border-color: #1ccdca;
+  color: #fff;
+}
+/*-------------------------------------------------------------
+ 
