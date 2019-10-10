@@ -48,9 +48,6 @@
                                             <li><a href="/rule">Pedoman dan Peraturan</a></li>
                                         </ul>
                                     </li>
-                                    <li>
-                                        <a href="/event">Kegiatan</a>
-                                    </li>
                                 </ul>
                             </nav>
                         </div>
