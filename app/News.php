@@ -17,6 +17,6 @@ class News extends Model
 
   public function images()
   {
-    return $this->hasMany('App\Galery', 'foreign_id', 'id');
+    return $this->belongsTo('App\Galery', 'foreign_id', 'id');
   }
 }
