@@ -170,7 +170,10 @@
                             $cols = $data->collections->where('noinduk_deposit','!=',null);
                             $col = $cols[0];
                             $titles = $data->catalog_ruas->where('tag','245')->first()->value;
-                            $title = "";
+                            $isbns = $data->catalog_ruas->where('tag','020')->first()->value;
+                            $issns = $data->catalog_ruas->where('tag','022')->first()->value;
+
+                            $title = ""; $isbn=""; $issn="";
                             if(preg_match('/[$]a(.*?)[$]/',$titles, $match)==1) 
                             {
                                 $title = trim($match[1]);
@@ -181,6 +184,21 @@
                                 $title = $data->title;
                             }
                             $title = str_replace(['/',':'], '',$title);
+
+                            if(preg_match('/[$]a(.*?)[$]/',$isbns, $match)==1) 
+                            {
+                                $isbn = trim($match[1]);
+                            } else if(preg_match('/[$]a(.*)/', $isbns, $match)==1) {
+                                $isbn = trim($match[1]);
+                            }
+                            
+                            if(preg_match('/[$]a(.*?)[$]/',$issns, $match)==1) 
+                            {
+                                $issn = trim($match[1]);
+                            } else if(preg_match('/[$]a(.*)/', $issns, $match)==1) {
+                                $issn = trim($match[1]);
+                            }
+
                             @endphp
 
                             <div class="mini-layout fluid span4 ebook">
@@ -198,8 +216,14 @@
                                         <a href="/wajibserah/detail?id={{$col->publisher_id}}" style="color: rgba(255, 255, 255, 0.7)">
                                             {{$col->master_publisher->publisher_name}} - {{$data->publishyear}}
                                         </a>
+                                        @endif &nsbnp; {{$data->worksheet->name}}
+                                        @if($isbn!="")
+                                        <i>ISBN {{$isbn}} </i>
                                         @endif
-                                        {{ $cols->count() }}  Copy 
+                                        @if($issn!="")
+                                        <i>ISSN {{$issn}} </i>
+                                        @endif
+                                        {{ $cols->count() }}  Copy  
                                         <br/>
                                     Tgl Terima <span class="date"><i class="icon-calendar"></i> {{$col->createdate}} </span> 
                                     </p>
