@@ -175,32 +175,33 @@
                             $issns = $data->catalog_ruas->where('tag','022')->first();
 
                             $title = ""; $isbn=""; $issn="";
-                            if(preg_match('/[$]a(.*?)[$]/',$titles, $match)==1) 
+                            if(preg_match('/[$]a(.*?)[$]/', $titles, $match) == 1) 
                             {
                                 $title = trim($match[1]);
-                            } else if(preg_match('/[$]a(.*)/', $titles, $match)==1) {
-                            $title = trim($match[1]);
+                            } else if(preg_match('/[$]a(.*)/', $titles, $match) == 1) {
+                                $title = trim($match[1]);
                             }  else {
-                            $title = $data->title;
+                                $title = $data->title;
                             }
                             $title = str_replace(['/',':'], '',$title);
 
                             if($isbns){
-                                if(preg_match('/[$]a(.*?)[$]/',$isbns->value, $match)==1) 
+                                if(preg_match('/[$]a(.*?)[$]/',$isbns->value, $match) == 1) 
                                 {
                                     $isbn = trim($match[1]);
-                                } else if(preg_match('/[$]a(.*)/', $isbns->value, $match)==1) {
+                                } else if(preg_match('/[$]a(.*)/', $isbns->value, $match) == 1) {
                                     $isbn = trim($match[1]);
                                 }
                             }
 
                             if($issns){
-                                if(preg_match('/[$]a(.*?)[$]/',$issns->value, $match)==1) {
+                                if(preg_match('/[$]a(.*?)[$]/', $issns->value, $match) == 1) {
                                     $issn = trim($match[1]);
-                                } else if(preg_match('/[$]a(.*)/', $issns->value, $match)==1) {
+                                } else if(preg_match('/[$]a(.*)/', $issns->value, $match) == 1) {
                                     $issn = trim($match[1]);
                                 }
                             }
+                            @endphp
                             <div class="mini-layout fluid span4 ebook">
                                 <div class="mini-layout-sidebar">
                                     @if($data->coverurl != null)
