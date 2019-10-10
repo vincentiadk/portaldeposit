@@ -180,6 +180,7 @@
                             else {
                                 $title = $data->title;
                             }
+                            $title = str_replace(['/',':'], '',$title);
                             @endphp
 
                             <div class="mini-layout fluid span4 ebook">
@@ -316,12 +317,14 @@
             @foreach($publication as $pub)
             @php $image = $pub->images()->where("table_name","publication")->first(); @endphp
             <div class="span2">
+                <a href="/publication/{{$pub->id}}">
                 @if($image)
                 <img data-src="/storage/deposit/deposit{{$pub->id}}/{{$image->file_name}}" class="lazy ebook" />
                 @else
                 <img data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" class="lazy ebook" />
                 @endif
                 <p><strong>{{ $pub->title }}</strong></p>
+                </a>
             </div>
             @endforeach
         </div>
