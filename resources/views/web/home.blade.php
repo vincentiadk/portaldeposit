@@ -184,9 +184,9 @@
                             <div class="mini-layout fluid span6 ebook">
                                 <div class="mini-layout-sidebar">
                                     @if($data->coverurl != null)
-                                    <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/{{$data->worksheet->name}}/{{$data->coverurl}}" alt="{{$title}}"/>
+                                    <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/{{$data->worksheet->name}}/{{$data->coverurl}}"/>
                                     @else
-                                    <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" alt="{{$title}}"/>
+                                    <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" />
                                     @endif
                                 </div>
                                 <div class="mini-layout-body white_section">
@@ -227,11 +227,11 @@
                             @endphp
                             <li><a href="/{{$new->slug}}">
                                 @if($image)
-                                <img data-src="/storage/berita/berita{{$new->id}}/{{$image->file_name}}" alt="{!!$new->title!!}" class="lazy" style="width:50px; height:50px;">
+                                <img data-src="/storage/berita/berita{{$new->id}}/{{$image->file_name}}" class="lazy" style="width:50px; height:50px;" />
                                 @else 
-                                <img data-src=" {{asset('/webpage/images/noimage.png')}} " alt="{!!$new->title!!}" class="lazy" style="width:50px; height:50px;">
+                                <img data-src="{{asset('/webpage/images/noimage.png')}}"  class="lazy" style="width:50px; height:50px;" />
                                 @endif
-                                {!!$new->title!!}</a>
+                                {{ $new->title }}</a>
                                 <div class="clear">
                                 </div>
                                 <span class="date"><i class="icon-calendar"></i> {{$new->datetime}}</span>
@@ -309,14 +309,14 @@
     <div class="container">
         <div class="row">
             @foreach($publication as $pub)
-            @php $image = $pub->images()->where("table_name","publication")->first() @endphp
+            @php $image = $pub->images()->where("table_name","publication")->first(); @endphp
             <div class="span2">
                 @if($image)
                 <img data-src="/storage/deposit/deposit{{$pub->id}}/{{$image->file_name}}" class="lazy" />
                 @else
-                <img data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" class=" lazy" />
+                <img data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" class="lazy" />
                 @endif
-                <p><strong>{{$pub->title}}</strong></p>
+                <p><strong>{{ $pub->title }}</strong></p>
             </div>
             @endforeach
         </div>
