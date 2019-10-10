@@ -25,6 +25,7 @@ class HomeController extends Controller
         $data['sliders'] = $this->getSlider();
         $data['depositNewest'] = $this->depositNewest();
         $data['publication']= $this->publication();
+
         $data['abstracts'] = $this->abstract();
         return view('web.home', $data);
     }
