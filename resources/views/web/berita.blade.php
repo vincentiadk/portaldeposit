@@ -14,7 +14,25 @@
 <section id="maincontent">
     <div class="container">
         <div class="row">
-            <div class="span8">
+            <div class="span12">
+                <aside>
+                    <div class="widget">
+                        <h4>Search widget</h4>
+                        <form class="form-search" action="/news" method="GET">
+                            <select name="type" class="input-medium">
+                                <option value="" @if($datas['type'] == "") selected @endif>Seluruh Berita</option>
+                                <option value="event" @if($datas['type'] == "event") selected @endif>Kegiatan</option>
+                                <option value="deposit" @if($datas['type'] == "deposit") selected @endif>Deposit</option>
+                            </select>
+                            <input placeholder="Type something" type="text" class="input-medium search-query">
+                            <button type="submit" class="btn btn-flat btn-color">Search</button>
+                        </form>
+                    </div>
+                </aside>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
                 <!-- start article 1 -->
                 @foreach ($newest as $new)
                 @php $image = $new->images()->where("table_name","news")->first()
@@ -43,7 +61,7 @@
                             </div>
                             <div class="clear"></div>
                         </div>
-                        <div class="span5">
+                        <div class="span9">
                             <p>
                                 @if(strlen($new->description) > 400)
                                 {!! substr($new['description'],0,400)  !!} ...
@@ -60,22 +78,7 @@
                 {{ $newest->links() }}
             </div>
 
-            <div class="span4">
-                <aside>
-                    <div class="widget">
-                        <h4>Search widget</h4>
-                        <form class="form-search" action="/news" method="GET">
-                            <select name="type" class="input-medium">
-                                <option value="" @if($datas['type'] == "") selected @endif>Seluruh Berita</option>
-                                <option value="event" @if($datas['type'] == "event") selected @endif>Kegiatan</option>
-                                <option value="deposit" @if($datas['type'] == "deposit") selected @endif>Deposit</option>
-                            </select>
-                            <input placeholder="Type something" type="text" class="input-medium search-query">
-                            <button type="submit" class="btn btn-flat btn-color">Search</button>
-                        </form>
-                    </div>
-                </aside>
-            </div>
+
         </div>
     </div>
 </section>
