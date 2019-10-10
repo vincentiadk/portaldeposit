@@ -52,7 +52,7 @@ class KoleksiController extends Controller
 	    $data['current_page'] = $data['data']->currentPage(); 
 	    $data['last_page'] = $data['data']->lastPage();
 
-    	return view('webpage.koleksi', $data);
+    	return view('web.koleksi', $data);
  	 }
   
   	public function detailkoleksi($id)
