@@ -9,7 +9,7 @@
                 <div class="span4">
                     <!-- logo -->
                     <div class="logo">
-                        <img data-src="/webpage/images/deposit.png" alt="" class="lazy" />
+                       <a href="/"> <img data-src="/webpage/images/deposit.png" alt="" class="lazy" /></a>
                     </div>
                     <!-- end logo -->
                 </div>
