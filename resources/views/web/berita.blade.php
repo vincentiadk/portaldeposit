@@ -63,8 +63,8 @@
                         </div>
                         <div class="span9">
                             <p>
-                                @if(strlen($new->description) > 400)
-                                {!! substr($new['description'],0,400)  !!} ...
+                                @if(strlen($new->description) > 500)
+                                {!! substr($new['description'],0,500)  !!} ...
                                 @else 
                                 {!! $new->description !!}
                                 @endif
