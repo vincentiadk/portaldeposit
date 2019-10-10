@@ -3,7 +3,7 @@
 <section id="intro">
     <div class="container">
         <div class="row">
-         <div class="span12">
+           <div class="span12">
             <!-- start flexslider -->
             <div class="flexslider">
                 <ul class="slides">
@@ -160,8 +160,8 @@
                 <span class="section-title uppercase white">Koleksi Deposit Terbaru</span>
                 <div class="testmonial_slider">
                     <ul class="slides">
-                       @foreach ($depositNewest->chunk(4) as $depost4) 
-                       <li>
+                     @foreach ($depositNewest->chunk(4) as $depost4) 
+                     <li>
                         @foreach($depost4->chunk(2) as $data)
                         @php $col = $data->collections->where('noinduk_deposit','!=',null)->first();  @endphp
                         <div class="row">
@@ -288,32 +288,17 @@
     <span class="section-title uppercase text-center white" style="background: #684962;padding: 20px 0px;">Publikasi Deposit</span>
     <div class="container">
         <div class="row">
-
+            @foreach($publication as $pub)
+            @php $image = $new->images()->where('table_name','publication')->first() @endphp
             <div class="span2">
-                <img data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" class="lazy" />
-                <p><strong>Title Publikasi</strong></p>
-            </div>
-            <div class="span2">
+                @if($image)
+                <img data-src="/storage/deposit/deposit{{$pub->id}}/{{$image->file_name}}" class="lazy" />
+                @else
                 <img data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" class=" lazy" />
+                @endif
                 <p><strong>Title Publikasi</strong></p>
             </div>
-            <div class="span2">
-                <img data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" class="lazy" />
-                <p><strong>Title Publikasi</strong></p>
-            </div>
-            <div class="span2">
-                <img data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" class=" lazy" />
-                <p><strong>Title Publikasi</strong></p>
-            </div>
-            <div class="span2">
-                <img data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" class=" lazy" />
-                <p><strong>Title Publikasi</strong></p>
-            </div>
-            <div class="span2">
-                <img data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" class="lazy" />
-                <p><strong>Title Publikasi</strong></p>
-            </div>
-
+            @endforeach
         </div>
         <div class="row text-center">
             <a href="/publication" class="btn btn-primary btn-rounded btn-large"> Lihat Semua Publikasi</a>
