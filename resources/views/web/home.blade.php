@@ -170,8 +170,8 @@
                             $cols = $data->collections->where('noinduk_deposit','!=',null);
                             $col = $cols[0];
                             $titles = $data->catalog_ruas->where('tag','245')->first()->value;
-                            $isbns = $data->catalog_ruas->where('tag','020')->first()->value;
-                            $issns = $data->catalog_ruas->where('tag','022')->first()->value;
+                            $isbns = $data->catalog_ruas->where('tag','020')->first();
+                            $issns = $data->catalog_ruas->where('tag','022')->first();
 
                             $title = ""; $isbn=""; $issn="";
                             if(preg_match('/[$]a(.*?)[$]/',$titles, $match)==1) 
@@ -184,19 +184,20 @@
                                 $title = $data->title;
                             }
                             $title = str_replace(['/',':'], '',$title);
-
-                            if(preg_match('/[$]a(.*?)[$]/',$isbns, $match)==1) 
-                            {
-                                $isbn = trim($match[1]);
-                            } else if(preg_match('/[$]a(.*)/', $isbns, $match)==1) {
-                                $isbn = trim($match[1]);
+                            if($isbns){
+                                if(preg_match('/[$]a(.*?)[$]/',$isbns, $match)==1) 
+                                {
+                                    $isbn = trim($match[1]);
+                                } else if(preg_match('/[$]a(.*)/', $isbns, $match)==1) {
+                                    $isbn = trim($match[1]);
+                                }
                             }
-                            
-                            if(preg_match('/[$]a(.*?)[$]/',$issns, $match)==1) 
-                            {
-                                $issn = trim($match[1]);
-                            } else if(preg_match('/[$]a(.*)/', $issns, $match)==1) {
-                                $issn = trim($match[1]);
+                            if($issns){
+                                if(preg_match('/[$]a(.*?)[$]/',$issns, $match)==1) {
+                                    $issn = trim($match[1]);
+                                } else if(preg_match('/[$]a(.*)/', $issns, $match)==1) {
+                                    $issn = trim($match[1]);
+                                }
                             }
 
                             @endphp
