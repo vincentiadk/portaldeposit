@@ -16,18 +16,17 @@
     <div class="row">
         <div class="span8">
             <!-- start article 1 -->
-            @foreach ($datas->data as $data)
-            @php $image = $data->images()->where("table_name","news")->first()
+            @foreach ($newest as $new)
+            @php $image = $new->images()->where("table_name","news")->first()
             @endphp
             <article class="blog-post">
                 <div class="post-heading">
-                    <h3><a href="/{{$data['slug']}}">{!!$data->title!!}</a></h3>
+                    <h3><a href="/{{$new['slug']}}">{!!$new->title!!}</a></h3>
                 </div>
                 <div class="row">
                     <div class="span3">
                         <div class="row-fluid">
                             <div class="span12 post-icon">
-                                <i class="icon-bg-dark icon-circled icon-file icon-3x active"></i>
                                 @if($image)
                                 <img data-src="/storage/berita/berita{{$new->id}}/{{$image->file_name}}" class="lazy img-polaroid "  />
                                 @else 
@@ -35,8 +34,10 @@
                                 @endif
                             </div>
                             <ul class="span12 post-meta">
-                                <li class="first"><i class="icon-calendar"></i><span>{{$data['datetime']}}</span></li>
-                                <li><i class="icon-user"></i><span><a href="#">{{$data['created_by']['name']}}</a></span></li>
+                                <li class="first"><i class="icon-calendar"></i><span>{{$new->datetime}}</span></li>
+                                @if($new->createdBy)
+                                <li><i class="icon-user"></i><span><a href="#">{{$new->createdBy->name}}</a></span></li>
+                                @endif
                                 <li class="last"><i class="icon-tags"></i><span><a href="#">Design</a>, <a href="#">Blog</a>, <a href="#">Tutorial</a></span></li>
                             </ul>
                         </div>
@@ -44,17 +45,20 @@
                     </div>
                     <div class="span5">
                       <p>
-                         {!! substr($data['description'],0,400) !!}
+                        @if(strlen($new->description) > 400)
+                         {!! substr($new['description'],0,400)  !!} ...
+                        @else 
+                        {!! $new->description !!}
+                        @endif
                      </p>
-                     <a href="/{{$data['slug']}}" class="btn btn-color btn-rounded">Read more</a>
+                     <a href="/{{$new['slug']}}" class="btn btn-color btn-rounded">Read more</a>
                  </div>
              </div>
          </article>
          @endforeach
          <!-- end article 1 -->
-
+         {{ $newest->links() }}
          <div class="pagination">
-            {{$datas->links()}}
             <ul>
               <li><a href="#">Prev</a></li>
               <li><a href="#">1</a></li>
