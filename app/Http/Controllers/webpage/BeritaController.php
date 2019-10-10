@@ -22,34 +22,14 @@ class BeritaController extends Controller
             $datas['type'] = "";
         }
         if ($req->search != "") {
-            $newest = $newest->where(DB::raw('lower(title)'), 'like', '%'.strtolower($req->search).'%');
+            $newest = $newest->where(DB::raw('lower(title)'), 'like', '%' . strtolower($req->search) . '%');
             $datas['search'] = $req->search;
         } else {
-             $datas['search'] = "";
+            $datas['search'] = "";
         }
         $newest = $newest->latest()->paginate(5);
         $datas['galery'] = $this->allGalery();
         return view('web.berita',compact('datas','newest'));
-
-        if ($req->search == null) 
-    {
-      $data->search = "";
-    }
-    else
-    {
-      $data->search = $req->search;
-    }
-
-    if ($req->type == null) 
-    {
-      $data->type = "";
-    }
-    else
-    {
-      $data->type = $req->type;
-    }
-    $allgalery['galery'] = $this->allGalery();
-    return view('webpage.berita')->with(['datas'=>$data, 'allgalerys' => $allgalery['galery']]);
     }
 
   //get newest berita with 10 data
