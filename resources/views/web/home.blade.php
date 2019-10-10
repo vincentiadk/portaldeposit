@@ -193,11 +193,12 @@
                                     <h3>{{$title}}</h3>
                                     <p class="left">
                                         @if(!empty($col) && $col->master_publisher)
-                                        <a href="/wajibserah/detail?id={{$col->publisher_id}}">{{$col->master_publisher->publisher_name}} - {{$data->publishyear}}
+                                        <a href="/wajibserah/detail?id={{$col->publisher_id}}">
+                                            {{$col->master_publisher->publisher_name}} - {{$data->publishyear}}
                                         </a>
                                         @endif
                                     </p>
-                                    Tgl Terima <span class="date"><i class="icon-calendar"></i> {{$col->created_at}} </span> 
+                                    Tgl Terima <span class="date"><i class="icon-calendar"></i> {{$col->createdate}} </span> 
                                 </div>
                             </div>
 
