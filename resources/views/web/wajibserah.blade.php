@@ -39,8 +39,8 @@
 			@foreach($data as $dat)
 			<a href="/wajibserah/detail?id={{$dat->publisher_id}}">
 				<div class="span2">
-					<h3>$dat['publisher_name']</h3>
-					<p>$dat['address1']</p>
+					<h3>{{$dat['publisher_name']}}</h3>
+					<p>{{$dat['address1']}}</p>
 				</div>
 			</a>
 			@endforeach
