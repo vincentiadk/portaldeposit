@@ -35,16 +35,18 @@
 				</aside>
 			</div>
 		</div>
+		@foreach($data->chunk(6) as $dat6)
 		<div class="row-fluid">
-			@foreach($data as $dat)
+			@foreach($dat6 as $dat)
 			<a href="/wajibserah/detail?id={{$dat->publisher_id}}">
 				<div class="span2">
-					<h3>{{$dat['publisher_name']}}</h3>
+					<p><strong>{{$dat['publisher_name']}}</strong></p>
 					<p>{{$dat['address1']}}</p>
 				</div>
 			</a>
 			@endforeach
 		</div>
+		@endforeach
 		{{$data->links()}}
 	</div>
 </section>
