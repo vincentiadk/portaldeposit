@@ -38,11 +38,11 @@
 </head>
 
 <body>
-    @include('layouts.header')
+    @include('web.layouts.header')
     @yield('content')
     <!-- footer   
        ================================================== -->
-       @include('layouts.footer')
+       @include('web.layouts.footer')
        <script src="/assets/js/jquery.js"></script>
        <script src="/assets/js/modernizr.js"></script>
        <script src="/assets/js/jquery.easing.1.3.js"></script>
