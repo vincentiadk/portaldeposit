@@ -28,13 +28,27 @@
 								<option value="{{$prop->code}}" @if($prop->code==$propinsi) selected @endif>{{$prop->namapropinsi}}</option>
 								@endforeach
 							</select>
-							<input placeholder="Ketik Sesuatu.." type="text" class="input-medium search-query" value="{{$search}}">
+							<input placeholder="Ketik Sesuatu.." type="text" name="search" class="input-medium search-query" value="{{$search}}">
 							<button type="submit" class="btn btn-flat btn-color">Search</button>
 						</form>
 					</div>
 				</aside>
 			</div>
 		</div>
+		@foreach($data->chunk(12) as $dat6)
+		<ul>
+			@foreach($dat6 as $dat)
+			<li>
+				<a href="/wajibserah/detail?id={{$dat->publisher_id}}">
+					<div class="span2">
+						<p><strong>{{$dat['publisher_name']}}</strong></p>
+						<p>{{$dat['address1']}}</p>
+					</div>
+				</a>
+			</li>
+			@endforeach	
+		</ul>
+		@endforeach
 		@foreach($data->chunk(6) as $dat6)
 		<div class="row-fluid">
 			@foreach($dat6 as $dat)
