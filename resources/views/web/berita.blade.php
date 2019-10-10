@@ -4,7 +4,7 @@
 <section id="subintro">
     <div class="container">
         <div class="row">
-            <div class="span4">
+            <div class="span12">
                 <h3>Berita <strong> Direktorat Deposit Bahan Pustaka</strong></h3>
             </div>
         </div>
@@ -17,7 +17,7 @@
             <div class="span12">
                 <aside>
                     <div class="widget">
-                        <h4>Search widget</h4>
+                        <h4>Telusuri Berita</h4>
                         <form class="form-search" action="/news" method="GET">
                             <select name="type" class="input-medium">
                                 <option value="" @if($datas['type'] == "") selected @endif>Seluruh Berita</option>
