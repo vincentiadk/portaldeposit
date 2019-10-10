@@ -2568,5 +2568,8 @@ article.blog-post img {
   border-color: #1ccdca;
   color: #fff;
 }
+.pagination ul > li > span {
+    border: none;
+}
 /*-------------------------------------------------------------
  
