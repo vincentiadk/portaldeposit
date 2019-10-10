@@ -66,7 +66,7 @@ class HomeController extends Controller
             ->select('catalog_id')
             ->groupby('catalog_id','createdate')
             ->latest()
-            ->take(20)
+            ->take(24)
             ->get()
             ->toArray();
         $catIds = array_column($collectionArray,'catalog_id');
