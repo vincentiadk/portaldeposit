@@ -162,18 +162,19 @@
                     <ul class="slides">
                      @foreach ($depositNewest->chunk(4) as $depost4) 
                      <li>
+                        <div class="row">
                         @foreach($depost4->chunk(2) as $depost2)
                         @foreach($depost2 as $data)
                         @php 
                         $col = $data->collections->where('noinduk_deposit','!=',null)->first();
                         $titles = $data->catalog_ruas->where('tag','245')->first()->value;
                         $title = "";
-                        if(preg_match('[$]a(.*?)[$]/',$titles, $match)==1) 
+                        if(preg_match('/[$]a(.*?)[$]/',$titles, $match)==1) 
                         {
                             $title = trim($match[1]);
                         }
                         @endphp
-                        <div class="row">
+                        
                             <div class="mini-layout fluid span6 ebook">
                                 <div class="mini-layout-sidebar">
                                     @if($data->coverurl != null)
@@ -193,8 +194,9 @@
                                     Tgl Terima <span class="date"><i class="icon-calendar"></i> {{$col->created_at}}</span> 
                                 </div>
                             </div>
-                        </div>
+                        
                         @endforeach
+                        </div>
                         @endforeach
                     </li>
                     @endforeach
