@@ -14,7 +14,7 @@
 		<div class="row">
 			<div class="span12">
 				<div class="row-fluid">
-					<div class="span12">
+					<div class="span8">
 						<aside>
 							<div class="widget">
 								<h4>Detail Wajib Serah</h4>
