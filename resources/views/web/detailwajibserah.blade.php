@@ -124,32 +124,31 @@
 					<div class="widget">
 						<h4>Download Data Terbitan</h4>
 						<form class="form-search" action="/wajibserah/download" method="GET">
-							<div class="row">
-								<select class="input-medium" name="month">
-									<option value="01">Januari</option>
-									<option value="02">Februari</option>
-									<option value="03">Maret</option>
-									<option value="04">April</option>
-									<option value="05">Mei</option>
-									<option value="06">Juni</option>
-									<option value="07">Juli</option>
-									<option value="08">Agustus</option>
-									<option value="09">September</option>
-									<option value="10">Oktober</option>
-									<option value="11">November</option>
-									<option value="12">Desember</option>
-								</select>
-							</div>
-							<div class="row">
-								<input type="text" name="ids" autocomplete="off" value="{{$id}}" hidden>
-								<input type="type" name="type" autocomplete="off" value="filter" hidden>
-								<input class="input-medium" type="text" name="year" autocomplete="off" value="2019">
-							</div>
+
+							<select class="input-medium" name="month">
+								<option value="01">Januari</option>
+								<option value="02">Februari</option>
+								<option value="03">Maret</option>
+								<option value="04">April</option>
+								<option value="05">Mei</option>
+								<option value="06">Juni</option>
+								<option value="07">Juli</option>
+								<option value="08">Agustus</option>
+								<option value="09">September</option>
+								<option value="10">Oktober</option>
+								<option value="11">November</option>
+								<option value="12">Desember</option>
+							</select>
+
+							<input type="hidden" name="ids" autocomplete="off" value="{{$id}}" >
+							<input type="hidden" name="type" autocomplete="off" value="filter" >
+							<input class="input-medium" type="text" name="year" autocomplete="off" value="2019">
+
 							<button class="btn btn-info" name="filter" type="submit" style="width: 100%;">Download <i class="icon-file-excel-o"></i></button>
 						</form>
 						<form class="form-search" action="/wajibserah/download" method="GET" data-search-live="rd-search-results-live">
-							<input type="text" name="ids" autocomplete="off" value="{{$id}}" hidden>
-							<input type="type" name="type" autocomplete="off" value="all" hidden>
+							<input type="hidden" name="ids" autocomplete="off" value="{{$id}}" >
+							<input type="hidden" name="type" autocomplete="off" value="all" >
 							<button class="btn btn-info" name="all" type="submit" style="width: 100%">Download Seluruh Terbitan <i class="fa fa-file-excel-o"></i></button>
 						</form>
 					</div>
