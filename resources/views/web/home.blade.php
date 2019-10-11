@@ -271,7 +271,7 @@
                                 <div class="clear">
                                 </div>
                                 <span class="date"><i class="icon-calendar"></i> {{$new->datetime}}</span>
-                                <span class="comment"><i class="icon-user"></i> {{$new->created_by}}</span>
+                                <span class="comment"><i class="icon-user"></i> {{$new->createdBy->name}}</span>
                             </li>
                             @endforeach
                         </ul>
