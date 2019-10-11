@@ -57,7 +57,7 @@ class KoleksiController extends Controller
   
   	public function detailkoleksi($id)
   	{
-    	return view('webpage.detailkoleksi');
+    	return view('web.detailkoleksi');
 	}
 
   	private function getByPage(Request $request)
