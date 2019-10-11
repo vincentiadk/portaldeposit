@@ -62,7 +62,7 @@ if($abstracts){
                             <div class="widget">
                                 <h4>Cover</h4>
                                 @if($data->coverurl != null)
-                                <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/{{$detail->worksheet->name}}/{{$data->coverurl}}" />
+                                <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/{{$data->worksheet->name}}/{{$data->coverurl}}" />
                                 @else
                                 <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" />
                                 @endif
