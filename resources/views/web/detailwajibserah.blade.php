@@ -1,5 +1,14 @@
 @extends('web.layouts.master')
 @section('content')
+<section id="subintro">
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				<h3>{{$detail->publisher_name}}</strong></h3>
+			</div>
+		</div>
+	</div>
+</section>
 <section id="maincontent">
 	<div class="container">
 		<div class="row">
