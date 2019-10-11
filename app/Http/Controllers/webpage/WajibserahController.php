@@ -103,8 +103,7 @@ class WajibserahController extends Controller
     $data['last_page'] = $data['data']->lastPage();
     $data['detail'] = $this->getDetail($id);
     $data['total'] = $this->getTotal($id);
-  //  dd($request->all());die();
-    return view('webpage.detailwajibserah', $data);
+    return view('web.detailwajibserah', $data);
   }
 
   public function terbitan($id)
