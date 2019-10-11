@@ -263,9 +263,9 @@
                             @endphp
                             <li><a href="/{{$new->slug}}">
                                 @if($image)
-                                <img data-src="/storage/berita/berita{{$new->id}}/{{$image->file_name}}" class="lazy" style="width:50px; height:50px;" />
+                                <img data-src="/storage/berita/berita{{$new->id}}/{{$image->file_name}}" class="lazy" style="width:50px; height:50px;" alt="{{$new->title}}" />
                                 @else 
-                                <img data-src="{{asset('/webpage/images/noimage.png')}}"  class="lazy" style="width:50px; height:50px;" />
+                                <img data-src="{{asset('/webpage/images/noimage.png')}}"  class="lazy" style="width:50px; height:50px;" alt="{{$new->title}}" />
                                 @endif
                                 {{ $new->title }}</a>
                                 <div class="clear">
