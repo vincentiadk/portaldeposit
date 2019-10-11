@@ -93,7 +93,7 @@ class WajibserahController extends Controller
     {
         $data['data'] = $this->getCollectionById($id);
 
-        return view ('webpage.terbitan', $data);
+        return view ('web.terbitan', $data);
     }
 
     public function statistik(Request $req)
