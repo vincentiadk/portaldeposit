@@ -48,7 +48,7 @@ class BeritaController extends Controller
         $data = $this->getBySlug($slug);
         $relation_name = "news";
         $comment = $this->getComment($data->id, $relation_name);
-        $gallery = $data->images->where('table_name','news')->get();//$this->getGalery($data->id);
+        $gallery = $data->images()->where('table_name','news')->get();//$this->getGalery($data->id);
         $otherNews = $this->newsOther($data->id);
         $allgalery = $this->allGalery();
 
