@@ -159,6 +159,7 @@
 						<h4>Berita Lainnya</h4>
 						<ul class="recent-posts">
 							@foreach($otherNews as $new)
+							@php $image = $new->images()->where("table_name","news")->first(); @endphp
 							<li><a href="/{{$new->slug}}">
                                 @if($image)
                                 <img data-src="/storage/berita/berita{{$new->id}}/{{$image->file_name}}" class="lazy" alt="{{$new->title}}" style="width:50px; height:50px;" />
