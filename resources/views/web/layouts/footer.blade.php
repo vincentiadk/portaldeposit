@@ -47,17 +47,35 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="subfooter">
-            <div class="container">
-              <div class="row">
-                <div class="span6">
-                    <p>
-                        &copy; Direktorat Deposit Bahan Pustaka - Perpustakaan Nasional RI - All right reserved
-                    </p>
+                <div class="span3">
+                    Anda pengunjung ke <!-- Default Statcounter code for Deposit.perpusnas.go.id
+                    http://deposit.perpusnas.go..id -->
+                    <script type="text/javascript">
+                        var sc_project=8642761; 
+                        var sc_invisible=0; 
+                        var sc_security="b6189033"; 
+                        var scJsHost = "https://";
+                        document.write("<sc"+"ript type='text/javascript' src='" +
+                            scJsHost+
+                            "statcounter.com/counter/counter.js'></"+"script>");
+                        </script>
+                        <noscript><div class="statcounter"><a title="Web Analytics"
+                            href="https://statcounter.com/" target="_blank"><img
+                            class="statcounter"
+                            src="https://c.statcounter.com/8642761/0/b6189033/0/"
+                            alt="Web Analytics"></a></div></noscript>
+                        </div>
+                    </div>
+                </div>
+                <div class="subfooter">
+                    <div class="container">
+                      <div class="row">
+                        <div class="span6">
+                            <p>
+                                &copy; Direktorat Deposit Bahan Pustaka - Perpustakaan Nasional RI - All right reserved
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</footer>
+        </footer>
