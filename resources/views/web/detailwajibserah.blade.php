@@ -144,12 +144,12 @@
 							<input type="hidden" name="type" autocomplete="off" value="filter" >
 							<input class="input-medium" type="text" name="year" autocomplete="off" value="2019">
 
-							<button class="btn btn-info" name="filter" type="submit" style="width: 100%;">Download <i class="icon-file-excel-o"></i></button>
+							<button class="btn btn-info" name="filter" type="submit" style="width: 100%;">Download <i class=" icon-download-alt"></i></button>
 						</form>
 						<form class="form-search" action="/wajibserah/download" method="GET" data-search-live="rd-search-results-live">
 							<input type="hidden" name="ids" autocomplete="off" value="{{$id}}" >
 							<input type="hidden" name="type" autocomplete="off" value="all" >
-							<button class="btn btn-info" name="all" type="submit" style="width: 100%">Download Seluruh Terbitan <i class="fa fa-file-excel-o"></i></button>
+							<button class="btn btn-info" name="all" type="submit" style="width: 100%">Download Seluruh Terbitan <i class=" icon-download-alt"></i></button>
 						</form>
 					</div>
 				</aside>
