@@ -110,13 +110,9 @@
 			<div class="span4">
 				<aside>
 					<div class="widget">
-						<h4>Telusuri Wajib Serah</h4>
+						<h4>Telusuri Koleksi</h4>
 						<form class="form-search" action="/wajibserah/detail" method="GET" data>
-							<select name="type" class="input-medium">
-								<option value="" @if($type == "") selected @endif>Seluruh Koleksi</option>
-								<option value="Pemerintah" @if($type == "Pemerintah") selected @endif>Pemerintah</option>
-								<option value="Swasta" @if($type == "Swasta") selected @endif>Swasta</option>
-							</select>
+							<input type="hidden" name="id" value="{{$id}}">
 							<input placeholder="Ketik Sesuatu.." type="text" name="search" class="input-medium search-query" value="{{$search}}">
 							<button type="submit" class="btn btn-flat btn-color">Search</button>
 						</form>
