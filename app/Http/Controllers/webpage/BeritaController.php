@@ -87,7 +87,7 @@ class BeritaController extends Controller
   //get other newest berita
     private function newsOther($id)
     {
-        $data = News::where('status', 'published')->where('id', '!=', $id)->orderby('created_at', 'desc')->take(3)->get();
+        $data = News::where('status', 'published')->where('id', '!=', $id)->orderby('created_at', 'desc')->take(7)->get();
         return $data;
     } 
 }
