@@ -8,8 +8,9 @@ if($cols->count() > 0){
 $titles = $data->catalog_ruas->where('tag','245')->first()->value;
 $isbns = $data->catalog_ruas->where('tag','020')->first();
 $issns = $data->catalog_ruas->where('tag','022')->first();
+$abstracts = $data->catalog_ruas->where('tag','520')->first();
 
-$title = ""; $isbn=""; $issn="";
+$title = ""; $isbn=""; $issn=""; $abstract="";
 if(preg_match('/[$]a(.*?)[$]/', $titles, $match) == 1) {
     $title = trim($match[1]);
 } else if(preg_match('/[$]a(.*)/', $titles, $match) == 1) {
@@ -34,6 +35,13 @@ if($issns){
         $issn = trim($match[1]);
     }
 }
+if($abstracts){
+    if(preg_match('/[$]a(.*?)[$]/',$abstracts->value, $match) == 1) {
+        $abstract = trim($match[1]);
+    } else if(preg_match('/[$]a(.*)/', $abstracts->value, $match) == 1) {
+        $abstract = trim($match[1]);
+    }
+}
 @endphp
 <section id="subintro">
   <div class="container">
@@ -49,6 +57,17 @@ if($issns){
         <div class="row">
             <div class="span12">
                 <div class="row-fluid">
+                    <div class="span4">
+                        <aside>
+                            <div class="widget">
+                                @if($data->coverurl != null)
+                                <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/{{$detail->worksheet->name}}/{{$data->coverurl}}" />
+                                @else
+                                <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" />
+                                @endif
+                            </div>
+                        </aside>
+                    </div>
                     <div class="span8">
                         <aside>
                             <div class="widget">
@@ -72,16 +91,9 @@ if($issns){
                         </aside>
                     </div>
                     <div class="span4">
-                        <aside>
-                            <div class="widget">
-                                @if($data->coverurl != null)
-                                <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/{{$detail->worksheet->name}}/{{$data->coverurl}}" />
-                                @else
-                                <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" />
-                                @endif
-                            </div>
-                        </aside>
+                        <p>{{$abstract}}</p>
                     </div>
+
                 </div>
             </div>
         </div>
