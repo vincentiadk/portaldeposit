@@ -1,13 +1,13 @@
 @extends('web.layouts.master')
 @section('content')
 @php 
-$cols = $detail->collections->where('noinduk_deposit','!=',null);
+$cols = $data->collections->where('noinduk_deposit','!=',null);
 if($cols->count() > 0){
     $col = $cols->first();
 }
-$titles = $detail->catalog_ruas->where('tag','245')->first()->value;
-$isbns = $detail->catalog_ruas->where('tag','020')->first();
-$issns = $detail->catalog_ruas->where('tag','022')->first();
+$titles = $data->catalog_ruas->where('tag','245')->first()->value;
+$isbns = $data->catalog_ruas->where('tag','020')->first();
+$issns = $data->catalog_ruas->where('tag','022')->first();
 
 $title = ""; $isbn=""; $issn="";
 if(preg_match('/[$]a(.*?)[$]/', $titles, $match) == 1) {
@@ -15,7 +15,7 @@ if(preg_match('/[$]a(.*?)[$]/', $titles, $match) == 1) {
 } else if(preg_match('/[$]a(.*)/', $titles, $match) == 1) {
     $title = trim($match[1]);
 }  else {
-    $title = $detail->title;
+    $title = $data->title;
 }
 $title = str_replace(['/',':'], '',$title);
 
@@ -54,17 +54,19 @@ if($issns){
                             <div class="widget">
                                 <h4>Detail Koleksi</h4>
                                 <ul class="project-detail">
-                                    <li><label>Judul : </label> {{$detail->publisher_name}}</li>
-                                    <li><label>Penerbit : </label> {{$detail->address1}}</li>
-                                    <li><label>Jenis : </label> {{$detail->city}}</li>
+                                    <li><label>Judul : </label> {{$title}}</li>
+                                    <li><label>Penerbit : </label> {{$col->master_publisher->publisher_name}}</li>
+                                    <li><label>Tahun Terbit : </label> {{$data->publishyear}}</li>
+                                    <li><label>Lokasi Terbit : </label>{{$col->master_publisher->propinsi->namapropinsi}}, {{$col->master_publisher->city}}</li>
+                                    <li><label>Jenis : </label> {{$data->worksheet->name}}</li>
                                     @if($isbn != "")
                                     <li> <label> ISBN : </label>{{ $isbn }} ></li>
                                     @endif
                                     @if($issn != "")
                                     <li> <label> ISSN : </label>{{ $issn }} </li>
                                     @endif
-                                    <li><label>Provinsi : </label>{{$detail->propinsi->namapropinsi}}</li>
-                                    <li><label>Jumlah Terbitan : </label>{{$total}}</li>
+                                    
+                                    <li><label>Jumlah Eksempelar Deposit : </label>{{ $cols->count() }}  Copy</li>
                                 </ul>
                             </div>
                         </aside>
@@ -72,8 +74,8 @@ if($issns){
                     <div class="span4">
                         <aside>
                             <div class="widget">
-                                @if($detail->coverurl != null)
-                                <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/{{$detail->worksheet->name}}/{{$detail->coverurl}}" />
+                                @if($data->coverurl != null)
+                                <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/{{$detail->worksheet->name}}/{{$data->coverurl}}" />
                                 @else
                                 <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" />
                                 @endif
