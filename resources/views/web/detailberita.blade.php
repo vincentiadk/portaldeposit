@@ -53,61 +53,6 @@
 				<!-- end article full post -->
 				<h4>{{count ($comments)}} komentar</h4>
 				<ul class="media-list">
-					<li class="media">
-						<a class="pull-left" href="#">
-							<img class="img-circle" src="assets/img/small-avatar.png" alt="" />
-						</a>
-						<div class="media-body">
-							<h5 class="media-heading"><a href="#">John doe</a></h5>
-							<span>3 June, 2013</span>
-							<p>
-								Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-							</p>
-							<a href="#" class="btn btn-color btn-rounded">Reply</a>
-							<!-- Nested media object -->
-							<div class="media">
-								<a class="pull-left" href="#">
-									<img class="img-circle" src="assets/img/small-avatar.png" alt="" />
-								</a>
-								<div class="media-body">
-									<h5 class="media-heading"><a href="#">Tom slayer</a></h5>
-									<span>3 June, 2013</span>
-									<p>
-										Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-									</p>
-									<a href="#" class="btn btn-color btn-rounded">Reply</a>
-									<!-- Nested media object -->
-									<div class="media">
-										<a class="pull-left" href="#">
-											<img class="img-circle" src="assets/img/small-avatar.png" alt="" />
-										</a>
-										<div class="media-body">
-											<h5 class="media-heading"><a href="#">Erick doe</a></h5>
-											<span>3 June, 2013</span>
-											<p>
-												Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-											</p>
-											<a href="#" class="btn btn-color btn-rounded">Reply</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- Nested media object -->
-							<div class="media">
-								<a class="pull-left" href="#">
-									<img class="img-circle" src="assets/img/small-avatar.png" alt="" />
-								</a>
-								<div class="media-body">
-									<h5 class="media-heading"><a href="#">Jimmy doe</a></h5>
-									<span>3 June, 2013</span>
-									<p>
-										Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-									</p>
-									<a href="#" class="btn btn-color btn-rounded">Reply</a>
-								</div>
-							</div>
-						</div>
-					</li>
 					@foreach ($comments as $comment)
 					<li class="media">
 						<a class="pull-left" href="#">
