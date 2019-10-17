@@ -219,7 +219,7 @@
                                     <p class="left">
                                         @if(!empty($col) && $col->master_publisher)
                                         <a href="/wajibserah/detail?id={{$col->publisher_id}}" style="color: rgba(255, 255, 255, 0.7)">
-                                            {{$col->master_publisher->publisher_name}} - {{$data->publishyear}}
+                                            {{$col->master_publisher->publisher_name}} - {{$col->publishyear}}
                                         </a>
                                         @endif 
                                         <br/>

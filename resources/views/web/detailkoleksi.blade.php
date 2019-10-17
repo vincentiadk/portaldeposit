@@ -1,7 +1,7 @@
 @extends('web.layouts.master')
 @section('content')
 @php 
-$cols = $data->collections->where('noinduk_deposit','!=',null);
+$cols = $data->collections->where('category_id',4);
 if($cols->count() > 0){
     $col = $cols->first();
 }
@@ -69,6 +69,7 @@ if($abstracts){
                             </div>
                         </aside>
                     </div>
+                    @if($data->worksheet->id==1)
                     <div class="span8">
                         <aside>
                             <div class="widget">
@@ -76,7 +77,7 @@ if($abstracts){
                                 <ul class="project-detail">
                                     <li><label>Judul : </label> {{$title}}</li>
                                     <li><label>Penerbit : </label> {{$col->master_publisher->publisher_name}}</li>
-                                    <li><label>Tahun Terbit : </label> {{$data->publishyear}}</li>
+                                    <li><label>Tahun Terbit : </label> {{$col->publishyear}}</li>
                                     <li><label>Lokasi Terbit : </label>{{$col->master_publisher->propinsi->namapropinsi}}, {{$col->master_publisher->city}}</li>
                                     <li><label>Jenis : </label> {{$data->worksheet->name}}</li>
                                     @if($isbn != "")
@@ -91,6 +92,51 @@ if($abstracts){
                             </div>
                         </aside>
                     </div>
+                    @endif
+                    @if($data->worksheet->id==13)
+                    @php 
+                    $arrBerkala = DB::select(DB::raw('select edisiserial, count(edisiserial) as jumlah,acquireddate from collections where catalog_id='.$data->id.' and category_id=4 and edisiserial is not null group by edisiserial,acquireddate union all select edisiserial, count(1),acquireddate from collections where catalog_id='.$data->id.' and category_id=4 and edisiserial is null group by edisiserial,acquireddate order by edisiserial')); 
+                    @endphp
+                    <div class="span4">
+                        <aside>
+                            <div class="widget">
+                                <h4>Detail Koleksi</h4>
+                                <ul class="project-detail">
+                                    <li><label>Judul : </label> {{$title}}</li>
+                                    <li><label>Penerbit : </label> {{$col->master_publisher->publisher_name}}</li>
+                                    <li><label>Tahun Terbit : </label> {{$col->publishyear}}</li>
+                                    <li><label>Lokasi Terbit : </label>{{$col->master_publisher->propinsi->namapropinsi}}, {{$col->master_publisher->city}}</li>
+                                    <li><label>Jenis : </label> {{$data->worksheet->name}}</li>
+                                    @if($isbn != "")
+                                    <li> <label> ISBN : </label>{{ $isbn }} ></li>
+                                    @endif
+                                    @if($issn != "")
+                                    <li> <label> ISSN : </label>{{ $issn }} </li>
+                                    @endif
+                                    
+                                    <li><label>Jumlah Eksempelar Deposit : </label>{{ $cols->count() }}  Copy</li>
+                                </ul>
+                            </div>
+                        </aside>
+                    </div>
+                    <div class="span4">
+                        <aside>
+                            <div class="widget">
+                                <h4>Edisi</h4>
+                                <ul class="project-detail">
+                                @foreach($arrBerkala as $berkala)
+                                @if($berkala->edisiserial=="")
+                                    <li> Edisi tidak diketahui : {{$berkala->jumlah}} copy  </li>
+                                @else
+                                    <li> {{$berkala->edisiserial}} : {{$berkala->jumlah}} copy </li>
+                                @endif
+                                @endforeach
+                                </ul>
+                            </div>
+                        </aside>
+                    </div>
+
+                    @endif
                     <div class="span4">
                         <p>{{$abstract}}</p>
                     </div>

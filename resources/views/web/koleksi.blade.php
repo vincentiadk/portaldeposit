@@ -33,7 +33,7 @@
 		<div class="row-fluid">
 			@foreach($dat4 as $dat)
 			@php 
-				$cols = $dat->collections->where('noinduk_deposit','!=',null);
+				$cols = $dat->collections->where('category_id',4);
 				if($cols->count() > 0){
 					$col = $cols->first();
 				}

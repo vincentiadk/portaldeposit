@@ -55,14 +55,16 @@ class HomeController extends Controller
             $query->select('catalogs.id')->from('catalogs')
             ->join('catalog_ruas','catalog_ruas.catalogid','=','catalogs.id')
             ->join('collections','collections.catalog_id','=','catalogs.id')
-            ->where('collections.noinduk_deposit','!=',null)
+            ->where('collections.category_id', 4)
+            ->where('collections.acquireddate', '!=', null)
             ->where('coverurl','!=',null)
             ->where('tag','520')->whereRaw('LENGTH(value) > 10 ');
         })->latest()->take(16)->get();
         return $data;
     }
     private function depositNewest(){
-        $collectionArray = Collection::where('noinduk_deposit','!=',null)
+        $collectionArray = Collection::where('collections.category_id', 4)
+            ->where('collections.acquireddate', '!=', null)
             ->select('catalog_id')
             ->groupby('catalog_id','createdate')
             ->latest()
