@@ -121,9 +121,15 @@ if($abstracts){
                     </div>
                     <div class="span4">
                         <aside>
-                            <div class="widget">
-                                <h4>Edisi</h4>
-                                <ul class="project-detail">
+                            <div class="accordion" id="edisi">
+                                <div class="accordion-group">
+                                  <div class="accordion-heading">
+                                    <a class="accordion-toggle active" data-toggle="collapse" data-parent="#edisi" href="#collapseOne">
+                                        <i class="icon-caret-down"></i> Collapsible Group Item #1 </a>
+                                    </div>
+                                    <div id="collapseOne" class="accordion-body collapse in">
+                                        <div class="accordion-inner">
+                                          <ul class="project-detail">
                                 @foreach($arrBerkala as $berkala)
                                 @if($berkala->edisiserial=="")
                                     <li> Edisi tidak diketahui : {{$berkala->jumlah}} copy  </li>
@@ -132,6 +138,13 @@ if($abstracts){
                                 @endif
                                 @endforeach
                                 </ul>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                            <div class="widget">
+                                <h4>Edisi</h4>
+                                
                             </div>
                         </aside>
                     </div>
