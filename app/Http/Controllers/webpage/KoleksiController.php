@@ -53,40 +53,31 @@ class KoleksiController extends Controller
 
     private function getByPage(Request $request)
     {
-        $type = request('type');
-        $search = request('search');
-        $collectionArray = Collection::where('collections.category_id', 4)
-            ->select('catalog_id')
-            ->join('master_publisher','master_publisher.publisher_id','collections.publisher_id')
-            ->groupby('catalog_id','createdate');
-        if($type != ""){
-            $collectionArray->where('type_of_publisher',$type);
-        }
-        if($search != ""){
-            $collectionArray->where(DB::Raw('lower(title)'), 'like', '%'.strtolower($search).'%');
-        }
-        $collectionArray->get()->toArray();
-        $catIds = array_column($collectionArray,'catalog_id');
-        $data = Catalog::whereIn('id',$catIds);
-        //->paginate(16)->appends(\Request::only(['search','type']))->setPath('');
-
-        /*$data = Catalog::whereHas('collections',function($query) {
-            $query->where('category_id',4);
+        $type = request('type'); $search = request('search');
+        $data = Catalog::whereHas('collections',function($query,$type,$search) {
+            $query->join('master_publisher','master_publisher.publisher_id','collections.publisher_id')
+                    ->where('category_id',4);
+            if($type != "") {
+                $query->where('type_of_publisher', $type);
+            }
+            if($type != ""){
+                $query->orwhere(DB::Raw('lower(collections.title)'), 'like', '%'.strtolower($search).'%');
+            }
         });
-        $type = request('type');
-        if (request('type') != ""){
+        
+       /* if (request('type') != ""){
             $data->whereHas('master_publisher', function($query) use($type){
                 $query->where('type_of_publisher', $type);
             });
         }
 
-        $search = request('search');
+       
         if ($search != "") {
             $data->where(function($query) use ($search) {
                 $query->orwhere(DB::Raw('lower(title)'), 'like', '%'.strtolower($search).'%');
             });
-        }
-        */
+        } */
+
         return $data->paginate(16)->appends(\Request::only(['search','type']))->setPath('');
     }
 
