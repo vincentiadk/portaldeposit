@@ -84,7 +84,7 @@ if($abstracts){
                                     <li><label>Lokasi Terbit : </label>{{$col->master_publisher->propinsi->namapropinsi}}, {{$col->master_publisher->city}}</li>
                                     <li><label>Jenis : </label> {{$data->worksheet->name}}</li>
                                     @if($isbn != "")
-                                    <li> <label> ISBN : </label>{{ $isbn }} ></li>
+                                    <li> <label> ISBN : </label>{{ $isbn }} </li>
                                     @endif
                                     @if($issn != "")
                                     <li> <label> ISSN : </label>{{ $issn }} </li>
