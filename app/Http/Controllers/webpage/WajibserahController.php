@@ -265,13 +265,8 @@ class WajibserahController extends Controller
 
     private function getCollection($page, $search, $id){
         $data = Catalog::whereHas('collections',function($query) use($id){
-            $query->where('noinduk_deposit','!=',null)->where('publisher_id',$id);
+            $query->where('category_id',4)->where('publisher_id',$id);
         })->latest();
-//  if ($id != ""){
-// $data->whereHas('master_publisher', function($query) use($id){
-//     $query->where('publisher_id', $id);
-// });
-// }
         if ($search != "") {
             $data->where(function($query) use ($search) {
                 $query->orwhere(DB::Raw('lower(title)'), 'like', '%'.strtolower($search).'%');
@@ -297,9 +292,8 @@ class WajibserahController extends Controller
 
     private function getTotal($id)
     {
-        $data = Collection::where('publisher_id',$id)->where('noinduk_deposit', '!=', null)->paginate(1);
-
-        $total = $data->total();
+        $total = Collection::where('publisher_id',$id)->where('category_id', 4)->count();
+     //   $catTtoal = Catalog::join('collections')
         return $total;
     }
 
