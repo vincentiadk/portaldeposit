@@ -56,7 +56,6 @@ class HomeController extends Controller
             ->join('catalog_ruas','catalog_ruas.catalogid','=','catalogs.id')
             ->join('collections','collections.catalog_id','=','catalogs.id')
             ->where('collections.category_id', 4)
-            ->where('collections.acquireddate', '!=', null)
             ->where('coverurl','!=',null)
             ->where('tag','520')->whereRaw('LENGTH(value) > 10 ');
         })->latest()->take(16)->get();
@@ -64,7 +63,6 @@ class HomeController extends Controller
     }
     private function depositNewest(){
         $collectionArray = Collection::where('collections.category_id', 4)
-            ->where('collections.acquireddate', '!=', null)
             ->select('catalog_id')
             ->groupby('catalog_id','createdate')
             ->latest()
