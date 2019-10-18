@@ -22,6 +22,12 @@
 								<option value="Pemerintah" @if($type == "Pemerintah") selected @endif>Pemerintah</option>
 								<option value="Swasta" @if($type == "Swasta") selected @endif>Swasta</option>
 							</select>
+							<select name="worksheet" class="input-medium">
+								<option value="" @if($type == "") selected @endif>Seluruh Jenis Koleksi</option>
+								@foreach(App\Worksheet::all() as $w)
+								<option value="{{$w->id}}" @if($worksheet == $w->id ) selected @endif>{{$w->name}}</option>
+								@endforeach
+							</select>
 							<input placeholder="Ketik Sesuatu.." type="text" name="search" class="input-medium search-query" value="{{$search}}">
 							<button type="submit" class="btn btn-flat btn-color">Search</button>
 						</form>

@@ -32,12 +32,19 @@ class KoleksiController extends Controller
         } else {
             $type = $request->type;
         }
+
+        if ($request->worksheet == null) {
+            $worksheet = "";
+        } else {
+            $worksheet = $request->worksheet;
+        }
     //   var_dump($request->query('page'));die();
 
         $data['data'] = $this->getByPage($request);
 
         $data['search'] = $search;
         $data['type'] = $type;
+        $data['worksheet'] = $worksheet;
         $data['count'] = $data['data']->total();
         $data['page'] = $page; 
         $data['current_page'] = $data['data']->currentPage(); 
@@ -53,32 +60,21 @@ class KoleksiController extends Controller
 
     private function getByPage(Request $request)
     {
-        $type = request('type'); $search = request('search');
-        $data = Catalog::whereHas('collections',function($query,$type,$search) {
-            $query->join('master_publisher','master_publisher.publisher_id','collections.publisher_id')
-                    ->where('category_id',4);
+        $type = request('type'); $search = request('search'); $worksheet = request('worksheet');
+        $data = Catalog::whereHas('collections',function($query) use($type, $search, $worksheet) {
+            $query->join('master_publisher','master_publisher.publisher_id','=','collections.publisher_id')
+                 ->where('category_id',4);
             if($type != "") {
                 $query->where('type_of_publisher', $type);
             }
-            if($type != ""){
-                $query->orwhere(DB::Raw('lower(collections.title)'), 'like', '%'.strtolower($search).'%');
+            if($search != ""){
+                $query->where(DB::Raw('lower(collections.title)'), 'like', '%'.strtolower($search).'%');
+            }
+            if($worksheet != ""){
+                $query->where('worksheet_id',$worksheet);
             }
         });
-        
-       /* if (request('type') != ""){
-            $data->whereHas('master_publisher', function($query) use($type){
-                $query->where('type_of_publisher', $type);
-            });
-        }
-
-       
-        if ($search != "") {
-            $data->where(function($query) use ($search) {
-                $query->orwhere(DB::Raw('lower(title)'), 'like', '%'.strtolower($search).'%');
-            });
-        } */
-
-        return $data->paginate(16)->appends(\Request::only(['search','type']))->setPath('');
+        return $data->paginate(16)->appends(\Request::only(['search','type','worksheet']))->setPath('');
     }
 
     public function statistik(Request $req)

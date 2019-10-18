@@ -201,12 +201,12 @@ class WajibserahController extends Controller
 
         if ($type == "all") {
             $data = Collection::where('publisher_id', '=', $id)
-            ->where('noinduk_deposit', '!=', null);
+            ->where('category_id', 4);
         }  else if ($type == "filter") {
             $data = Collection::whereYear('createdate', '=', $year)
             ->whereMonth('createdate', '=', $month)
             ->where('publisher_id', '=', $id)
-            ->where('noinduk_deposit', '!=', null);
+            ->where('category_id', 4);
         }
         return $data->paginate(10000);
     }

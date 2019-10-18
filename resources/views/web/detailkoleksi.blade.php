@@ -69,30 +69,6 @@ if($abstracts){
                             </div>
                         </aside>
                     </div>
-                    @if($data->worksheet->id==1)
-                    <div class="span8">
-                        <aside>
-                            <div class="widget">
-                                <h4>Detail Koleksi</h4>
-                                <ul class="project-detail">
-                                    <li><label>Judul : </label> {{$title}}</li>
-                                    <li><label>Penerbit : </label> {{$col->master_publisher->publisher_name}}</li>
-                                    <li><label>Tahun Terbit : </label> {{$col->publishyear}}</li>
-                                    <li><label>Lokasi Terbit : </label>{{$col->master_publisher->propinsi->namapropinsi}}, {{$col->master_publisher->city}}</li>
-                                    <li><label>Jenis : </label> {{$data->worksheet->name}}</li>
-                                    @if($isbn != "")
-                                    <li> <label> ISBN : </label>{{ $isbn }} ></li>
-                                    @endif
-                                    @if($issn != "")
-                                    <li> <label> ISSN : </label>{{ $issn }} </li>
-                                    @endif
-                                    
-                                    <li><label>Jumlah Eksempelar Deposit : </label>{{ $cols->count() }}  Copy</li>
-                                </ul>
-                            </div>
-                        </aside>
-                    </div>
-                    @endif
                     @if($data->worksheet->id==13)
                     @php 
                     $arrBerkala = DB::select(DB::raw('select edisiserial, count(edisiserial) as jumlah,acquireddate from collections where catalog_id='.$data->id.' and category_id=4 and edisiserial is not null group by edisiserial,acquireddate union all select edisiserial, count(1),acquireddate from collections where catalog_id='.$data->id.' and category_id=4 and edisiserial is null group by edisiserial,acquireddate order by edisiserial')); 
@@ -103,7 +79,7 @@ if($abstracts){
                                 <h4>Detail Koleksi</h4>
                                 <ul class="project-detail">
                                     <li><label>Judul : </label> {{$title}}</li>
-                                    <li><label>Penerbit : </label> {{$col->master_publisher->publisher_name}}</li>
+                                    <li><label>Penerbit : </label>  <a href="/wajibserah/detail?id={{$col->master_publisher->publisher_id}}">{{$col->master_publisher->publisher_name}}</a></li>
                                     <li><label>Tahun Terbit : </label> {{$col->publishyear}}</li>
                                     <li><label>Lokasi Terbit : </label>{{$col->master_publisher->propinsi->namapropinsi}}, {{$col->master_publisher->city}}</li>
                                     <li><label>Jenis : </label> {{$data->worksheet->name}}</li>
@@ -117,6 +93,12 @@ if($abstracts){
                                     <li><label>Jumlah Eksempelar Deposit : </label>{{ $cols->count() }}  Copy</li>
                                 </ul>
                             </div>
+                            @if(strlen($abstract) > 5)
+                            <div class="widget">
+                                <h4>Abstrak</h4>
+                                <p>{{$abstract}}</p>
+                            </div>
+                            @endif
                         </aside>
                     </div>
                     <div class="span4">
@@ -145,13 +127,40 @@ if($abstracts){
                                 </div>
                                 </div>    
                             </div>
+                           
                         </aside>
                     </div>
-
-                    @endif
-                    <div class="span4">
-                        <p>{{$abstract}}</p>
+                    @else
+                     <div class="span8">
+                        <aside>
+                            <div class="widget">
+                                <h4>Detail Koleksi</h4>
+                                <ul class="project-detail">
+                                    <li><label>Judul : </label> {{$title}}</li>
+                                    <li><label>Penerbit : </label> <a href="/wajibserah/detail?id={{$col->master_publisher->publisher_id}}">{{$col->master_publisher->publisher_name}}</a></li>
+                                    <li><label>Tahun Terbit : </label> {{$col->publishyear}}</li>
+                                    <li><label>Lokasi Terbit : </label>{{$col->master_publisher->propinsi->namapropinsi}}, {{$col->master_publisher->city}}</li>
+                                    <li><label>Jenis : </label> {{$data->worksheet->name}}</li>
+                                    @if($isbn != "")
+                                    <li> <label> ISBN : </label>{{ $isbn }} ></li>
+                                    @endif
+                                    @if($issn != "")
+                                    <li> <label> ISSN : </label>{{ $issn }} </li>
+                                    @endif
+                                    
+                                    <li><label>Jumlah Eksempelar Deposit : </label>{{ $cols->count() }}  Copy</li>
+                                </ul>
+                            </div>
+                            @if(strlen($abstract) > 5)
+                            <div class="widget">
+                                <h4>Abstrak</h4>
+                                <p>{{$abstract}}</p>
+                            </div>
+                            @endif
+                        </aside>
                     </div>
+                    @endif
+                   
 
                 </div>
             </div>
