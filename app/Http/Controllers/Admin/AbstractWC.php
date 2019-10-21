@@ -65,50 +65,56 @@ class AbstractWC extends Controller
 		} else {
 			$data = AbstractCat::find($id);
 		}
-		if($data->slug == "") {
-			$slug = 'abstract/'.str_slug(request('title'), "-");
-			$checkLink = $this->checkLink($slug);
-			if($checkLink == 0) {
-				$model->slug = $slug;
-			} else {
-				$checkLink ++;
-				$model->slug = $slug . "_" . $checkLink;
+		$check_isbn = $this->check_isbn(request('isbn'));
+		if($check_isbn[0] != 0 ){
+			return redirect()->back()
+			->withErrors(['error', 'Buku dengan ISBN dimaksud sudah pernah dibuat abstract oleh'.$check_isbn[1]->createdBy->name]);
+		} else {
+			if($data->slug == "") {
+				$slug = 'abstract/'.str_slug(request('title'), "-");
+				$checkLink = $this->checkLink($slug);
+				if($checkLink == 0) {
+					$model->slug = $slug;
+				} else {
+					$checkLink ++;
+					$model->slug = $slug . "_" . $checkLink;
+				}
 			}
-		}
-		$data->title = request('title');
-		$data->keywords = request('keywords');
-		$data->abstract = request('abstract');
-		$data->updated_by = Auth::user()->id;
-		$data->catalog_id = $this->getCatalogId(request('isbn'));
-		$data->isbn = request('isbn');
-		$data->status = $req['status'];
-		$data->save();
+			$data->title = request('title');
+			$data->keywords = request('keywords');
+			$data->abstract = request('abstract');
+			$data->updated_by = Auth::user()->id;
+			$data->catalog_id = $this->getCatalogId(request('isbn'));
+			$data->isbn = request('isbn');
+			$data->status = $req['status'];
+			$data->save();
 
-		if(!request('files') == null )
-		{
-			$files = request('files');
-			$format = array('jpg','jpeg','png');
-			foreach ($files as $file) {
-				if ($file->getSize() > 100000000) {
-					$files_error++;
-				}
-				else if (!in_array($file->getClientOriginalExtension(), $format)) {
-					$files_error++;
-				}else{
-					$file_name = Uuid::generate()->string.'.'.$file->getClientOriginalExtension();
-					$file->storeAs('public/abstract', $file_name);
-					$gal = new Galery();
-					$gal->file_name = $file_name;
-					$gal->table_name = 'abstract';
-					$gal->foreign_id = $data->id;
-					$gal->created_by = Auth::user()->id;
-					$gal->created_at = now();
-					$gal->save();
-					$status = 1;
+			if(!request('files') == null )
+			{
+				$files = request('files');
+				$format = array('jpg','jpeg','png');
+				foreach ($files as $file) {
+					if ($file->getSize() > 100000000) {
+						$files_error++;
+					}
+					else if (!in_array($file->getClientOriginalExtension(), $format)) {
+						$files_error++;
+					}else{
+						$file_name = Uuid::generate()->string.'.'.$file->getClientOriginalExtension();
+						$file->storeAs('public/abstract', $file_name);
+						$gal = new Galery();
+						$gal->file_name = $file_name;
+						$gal->table_name = 'abstract';
+						$gal->foreign_id = $data->id;
+						$gal->created_by = Auth::user()->id;
+						$gal->created_at = now();
+						$gal->save();
+						$status = 1;
+					}
 				}
 			}
+			return redirect('/bo/abstract/detail/'.$id);
 		}
-		return redirect('/bo/abstract/detail/'.$id);
 	}
 	public function getCatalogId($isbn)
 	{
@@ -138,10 +144,21 @@ class AbstractWC extends Controller
 		unset($req['_token']);
 		return $req;
 	}
-	
+
 	function checkLink($link)
 	{
 		$count = AbstractCat::where("slug",$link)->count();
 		return $count;
+	}
+
+	function check_isbn($isbn)
+	{
+		$abstractcat = AbstractCat::where(DB::raw("replace(isbn,'-')", "LIKE", "replace('".$isbn."','-')"))->first();
+		if($abstractcat){
+			return [0,0];
+		}else {
+			return [1,$abstractcat];
+		}
+		
 	}
 }

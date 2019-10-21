@@ -38,11 +38,12 @@
                         <thead>
                             <tr>
                                 <th width="1%">#</th>
-                                <th>Judul</th>
-                                <th width="10%">Keywords</th>
-                                <th width="10%">Create At</th>
-                                <th width="10%">Creator</th>
-                                <th width="10%">Action</th>
+                                <th width="10%">Judul</th>
+                                <th>ISBN</th>
+                                <th>Keywords</th>
+                                <th>Create At</th>
+                                <th>Creator</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                     </table>
@@ -66,6 +67,7 @@
             columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', searchable:false, orderable:false},
             { data: 'title', name: 'title' },
+            { data: 'isbn', name: 'isbn' },
             { data: 'keywords', name: 'keywords' },
             { data: 'created_at', name: 'created_at' },
             { data: 'created_by', name: 'created_by' },
