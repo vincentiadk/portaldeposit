@@ -62,6 +62,7 @@ class AbstractWC extends Controller
 		$data->abstract = request('abstract');
 		$data->created_by = Auth::user()->id;
 		$data->catalog_id = $this->getCatalogId(request('isbn'));
+		$data->isbn = request('isbn');
 		$data->save();
 
 		if(!request()->files == "")
