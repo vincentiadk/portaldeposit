@@ -27,6 +27,6 @@ class AbstractCat extends Model
 
 	public function images()
 	{
-		return $this->hasMany('App\Galery', 'foreign_id', 'id');
+		return $this->hasMany('App\Galery', 'foreign_id', 'id')->where('table_name','abstract');
 	}
 }

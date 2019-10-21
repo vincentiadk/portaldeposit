@@ -9,7 +9,40 @@ $id= $data->id;
 $mode="detail"; 
 } 
 @endphp
+<style>
+.lds-hourglass {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-hourglass:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  margin: 6px;
+  box-sizing: border-box;
+  border: 26px solid #ccc;
+  border-color: #ccc transparent #ccc transparent;
+  animation: lds-hourglass 1.2s infinite;
+}
+@keyframes lds-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
+}
 
+</style>
 <div class="row">
     <div class="col-lg-12">
       <h2> Detail Abstract </h2>
@@ -41,6 +74,7 @@ $mode="detail";
                     <strong>{{$errors->first()}}</strong>
                 </div>
                 @endif
+                
                 <form action="/bo/abstract/detail/{{$id}}" method="post" class="form-horizontal" id="form1" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" id="id" name="id" class="form-control" value="{{$id ?? ''}}" readonly />
@@ -48,11 +82,15 @@ $mode="detail";
                     <div class="form-group">
                         <label class="control-label col-lg-2">ISBN</label>
                         <div class="col-lg-6">
-                            <input type="text" id="isbn" name="isbn" class="form-control activator" readonly required value="{{$data->isbn ?? ''}}">
+                            <input type="text" id="isbn" name="isbn" class="form-control" @if($mode=='detail') readonly @endif required value="{{$data->isbn ?? ''}}">
                         </div>
+                        @if($mode=='tambah')
                         <div class="col-lg-2">
                             <a class="btn btn-primary" id="searchISBN">Search ISBN</a>
                         </div>
+                        @endif
+                        <div class="lds-hourglass" id="lds-hourglass" style="display:none">
+                    <div></div>            </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-lg-2">Judul</label>
@@ -60,7 +98,24 @@ $mode="detail";
                             <textarea id="title" name="title" class="form-control activator" readonly required>{{$data->title ?? ''}}</textarea>
                         </div>
                     </div>
-
+                     <div class="form-group">
+                        <label class="control-label col-lg-2">Author</label>
+                        <div class="col-lg-8">
+                            <textarea id="author" name="author" class="form-control" readonly required>{{$data->author ?? ''}}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-lg-2">Publisher</label>
+                        <div class="col-lg-8">
+                            <input type="text" id="publisher" class="form-control" readonly value={{$data->publisher ?? ''}}>
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="control-label col-lg-2">Publish Year</label>
+                        <div class="col-lg-8">
+                            <input type="text" id="publishyear" class="form-control" readonly value={{$data->publishyear ?? ''}}>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="control-label col-lg-2">Abstract</label>
                         <div class="col-lg-8">
@@ -224,26 +279,41 @@ $mode="detail";
             })
         }  else  {
             $(".simpan").show();
-            $(".activator").prop("readonly", false);
+         //   $(".activator").prop("readonly", false);
             $("#kategori").prop('disabled', false);
             $("#is_comment").prop('disabled', false);
         }
         $('#searchISBN').on("click",function(){
-            $.ajax({
-                type: "GET",
-                url:'/bo/abstract/getCatalog/'+isbn,
-                dataType: 'json',      
-                success: function(data) {
-                    if(obj(data)){
-                        $('#title').val(data.title);
-                    } else {
-                        alert(data);
+            if($('#isbn').val().trim().length == 0) {
+                 alert('Masukkan ISBN');
+            }else {
+                $(".activator").prop("readonly", true);
+                $('#abstract').summernote('disable');
+                $('#lds-hourglass').css('display','block');
+                $.ajax({
+                    type: "GET",
+                    url:'/bo/abstract/getCatalog/'+$('#isbn').val().trim(),
+                    dataType: 'json',    
+                    success: function(data) {
+                        if(Object.prototype.toString.call(data)==='[object Object]'){
+                            $('#abstract').summernote('enable');
+                            $('#isbn').val(data.isbn);
+                            $('#title').val(data.title);
+                            $('#author').val(data.author);
+                            $('#publishyear').val(data.publishyear);
+                            $('#publisher').val(data.publisher);
+                            $('#abstract').summernote('reset');
+                            $('#abstract').summernote('insertText',data.abstract);
+                            $(".activator").prop("readonly", false);
+                        } else {
+                            alert(data);
+                        }
+                        $('#lds-hourglass').css('display','none');
+                    },
+                    completed :function(data){
                     }
-                },
-                completed :function(data){
-
-                }
-            });
+                });
+            }
         });
 
 
@@ -254,6 +324,7 @@ $mode="detail";
         $(".summernote").summernote({
             height: 300,
         });
+         $('#abstract').summernote('disable');
     }
 
 

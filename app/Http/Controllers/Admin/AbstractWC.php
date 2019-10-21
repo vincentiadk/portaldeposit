@@ -52,7 +52,12 @@ class AbstractWC extends Controller
 		}
 		else {
 			$data = AbstractCat::find($id);
+			$catalog = $this->getDetailCatalogById($data->catalog_id);
+			$data->author = $catalog->author;
+			$data->publisher = $catalog->publisher;
+			$data->publishyear = $catalog->publishyear;
 		}
+
 		$action = "/bo/abstract/detail/".$id;
 		return view('admin.abstract.abstract-detail', compact('data','action'));
 	}
@@ -95,10 +100,20 @@ class AbstractWC extends Controller
 		} else {
 			return redirect()
 			->back()
-			->withErrors(['Tidak ditemukan buku dengan ISBN '.request('ISBN'). ' pada database INLIS, mohon cek ISBN yang Anda masukkan.');
+			->withErrors(['Tidak ditemukan buku dengan ISBN '.request('ISBN'). ' pada database INLIS, mohon cek ISBN yang Anda masukkan.']);
 		}
 		$data->isbn = request('isbn');
 		$data->status = $req['status'];
+
+		if (! request('delete_id') == null) {
+	        foreach (request('delete_id') as $did) {
+	            $file = Galery::find($did);
+	            if ($file != null) {
+	            	File::delete(storage_path('app/public/abstract/'.$file->file_name));
+	            	$file->delete();
+	            }
+	        }
+   		}
 		$data->save();
 
 		if(!request('files') == null )
@@ -155,8 +170,23 @@ class AbstractWC extends Controller
 			$check_isbn = $this->check_isbn($isbn);
 			if($check_isbn[0] == 0 ) {
 				return response()->json('Buku dengan ISBN dimaksud sudah pernah dibuat abstract oleh '.$check_isbn[1]);
-			} 
-			return response()->json($catalog);
+			} else {
+				$col = $catalog->collections->where('category_id',4)->first();
+				$col->publisher = ($col->publisher_id ? $col->master_publisher->publisher_name : $col->publisher);
+				$abstract_="";
+				$abstract = $catalog->catalog_ruas->where('tag','520')->first();
+				if($abstract){
+                    if(preg_match('/[$]a(.*?)[$]/',$abstract->value, $match) == 1) {
+                        $abstract_ = trim($match[1]);
+                    } else if(preg_match('/[$]a(.*)/', $abstract->value, $match) == 1) {
+                        $abstract_ = trim($match[1]);
+                    }
+                }
+                $col->isbn = $catalog->isbn;
+				$col->abstract = $abstract_;
+				return response()->json($col);
+			}
+			
 		} else {
 			return response()->json("Tidak ditemukan buku dengan ISBN ".$isbn." pada database INLIS, mohon cek ISBN yang Anda masukkan.");
 		}
@@ -203,5 +233,23 @@ class AbstractWC extends Controller
 			$data->delete();
 		}
 		return redirect('/bo/abstract')->with(["status"=>1]);
+	}
+	function getDetailCatalogById($id)
+	{
+		$catalog = Catalog::find($id);
+		$col = $catalog->collections->where('category_id',4)->first();
+		$col->publisher = ($col->publisher_id ? $col->master_publisher->publisher_name : $col->publisher);
+		$abstract_="";
+		$abstract = $catalog->catalog_ruas->where('tag','520')->first();
+		if($abstract){
+            if(preg_match('/[$]a(.*?)[$]/',$abstract->value, $match) == 1) {
+                $abstract_ = trim($match[1]);
+            } else if(preg_match('/[$]a(.*)/', $abstract->value, $match) == 1) {
+                 $abstract_ = trim($match[1]);
+            }
+        }
+        $col->isbn = $catalog->isbn;
+		$col->abstract = $abstract_;
+		return $col;		
 	}
 }
