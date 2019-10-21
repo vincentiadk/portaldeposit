@@ -22,7 +22,7 @@
                     @endif  
                     <div class="form-group row">
                         <div class="col-sm-9">
-                            <a href="/bo/abstract/tambah" class="btn btn-primary btn-sm">Tambah</a>
+                            <a href="/bo/abstract/detail/new" class="btn btn-primary btn-sm">Tambah</a>
                         </div>
                         <div class="input-group col-sm-3">
                             <div class="input-group-addon">Kategori</div>
