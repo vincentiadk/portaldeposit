@@ -61,7 +61,6 @@ class AbstractWC extends Controller
 	{
 		$req = request()->all();
 		$req = $this->setup_data($req);
-		
 		if($id == 'new') {
 			$data = new AbstractCat();
 			$data->created_by = Auth::user()->id;
@@ -166,5 +165,17 @@ class AbstractWC extends Controller
 			return [1, 0]; // belum ada
 		}
 		
+	}
+	function delete (Request $request) 
+	{
+		$data = AbstractCat::find($request->id);
+		if ($data) {
+			$images = $data->images;
+			foreach ($images as $img) {
+				File::delete(storage_path('app/public/abstract/'.$img->file_name));
+			}
+			$data->delete();
+		}
+		return redirect('/bo/abstract')->with(["status"=>1]);
 	}
 }
