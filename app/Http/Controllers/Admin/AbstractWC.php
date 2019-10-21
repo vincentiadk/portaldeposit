@@ -66,7 +66,7 @@ class AbstractWC extends Controller
 		$data->isbn = request('isbn');
 		$data->save();
 
-		if(count(request('files')) > 0 )
+		if(!request('files') == null )
 		{
 			$files = request('files');
 			$format = array('jpg','jpeg','png');
