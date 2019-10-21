@@ -23,6 +23,7 @@ class HomeController extends Controller
         $data['sliders'] = $this->getSlider();
         $data['depositNewest'] = $this->depositNewest();
         $data['publication']= $this->publication();
+        $data['abstracts'] = $this->abstract();
         return view('web.home', $data);
     }
 
@@ -61,7 +62,8 @@ class HomeController extends Controller
         })->latest()->take(16)->get();
         return $data;
     }
-    private function depositNewest(){
+    private function depositNewest()
+    {
         $collectionArray = Collection::where('collections.category_id', 4)
             ->select('catalog_id')
             ->groupby('catalog_id','createdate')
@@ -73,7 +75,11 @@ class HomeController extends Controller
         $data = Catalog::whereIn('id',$catIds)->get();
         return $data;
     }
-
+    private function abstract()
+    {
+        $data = AbstractCat::where('status','published')->latest()->take(10)->get();
+        return $data;
+    }
     private function eventNewest()
     {
         $data = Event::where('status', 'published')->where('datetime', '>=', now())->orderby('created_at', 'desc')->take(5)->get();

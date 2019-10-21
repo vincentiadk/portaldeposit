@@ -282,54 +282,24 @@
                 <span class="section-title uppercase">Abstrak</span>
                 <div class="testmonial_slider" style="height:auto">
                     <ul class="slides">
+                        @foreach($abstracts as $abstract)
                         <li>
                             <div class="testimonial_item mini-layout fluid">
                                 <div class="mini-layout-sidebar hidden-phone ">
-                                    <img data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/Monograf/1218118.jpg" class="lazy img-polaroid">
+                                    <img data-src="/storage/asbtract/{{$abstract->images->first()->file_name}}" class="lazy img-polaroid">
                                 </div>
                                 <div class="mini-layout-body">
                                     <p>
-                                        Lorem ipsum dolor sit amet nec, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes. enean commodo ligula eget dolor. Aenean massa.
-                                        Aenean commodo ligula eget dolor. Aenean massa.
-                                        Aenean commodo ligula eget dolor. Aenean massa.
+                                    {!!$abstract->abstract!!}
                                     </p>
-                                    <span class="author">Johny doe</span>
-                                    <span class="occupation">Graphic and HTML Web Designer</span>
+                                    <span class="occupation">ISBN {{$abstract->isbn}}</span>
+                                    <span class="author">{{$abstract->createdBy->name}}</span>
+                                    
                                 </div>
                             </div>
                             <!-- end testmonial -->
                         </li>
-                        <li>
-                            <div class="testimonial_item mini-layout fluid">
-                                <div class="mini-layout-sidebar hidden-phone">
-                                    <img data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/Monograf/1218118.jpg" class="lazy">
-                                </div>
-                                <div class="mini-layout-body">
-                                    <p>
-                                        Aenean commodo ligula eget dolor. Aenean massa.  libero quam euismod quam, sed sodales purus nisl eget felis. Pellentesque elit massa, cursus id.  libero quam euismod quam, sed sodales purus nisl eget felis. Pellentesque elit massa, cursus id.  libero quam euismod quam, sed sodales purus nisl eget felis. Pellentesque elit massa, cursus id.
-                                    </p>
-                                    <span class="author">John Doe</span>
-                                    <span class="occupation">CEO Engineer</span>
-                                </div>
-                                <!-- end testmonial -->
-                            </div>
-                        </li>
-                        <li>
-                            <div class="testimonial_item mini-layout fluid">
-                                <div class="mini-layout-sidebar hidden-phone">
-                                    <img data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/Monograf/1218118.jpg" class="lazy">
-                                </div>
-                                <div class="mini-layout-body">
-                                    <p>
-                                        libero quam euismod quam, sed sodales purus nisl eget felis. Pellentesque elit massa, cursus id.
-                                        Lorem ipsum dolor sit amet nec, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes. enean commodo ligula eget dolor.
-                                    </p>
-                                    <span class="author">Roro Still</span>
-                                    <span class="occupation">New In Field</span>
-                                </div>
-                                <!-- end testmonial -->
-                            </div>
-                        </li>
+                        @endforeach
                     </ul>
                     <!-- end testmonial slider -->
                 </div>
