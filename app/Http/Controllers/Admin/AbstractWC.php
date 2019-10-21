@@ -26,7 +26,7 @@ class AbstractWC extends Controller
 		}
 		$dataTable = \DataTables::eloquent($model)
 		->editColumn('action',function($model){
-			return "<a href='/bo/abstract/detail/".$item['id']."' class='btn btn-xs btn-default btn-edit'><i class='fa fa-edit'></i> Detail</a>";
+			return "<a href='/bo/abstract/detail/".$model->id."' class='btn btn-xs btn-default btn-edit'><i class='fa fa-edit'></i> Detail</a>";
 		})
 		->editColumn('created_by',function($model){
 			return User::find($model->created_by)->name;
