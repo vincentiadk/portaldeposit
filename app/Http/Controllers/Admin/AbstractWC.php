@@ -46,7 +46,7 @@ class AbstractWC extends Controller
 		else {
 			$data = AbstractCat::find($id);
 		}
-		$action = "/bo/asbtract/detail/".$id;
+		$action = "/bo/abstract/detail/".$id;
 		return view('admin.abstract.abstract-detail', compact('data','action'));
 	}
 	public function update($id)
