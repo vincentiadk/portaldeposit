@@ -107,7 +107,7 @@
 
                                         <label class="hide-edit" style="color:red">*Pilih gambar yg akan dihapus</label>
                                         <div class="form-group">
-                                            @foreach($data->images() as $gal)
+                                            @foreach($data->images as $gal)
                                             <div class="col-lg-3"><label class="btn"><img src="/storage/berita/berita{{$data->id}}/{{$gal->file_name}}" class="img-thumbnail img-check"><input type="checkbox" name="delete_id[]" value="{{$gal->id}}" class="hidden checkbox-delete" autocomplete="off" disabled></label></div>
                                             @endforeach
                                         </div>

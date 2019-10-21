@@ -81,11 +81,11 @@ class AbstractWC extends Controller
 					$gal = new Galery();
 					$gal->file_name = $file_name;
 					$gal->table_name = 'abstract';
-					$gal->foreign_id = 0;
+					$gal->foreign_id = $data->id;
 					$gal->created_by = Auth::user()->id;
 					$gal->created_at = now();
 					$gal->save();
-					$status=1;
+					$status = 1;
 				}
 			}
 		}
