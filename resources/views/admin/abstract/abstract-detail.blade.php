@@ -44,14 +44,14 @@ $mode="detail";
                 <form action="/bo/abstract/detail/{{$id}}" method="post" class="form-horizontal" id="form1" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" id="id" name="id" class="form-control" value="{{$id ?? ''}}" readonly />
-
+                    <input type="hidden" id="catalog_id" name="catalog_id" class="form-control" value="{{$data->catalog_id ?? ''}}" readonly />
                     <div class="form-group">
                         <label class="control-label col-lg-2">ISBN</label>
                         <div class="col-lg-6">
                             <input type="text" id="isbn" name="isbn" class="form-control activator" readonly required value="{{$data->isbn ?? ''}}">
                         </div>
                         <div class="col-lg-2">
-                            <a class="btn btn-primary">Search ISBN</a>
+                            <a class="btn btn-primary" id="searchISBN">Search ISBN</a>
                         </div>
                     </div>
                     <div class="form-group">
@@ -228,6 +228,23 @@ $mode="detail";
             $("#kategori").prop('disabled', false);
             $("#is_comment").prop('disabled', false);
         }
+        $('#searchISBN').on("click",function(){
+            $.ajax({
+                type: "GET",
+                url:'/bo/abstract/getCatalog/'+isbn,
+                dataType: 'json',      
+                success: function(data) {
+                    if(obj(data)){
+                        $('#title').val(data.title);
+                    } else {
+                        alert(data);
+                    }
+                },
+                completed :function(data){
+
+                }
+            });
+        });
 
 
 

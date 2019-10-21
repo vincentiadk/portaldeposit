@@ -78,6 +78,7 @@ Route::group (['middleware' => ['auth']], function () {
 	Route::get ('/bo/abstract/detail/{id}', 'Admin\AbstractWC@edit');
 	Route::post ('/bo/abstract/detail/{id}', 'Admin\AbstractWC@update');
 	Route::post ('/bo/abstract/delete', 'Admin\AbstractWC@delete');
+	Route::get ('/bo/abstract/getCatalog/{isbn}', 'Admin\AbstractWC@getCatalog');
 });
 
 

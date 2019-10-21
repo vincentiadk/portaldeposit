@@ -94,8 +94,8 @@ class AbstractWC extends Controller
 			$data->catalog_id = $this->getCatalogId(request('isbn'));
 		} else {
 			return redirect()
-					->back()
-					->withErrors(['Tidak ditemukan buku dengan ISBN '.request('ISBN'). ' pada database INLIS, mohon cek ISBN yang Anda masukkan.');
+			->back()
+			->withErrors(['Tidak ditemukan buku dengan ISBN '.request('ISBN'). ' pada database INLIS, mohon cek ISBN yang Anda masukkan.');
 		}
 		$data->isbn = request('isbn');
 		$data->status = $req['status'];
@@ -142,6 +142,24 @@ class AbstractWC extends Controller
 			return 0;
 		}
 
+	}
+	public function getCatalog($isbn)
+	{
+		$catalog = Catalog::whereHas('collections',function($q){
+			$q->where('category_id', 4);
+		})
+		->where(DB::raw("replace(isbn,'-')"), "=", DB::raw("replace('".$isbn."','-')"))
+		->where('isdelete',0)
+		->first();
+		if($catalog){
+			$check_isbn = $this->check_isbn($isbn);
+			if($check_isbn[0] == 0 ) {
+				return response()->json('Buku dengan ISBN dimaksud sudah pernah dibuat abstract oleh '.$check_isbn[1]);
+			} 
+			return response()->json($catalog);
+		} else {
+			return response()->json("Tidak ditemukan buku dengan ISBN ".$isbn." pada database INLIS, mohon cek ISBN yang Anda masukkan.");
+		}
 	}
 
 	function setup_data($req)
