@@ -51,7 +51,11 @@ class AbstractWC extends Controller
 	}
 	public function update($id)
 	{
-		if($id == 'new'){
+		$req = request()->all();
+		$slug = 'abstract/'.str_replace(' ', '-', strtolower($req['title']));
+		$req = $this->setup_data($req);
+		
+		if($id == 'new') {
 			$data = new AbstractCat();
 			$data->created_by = Auth::user()->id;
 		}
@@ -64,6 +68,7 @@ class AbstractWC extends Controller
 		$data->updated_by = Auth::user()->id;
 		$data->catalog_id = $this->getCatalogId(request('isbn'));
 		$data->isbn = request('isbn');
+		$data->status = $req['status'];
 		$data->save();
 
 		if(count(request('files')) > 0 )
@@ -104,6 +109,21 @@ class AbstractWC extends Controller
 		} else {
 			return 0;
 		}
-	
+
+	}
+
+	function setup_data($req){
+		if (!empty($req['simpan'])) 
+		{
+			$req['status'] = 'not published';
+		}
+		else if (!empty($req['simpanpub'])) 
+		{
+			$req['status'] = 'published';
+		}
+		unset($req['simpan']);
+		unset($req['simpanpub']);
+		unset($req['_token']);
+		return $req;
 	}
 }
