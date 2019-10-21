@@ -291,6 +291,7 @@
                                     @else
                                     <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" />
                                     @endif
+                                    {{$abstract->all}}
                                 </div>
                                 <div class="mini-layout-body">
                                     {!!$abstract->abstract!!}
