@@ -39,6 +39,11 @@
       <i class="icon-share"></i> Publikasi Deposit
     </a>                   
   </li>
+  <li class="panel">
+    <a href="/bo/abstract" >
+      <i class="icon-pencil"></i> Abstract
+    </a>                   
+  </li>
   <li class="panel ">
     <a href="/bo/kegiatan/agenda">  
       <i class="icon-calendar"></i> Kegiatan
