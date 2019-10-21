@@ -21,5 +21,9 @@ class Catalog extends Model
 	{
 		return $this->belongsTo('App\Worksheet', 'worksheet_id', 'id');
 	}
+	public function abstractcat()
+	{
+		return $this->belongsTo('App\AbstractCat','catalog_id','id');
+	}
 
 }

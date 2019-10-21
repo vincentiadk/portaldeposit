@@ -90,7 +90,13 @@ class AbstractWC extends Controller
 		$data->keywords = request('keywords');
 		$data->abstract = request('abstract');
 		$data->updated_by = Auth::user()->id;
-		$data->catalog_id = $this->getCatalogId(request('isbn'));
+		if($this->getCatalogId(request('isbn')) != 0){
+			$data->catalog_id = $this->getCatalogId(request('isbn'));
+		} else {
+			return redirect()
+					->back()
+					->withErrors(['Tidak ditemukan buku dengan ISBN '.request('ISBN'). ' pada database INLIS, mohon cek ISBN yang Anda masukkan.');
+		}
 		$data->isbn = request('isbn');
 		$data->status = $req['status'];
 		$data->save();
@@ -121,13 +127,13 @@ class AbstractWC extends Controller
 		}
 		return redirect('/bo/abstract/detail/'.$data->id);
 	}
-	
+
 	public function getCatalogId($isbn)
 	{
 		$catalog = Catalog::whereHas('collections',function($q){
 			$q->where('category_id', 4);
 		})
-		->where(DB::raw("replace(isbn,'-')", "LIKE", "replace('".$isbn."','-')"))
+		->where(DB::raw("replace(isbn,'-')", "=", "replace('".$isbn."','-')"))
 		->where('isdelete',0)
 		->first();
 		if($catalog){
