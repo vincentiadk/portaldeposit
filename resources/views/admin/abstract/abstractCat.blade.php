@@ -18,7 +18,7 @@
                                 <th>Judul</th>
                                 <th width="10%">Impresum</th>
                                 <th width="10%">ISBN/ISSN</th>
-                                <th width="10%">No Deposit</th>
+                               
                                 <th width="10%">Action</th>
                             </tr>
                         </thead>
@@ -41,15 +41,15 @@
             dom: 'lBfrtip',
             buttons : ['csv','excel','print','reset','reload'],
             columns: [
-            { data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            { data: 'DT_RowIndex', name: 'DT_RowIndex', searchable:false, orderable:false},
             { data: 'title', name: 'title' },
-            { data: 'impresum', name: 'impresum' },
+            { data: 'impresum', name: 'impresum', searchable:false, orderable:false },
             { data: 'isbn', name: 'isbn' },
-            { data: 'no_deposit', name: 'no_deposit' },
-            { data: 'action', name: 'action' }
+           
+            { data: 'action', name: 'action', searchable:false, orderable:false }
 
             ]
         });
-    }
+    });
 </script>
 @endsection

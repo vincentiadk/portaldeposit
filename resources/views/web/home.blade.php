@@ -166,7 +166,7 @@
 
                             @foreach($depost2 as $data)
                             @php 
-                            $cols = $data->collections->where('noinduk_deposit','!=',null);
+                            $cols = $data->collections->where('category_id',4);
                             if($cols->count() > 0){
                                 $col = $cols->first();
                             }
