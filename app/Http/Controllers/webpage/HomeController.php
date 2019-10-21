@@ -12,6 +12,8 @@ use App\Rule;
 use App\Collection;
 use App\Galery;
 use App\Catalog;
+use App\AbstractCat;
+
 class HomeController extends Controller
 {
     public function homePage()
