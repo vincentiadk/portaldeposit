@@ -19,7 +19,7 @@ class AbstractCat extends Model
 		return $this->belongsTo('App\User', 'created_by', 'id');
 	}
 
-	public function createdBy()
+	public function updatedBy()
 	{
 		return $this->belongsTo('App\User', 'updated_by', 'id');
 	}
