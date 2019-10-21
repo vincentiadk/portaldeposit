@@ -9,6 +9,9 @@ use App\Catalog;
 use App\AbstractCat;
 use App\Galery;
 use DB;
+use Uuid;
+Use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class AbstractWC extends Controller
 {
