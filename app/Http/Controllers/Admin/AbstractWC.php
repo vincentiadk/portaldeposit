@@ -53,6 +53,7 @@ class AbstractWC extends Controller
 	{
 		if($id == 'new'){
 			$data = new AbstractCat();
+			$data->created_by = Auth::user()->id;
 		}
 		else {
 			$data = AbstractCat::find($id);
@@ -60,7 +61,7 @@ class AbstractWC extends Controller
 		$data->title = request('title');
 		$data->keywords = request('keywords');
 		$data->abstract = request('abstract');
-		$data->created_by = Auth::user()->id;
+		$data->updated_by = Auth::user()->id;
 		$data->catalog_id = $this->getCatalogId(request('isbn'));
 		$data->isbn = request('isbn');
 		$data->save();
