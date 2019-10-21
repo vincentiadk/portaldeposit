@@ -12,7 +12,7 @@ $mode="detail";
 
 <div class="row">
     <div class="col-lg-12">
-      <h2> Detail Asbtract </h2>
+      <h2> Detail Abstract </h2>
   </div>
 </div>
 
@@ -44,18 +44,23 @@ $mode="detail";
                 <form action="/bo/abstract/detail/{{$id}}" method="post" class="form-horizontal" id="form1" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" id="id" name="id" class="form-control" value="{{$id ?? ''}}" readonly />
+
+                    <div class="form-group">
+                        <label class="control-label col-lg-2">ISBN</label>
+                        <div class="col-lg-6">
+                            <input type="text" id="isbn" name="isbn" class="form-control activator" readonly required value="{{$data->isbn ?? ''}}">
+                        </div>
+                        <div class="col-lg-2">
+                            <a class="btn btn-primary">Search ISBN</a>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="control-label col-lg-2">Judul</label>
                         <div class="col-lg-8">
                             <textarea id="title" name="title" class="form-control activator" readonly required>{{$data->title ?? ''}}</textarea>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-lg-2">ISBN</label>
-                        <div class="col-lg-8">
-                            <input type="text" id="isbn" name="isbn" class="form-control activator" readonly required value="{{$data->isbn ?? ''}}">
-                        </div>
-                    </div>
+
                     <div class="form-group">
                         <label class="control-label col-lg-2">Abstract</label>
                         <div class="col-lg-8">
