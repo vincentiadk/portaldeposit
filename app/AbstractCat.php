@@ -8,6 +8,7 @@ class AbstractCat extends Model
 {
 	protected $table = 'abstracts';
 	protected $connection = 'oracle2';
+	 protected $guarded = [];
 
 	public function catalog()
 	{
