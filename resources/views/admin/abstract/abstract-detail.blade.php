@@ -37,7 +37,7 @@
                     $mode="detail"; 
                 } 
                 @endphp
-                <form action="/bo/abstract/edit/{{$id}}" method="post" class="form-horizontal" id="form1" enctype="multipart/form-data">
+                <form action="/bo/abstract/detail/{{$id}}" method="post" class="form-horizontal" id="form1" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label class="control-label col-lg-2">Judul</label>
