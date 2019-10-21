@@ -90,7 +90,7 @@ class AbstractWC extends Controller
 		$catalog = Catalog::whereHas('collections',function($q){
 			$q->where('category_id', 4);
 		})
-		->where(DB::raw("replace(isbn,'-')", "LIKE", "replace('".$isbn."','-')")
+		->where(DB::raw("replace(isbn,'-')", "LIKE", "replace('".$isbn."','-')"))
 		->first();
 		if($catalog){
 			return $catalog->id;
