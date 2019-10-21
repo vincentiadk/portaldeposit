@@ -15,11 +15,9 @@ use App\Master_publisher;
 
 class DashboardWC extends Controller
 {
-    public function dashboard(){
+    public function dashboard()
+    {
     	$user = Auth::user();
-
-        $total = Collection::where('category_id', 4);
-        $totalws = Master_publisher::query();
 
         $totws = Master_publisher::count();
         $totcol =Collection::where('category_id',4)->count();
@@ -30,8 +28,7 @@ class DashboardWC extends Controller
 	    	$countevent = Event::count();
 	    	$countpedoman = Rule::count();
 	    	$countperaturan = Rule::where('type', 'peraturan')->count();
-    	}
-    	else{
+    	} else{
 	    	$countnews = News::where('created_by', $user->id)->count(); 
 	    	$countpub = Publication::where('created_by', $user->id)->count();
 	    	$countevent = Event::where('created_by', $user->id)->count();
@@ -40,12 +37,12 @@ class DashboardWC extends Controller
     	}
     	$event = $this->eventNewest();
 
-    	return view('admin.dashboard')->with(['event' => $event, 'countpedoman' => $countpedoman, 'countperaturan' => $countperaturan, 'countevent' => $countevent, 'countpub' => $countpub, 'countnews' => $countnews, 'totcol' => $totcol, 'totws' => $totws]);
+        return view('admin.dashboard')->with(['event' => $event, 'countpedoman' => $countpedoman, 'countperaturan' => $countperaturan, 'countevent' => $countevent, 'countpub' => $countpub, 'countnews' => $countnews, 'totcol' => $totcol, 'totws' => $totws]);
     }
 
-  private function eventNewest()
-  {
-    $data = Event::where('status', 'published')->orderby('created_at', 'desc')->take(5)->get();
-    return $data;
-	}
+    private function eventNewest()
+    {
+        $data = Event::where('status', 'published')->orderby('created_at', 'desc')->take(5)->get();
+        return $data;
+    }
 }
