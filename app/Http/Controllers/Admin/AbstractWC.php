@@ -89,7 +89,7 @@ class AbstractWC extends Controller
 				}
 			}
 		}
-		return redirect('/bo/asbtract/detail/'.$id);
+		return redirect('/bo/abstract/detail/'.$id);
 	}
 	public function getCatalogId($isbn)
 	{
