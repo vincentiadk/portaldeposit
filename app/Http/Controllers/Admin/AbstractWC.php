@@ -71,7 +71,7 @@ class AbstractWC extends Controller
 		$data->status = $req['status'];
 		$data->save();
 
-		if(count(request('files')) > 0 )
+		if(!request('files') == null )
 		{
 			$files = request('files');
 			$format = array('jpg','jpeg','png');
