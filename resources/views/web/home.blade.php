@@ -286,7 +286,11 @@
                         <li>
                             <div class="testimonial_item mini-layout fluid">
                                 <div class="mini-layout-sidebar hidden-phone ">
+                                    @if($abstract->images()->count() > 0)
                                     <img data-src="/storage/asbtract/{{$abstract->images->first()->file_name}}" class="lazy img-polaroid">
+                                    @else
+                                    <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" />
+                                    @endif
                                 </div>
                                 <div class="mini-layout-body">
                                     <p>
