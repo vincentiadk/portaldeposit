@@ -20,6 +20,9 @@ class AbstractWC extends Controller
 	public function list()
 	{
 		$model = AbstractCat::query();
+		if(Auth::user()->group_id != 0){
+			$model->where('created_by', Auth::user()->id);
+		}
 		$dataTable = \DataTables::eloquent($model)
 		->editColumn('action',function($model){
 			return "Pick";
@@ -40,7 +43,7 @@ class AbstractWC extends Controller
 
 	public function edit($id)
 	{
-		if($id == 'new'){
+		if($id == 'new') {
 			$data = new AbstractCat();
 		}
 		else {
@@ -49,18 +52,28 @@ class AbstractWC extends Controller
 		$action = "/bo/abstract/detail/".$id;
 		return view('admin.abstract.abstract-detail', compact('data','action'));
 	}
+
 	public function update($id)
 	{
 		$req = request()->all();
-		$slug = 'abstract/'.str_replace(' ', '-', strtolower($req['title']));
 		$req = $this->setup_data($req);
 		
 		if($id == 'new') {
 			$data = new AbstractCat();
 			$data->created_by = Auth::user()->id;
-		}
-		else {
+			
+		} else {
 			$data = AbstractCat::find($id);
+		}
+		if($data->slug == "") {
+			$slug = 'abstract/'.str_slug(request('title'), "-");
+			$checkLink = $this->checkLink($slug);
+			if($checkLink == 0) {
+				$model->slug = $slug;
+			} else {
+				$checkLink ++;
+				$model->slug = $slug . "_" . $checkLink;
+			}
 		}
 		$data->title = request('title');
 		$data->keywords = request('keywords');
@@ -112,18 +125,23 @@ class AbstractWC extends Controller
 
 	}
 
-	function setup_data($req){
+	function setup_data($req)
+	{
 		if (!empty($req['simpan'])) 
 		{
 			$req['status'] = 'not published';
-		}
-		else if (!empty($req['simpanpub'])) 
-		{
+		} else if (!empty($req['simpanpub'])) {
 			$req['status'] = 'published';
 		}
 		unset($req['simpan']);
 		unset($req['simpanpub']);
 		unset($req['_token']);
 		return $req;
+	}
+	
+	function checkLink($link)
+	{
+		$count = AbstractCat::where("slug",$link)->count();
+		return $count;
 	}
 }
