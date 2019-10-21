@@ -28,6 +28,11 @@
                     <strong>{{session('files_error')}} file gagal diupload</strong>
                 </div>
                 @endif
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <strong>{{$errors->first()}}</strong>
+                </div>
+                @endif
                 @php 
                 if($data->id=="") { 
                 $id = "new"; 
@@ -42,7 +47,7 @@
                     <div class="form-group">
                         <label class="control-label col-lg-2">Judul</label>
                         <div class="col-lg-8">
-                            <textarea id="title" name="title" class="form-control activator" readonly>{{$data->title ?? ''}}</textarea>
+                            <textarea id="title" name="title" class="form-control activator" readonly required>{{$data->title ?? ''}}</textarea>
                         </div>
                     </div>
                     <div class="form-group">

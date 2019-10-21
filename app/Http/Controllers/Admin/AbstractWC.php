@@ -66,18 +66,19 @@ class AbstractWC extends Controller
 			$data = AbstractCat::find($id);
 		}
 		$check_isbn = $this->check_isbn(request('isbn'));
-		if($check_isbn[0] != 0 ){
-			return redirect()->back()
-			->withErrors(['error', 'Buku dengan ISBN dimaksud sudah pernah dibuat abstract oleh'.$check_isbn[1]->createdBy->name]);
+		if($check_isbn[0] == 0 ) {
+			return redirect()
+			->back()
+			->withErrors(['Buku dengan ISBN dimaksud sudah pernah dibuat abstract oleh '.$check_isbn[1]]);
 		} else {
 			if($data->slug == "") {
 				$slug = 'abstract/'.str_slug(request('title'), "-");
 				$checkLink = $this->checkLink($slug);
 				if($checkLink == 0) {
-					$model->slug = $slug;
+					$data->slug = $slug;
 				} else {
 					$checkLink ++;
-					$model->slug = $slug . "_" . $checkLink;
+					$data->slug = $slug . "_" . $checkLink;
 				}
 			}
 			$data->title = request('title');
@@ -122,6 +123,7 @@ class AbstractWC extends Controller
 			$q->where('category_id', 4);
 		})
 		->where(DB::raw("replace(isbn,'-')", "LIKE", "replace('".$isbn."','-')"))
+		->where('isdelete',0)
 		->first();
 		if($catalog){
 			return $catalog->id;
@@ -153,11 +155,11 @@ class AbstractWC extends Controller
 
 	function check_isbn($isbn)
 	{
-		$abstractcat = AbstractCat::where(DB::raw("replace(isbn,'-')", "LIKE", "replace('".$isbn."','-')"))->first();
+		$abstractcat = AbstractCat::where(DB::raw("replace(isbn,'-')"), "=", DB::raw("replace('".$isbn."','-')"))->first();
 		if($abstractcat){
-			return [0,0];
+			return [0, $abstractcat->createdBy->name]; //sudah ada
 		}else {
-			return [1,$abstractcat];
+			return [1, 0]; // belum ada
 		}
 		
 	}
