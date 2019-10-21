@@ -9,6 +9,7 @@ use DataTables;
 use App\Catalog;
 use App\AbstractCat;
 use App\Galery;
+use App\User;
 use DB;
 use Uuid;
 Use Illuminate\Support\Facades\File;
@@ -25,7 +26,10 @@ class AbstractWC extends Controller
 		}
 		$dataTable = \DataTables::eloquent($model)
 		->editColumn('action',function($model){
-			return "Pick";
+			return "<a href='/bo/abstract/detail/".$item['id']."' class='btn btn-xs btn-default btn-edit'><i class='fa fa-edit'></i> Detail</a>";
+		})
+		->editColumn('created_by',function($model){
+			return User::find($model->created_by)->name;
 		})
 		->addIndexColumn()
 		->rawColumns(['action']);
