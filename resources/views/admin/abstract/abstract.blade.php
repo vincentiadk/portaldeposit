@@ -64,12 +64,12 @@
             dom: 'lBfrtip',
             buttons : ['csv','excel','print','reset','reload'],
             columns: [
-            { data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            { data: 'DT_RowIndex', name: 'DT_RowIndex', searchable:false, orderable:false},
             { data: 'title', name: 'title' },
             { data: 'keywords', name: 'keywords' },
             { data: 'created_at', name: 'created_at' },
             { data: 'created_by', name: 'created_by' },
-            { data: 'action', name: 'action' }
+            { data: 'action', name: 'action', searchable:false, orderable:false }
 
             ]
         });
