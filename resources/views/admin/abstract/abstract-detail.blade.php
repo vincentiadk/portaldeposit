@@ -57,6 +57,12 @@
                             <textarea name="abstract" id="abstract" class="form-control activator summernote" readonly>{{$data->abstract ?? ''}}</textarea>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="control-label col-lg-2">Keywords</label>
+                        <div class="col-lg-8">
+                            <textarea id="keywords" name="keywords" class="form-control activator" readonly>{{$data->keywords ?? ''}}</textarea>
+                        </div>
+                    </div>
                     <!-- List File -->
                     <div class="form-group">  
                         <label class="control-label col-lg-2">Gambar</label>

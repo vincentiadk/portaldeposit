@@ -56,6 +56,7 @@ class AbstractWC extends Controller
 		else {
 			$data = AbstractCat::find($id);
 		}
+		$data->title = request('title');
 		$data->keywords = request('keywords');
 		$data->abstract = request('abstract');
 		$data->created_by = Auth::user()->id;
