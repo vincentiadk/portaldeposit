@@ -18,25 +18,25 @@ class DashboardWC extends Controller
     public function dashboard(){
     	$user = Auth::user();
 
-        $total = Collection::where('noinduk_deposit', '!=', null)->paginate(1);
-        $totalws = Master_publisher::paginate(1);
+        $total = Collection::where('category_id', 4);
+        $totalws = Master_publisher::query();
 
-        $totws = $totalws->total();
-        $totcol = $total->total();
+        $totws = Master_publisher::count();
+        $totcol =Collection::where('category_id',4)->count();
 
     	if ($user->group_id == 0) {
-	    	$countnews = count(News::all());
-	    	$countpub = count(Publication::all());
-	    	$countevent = count(Event::all());
-	    	$countpedoman = count(Rule::where('type', 'pedoman')->get());
-	    	$countperaturan = count(Rule::where('type', 'peraturan')->get());
+	    	$countnews = News::count();
+	    	$countpub = Publication::count();
+	    	$countevent = Event::count();
+	    	$countpedoman = Rule::count();
+	    	$countperaturan = Rule::where('type', 'peraturan')->count();
     	}
     	else{
-	    	$countnews = count(News::where('created_by', $user->id)->get());
-	    	$countpub = count(Publication::where('created_by', $user->id)->get());
-	    	$countevent = count(Event::where('created_by', $user->id)->get());
-	    	$countpedoman = count(Rule::where('type', 'pedoman')->where('created_by', $user->id)->get());
-	    	$countperaturan = count(Rule::where('type', 'peraturan')->where('created_by', $user->id)->get());
+	    	$countnews = News::where('created_by', $user->id)->count(); 
+	    	$countpub = Publication::where('created_by', $user->id)->count();
+	    	$countevent = Event::where('created_by', $user->id)->count();
+	    	$countpedoman = Rule::where('type', 'pedoman')->where('created_by', $user->id)->count();
+	    	$countperaturan =Rule::where('type', 'peraturan')->where('created_by', $user->id)->count();
     	}
     	$event = $this->eventNewest();
 
