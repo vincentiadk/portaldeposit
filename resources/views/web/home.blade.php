@@ -289,11 +289,9 @@
                                     <img data-src="/storage/asbtract/{{$abstract->images->first()->file_name}}" class="lazy img-polaroid">
                                 </div>
                                 <div class="mini-layout-body">
-                                    <p>
                                     {!!$abstract->abstract!!}
-                                    </p>
-                                    <span class="occupation">ISBN {{$abstract->isbn}}</span>
-                                    <span class="author">{{$abstract->createdBy->name}}</span>
+                                    <span class="occupation">ISBN : {{$abstract->isbn}}</span>
+                                    <span class="author">oleh : {{$abstract->createdBy->name}} <small><i>{{$abstract->created_at}}</i></small></span>
                                     
                                 </div>
                             </div>
