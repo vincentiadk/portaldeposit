@@ -100,7 +100,7 @@ class AbstractWC extends Controller
 		} else {
 			return redirect()
 			->back()
-			->withErrors(['Tidak ditemukan buku dengan ISBN '.request('ISBN'). ' pada database INLIS, mohon cek ISBN yang Anda masukkan.']);
+			->withErrors(['Tidak ditemukan buku dengan ISBN '.request('ISBN'). ' pada database INLIS Deposit, mohon cek ISBN yang Anda masukkan, pastikan ISBN tersebut merupakan koleksi deposit dan ada di INLIS.']);
 		}
 		$data->isbn = request('isbn');
 		$data->status = $req['status'];
@@ -188,7 +188,7 @@ class AbstractWC extends Controller
 			}
 			
 		} else {
-			return response()->json("Tidak ditemukan buku dengan ISBN ".$isbn." pada database INLIS, mohon cek ISBN yang Anda masukkan.");
+			return response()->json("Tidak ditemukan buku dengan ISBN ".$isbn." pada database INLIS Deposit, mohon cek ISBN yang Anda masukkan, pastikan ISBN tersebut merupakan koleksi deposit dan ada di INLIS.");
 		}
 	}
 
