@@ -18,7 +18,6 @@
                                 <th>Judul</th>
                                 <th width="10%">Impresum</th>
                                 <th width="10%">ISBN/ISSN</th>
-                               
                                 <th width="10%">Action</th>
                             </tr>
                         </thead>

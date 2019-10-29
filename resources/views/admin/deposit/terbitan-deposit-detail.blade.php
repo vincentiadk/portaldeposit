@@ -56,6 +56,7 @@
               <label class="control-label col-lg-2">Kategori</label>
               <div class="col-lg-8">
                 <select class="form-control activator" id="kategori" name="type" value="{{$data->type ?? ''}}" aria-describedby="basic-addon1" disabled>
+                  <option value="abstrak">Abstrak</option>
                   <option value="kin">KIN</option>
                   <option value="daftar_kckr">Daftar KCKR</option>
                   <option value="direktori_penerbit">Direktori Penerbit</option>

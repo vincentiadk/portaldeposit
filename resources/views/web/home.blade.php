@@ -283,20 +283,30 @@
                 <div class="testmonial_slider" style="height:auto">
                     <ul class="slides">
                         @foreach($abstracts as $abstract)
+                        @php
+                        $col = getDetailCatalogById($abstract->catalog_id);
+                        @endphp
                         <li>
                             <div class="testimonial_item mini-layout fluid">
                                 <div class="mini-layout-sidebar hidden-phone ">
                                     @if($abstract->images()->count() > 0)
-                                    <img data-src="/storage/asbtract/{{$abstract->images->first()->file_name}}" class="lazy img-polaroid">
+                                    <img data-src="/storage/abstract/{{$abstract->images->first()->file_name}}" class="lazy img-polaroid">
                                     @else
                                     <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" />
                                     @endif
                                     {{$abstract->all}}
                                 </div>
                                 <div class="mini-layout-body">
+                                    <h4>{{$abstract->title}}</h4>
                                     {!!$abstract->abstract!!}
-                                    <span class="occupation">ISBN : {{$abstract->isbn}}</span>
-                                    <span class="author">oleh : {{$abstract->createdBy->name}} <small><i>{{$abstract->created_at}}</i></small></span>
+                                    <span class="author">Abstrak oleh  {{$abstract->createdBy->name}} <small><i>{{$abstract->created_at}}</i></small></span>
+                                    <span class="occupation">
+                                        ISBN : {{$abstract->isbn}}<br/>
+                                        Penerbit : {{$col->publisher}}<br/>
+                                        Tahun Terbit  : {{$col->publishyear}}<br/>
+                                        Kepengarangan  : {{$col->author}}
+                                    </span>
+                                   
                                     
                                 </div>
                             </div>

@@ -19,6 +19,7 @@
 						<form class="form-search" action="/publication" method="GET" data>
 							<select name="type" class="input-medium">
 								<option value="" @if($type == "") selected @endif>Seluruh Publikasi</option>
+								<option value="abstrak" @if($type == "abstrak") selected @endif>Abstrak</option>
 								<option value="buletin_deposit" @if($type == "buletin_deposit") selected @endif>Buletin</option>
 								<option value="direktori_penerbit" @if($type == "direktori_penerbit") selected @endif>Direktori Penerbit</option>
 								<option value="kin" @if($type == "kin") selected @endif>KIN</option>

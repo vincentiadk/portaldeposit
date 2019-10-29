@@ -279,7 +279,6 @@ $mode="detail";
             })
         }  else  {
             $(".simpan").show();
-         //   $(".activator").prop("readonly", false);
             $("#kategori").prop('disabled', false);
             $("#is_comment").prop('disabled', false);
         }
@@ -288,7 +287,7 @@ $mode="detail";
                  alert('Masukkan ISBN');
             }else {
                 $(".activator").prop("readonly", true);
-                $('#abstract').summernote('disable');
+                $('.summernote').summernote('disable');
                 $('#lds-hourglass').css('display','block');
                 $.ajax({
                     type: "GET",
@@ -296,14 +295,14 @@ $mode="detail";
                     dataType: 'json',    
                     success: function(data) {
                         if(Object.prototype.toString.call(data)==='[object Object]'){
-                            $('#abstract').summernote('enable');
+                            $('.summernote').summernote('enable');
                             $('#isbn').val(data.isbn);
                             $('#title').val(data.title);
                             $('#author').val(data.author);
                             $('#publishyear').val(data.publishyear);
                             $('#publisher').val(data.publisher);
-                            $('#abstract').summernote('reset');
-                            $('#abstract').summernote('insertText',data.abstract);
+                            $('.summernote').summernote('code','<p><br></p>');
+                            $('.summernote').summernote('insertText',data.abstract);
                             $(".activator").prop("readonly", false);
                         } else {
                             alert(data);
@@ -323,6 +322,13 @@ $mode="detail";
     function create_summernote() {
         $(".summernote").summernote({
             height: 300,
+            callbacks:{
+                onPaste: function(e){
+                    var buffertext = (( e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                    e.preventDefault();
+                    document.execCommand('insertText',false,buffertext);
+                }
+            }
         });
          $('#abstract').summernote('disable');
     }

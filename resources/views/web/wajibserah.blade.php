@@ -54,8 +54,8 @@
             <table class="table">
                 @foreach($kolprop as $kolprop)
                 <tr>
-                  <td><a href="/wajibserah/?propinsi={{$kolprop->code}}">{{$kolprop->label}}</a></td>
-                  <td><a href="/wajibserah/?propinsi={{$kolprop->code}}">({{$kolprop->total}})</a></td>
+                  <td><a href="/wajibserah?propinsi={{$kolprop->code}}">{{$kolprop->label}}</a></td>
+                  <td><a href="/wajibserah?propinsi={{$kolprop->code}}">({{$kolprop->total}})</a></td>
                 </tr>
                 @endforeach
             </table>

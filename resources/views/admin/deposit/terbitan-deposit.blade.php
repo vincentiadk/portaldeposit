@@ -28,6 +28,7 @@
               <div class="input-group-addon">Kategori</div>
               <select class="form-control" id="kategori" aria-describedby="basic-addon1">
                 <option value="all" selected>Semua</option>
+                <option value="abstrak">Abstrak</option>
                 <option value="kin">KIN</option>
                 <option value="daftar_kckr">Daftar KCKR</option>
                 <option value="direktori_penerbit">Direktori Penerbit</option>
