@@ -68,7 +68,7 @@ class BeritaWC extends Controller
          $files = $request->file('files');
           $format = array('jpg','jpeg','png');
           foreach ($files as $file) {
-            if ($file->getSize()> 10000000) {
+            if ($file->getSize() > 100000000) {
               $files_error++;
             }
             else if (!in_array(strtolower($file->getClientOriginalExtension()), $format)) {

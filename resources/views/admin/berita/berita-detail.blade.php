@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('content')
 
-    
+
 <div class="row">
   <div class="col-lg-12">
     <h2> Detail Berita </h2>
@@ -10,9 +10,9 @@
 
 <hr />  
 @if ($mode=='detail' && $comment > 0) 
-  <div class="row" align="right" style="margin: 10px;">
-    <a href="/bo/comment/{{$data->slug}}" class="btn btn-primary btn-sm">Atur Komentar</a>
-  </div>
+<div class="row" align="right" style="margin: 10px;">
+  <a href="/bo/comment/{{$data->slug}}" class="btn btn-primary btn-sm">Atur Komentar</a>
+</div>
 @endif
 
 <div class="row">
@@ -20,18 +20,18 @@
     <div class="panel panel-default">
       <div class="panel-body">
         @if (!empty(session('status')) && session('status') ==1)
-          <div class="alert alert-success">
-            <strong>Berhasil!</strong>
-          </div>
+        <div class="alert alert-success">
+          <strong>Berhasil!</strong>
+        </div>
         @elseif (!empty(session('status')) && session('status') ==0)
-          <div class="alert alert-danger">
-            <strong>Gagal!</strong>
-          </div>
+        <div class="alert alert-danger">
+          <strong>Gagal!</strong>
+        </div>
         @endif  
         @if (!empty(session('files_error')) && session('files_error')>0)
-          <div class="alert alert-danger">
-            <strong>{{session('files_error')}} file gagal diupload</strong>
-          </div>
+        <div class="alert alert-danger">
+          <strong>{{session('files_error')}} file gagal diupload</strong>
+        </div>
         @endif
         <form action="{{$action}}" method="post" class="form-horizontal" id="form1" enctype="multipart/form-data">
           @csrf
@@ -46,9 +46,9 @@
             <label class="control-label col-lg-2">Kategori</label>
             <div class="col-lg-8">
               <select class="form-control activator" id="kategori" name="type" value="{{$data->type ?? 'event'}}" aria-describedby="basic-addon1" disabled>
-                  <option value="news">Berita</option>
-                  <option value="news_deposit">Deposit</option>
-                </select>
+                <option value="news">Berita</option>
+                <option value="news_deposit">Deposit</option>
+              </select>
             </div>
           </div>
           <div class="form-group">
@@ -61,9 +61,9 @@
             <label class="control-label col-lg-2">Komentar</label>
             <div class="col-lg-8">
               <select class="form-control activator" id="is_comment" name="is_comment" value="{{$data->is_comment ?? '1'}}" aria-describedby="basic-addon1" disabled>
-                  <option value="1">Diizinkan</option>
-                  <option value="0">Tidak diizinkan</option>
-                </select>
+                <option value="1">Diizinkan</option>
+                <option value="0">Tidak diizinkan</option>
+              </select>
             </div>
           </div>
           <!-- List File -->
@@ -123,44 +123,44 @@
           </div>
           
           @if($mode == 'detail')
-            <div class="form-group">
-              <label class="control-label col-lg-2">Status</label>
-              <div class="col-lg-8">
-                <p class="control-label" style="float: left;">{{$data->status ?? ''}}</p>
-              </div>
+          <div class="form-group">
+            <label class="control-label col-lg-2">Status</label>
+            <div class="col-lg-8">
+              <p class="control-label" style="float: left;">{{$data->status ?? ''}}</p>
             </div>
-            <div class="form-group">
-              <label class="control-label col-lg-2">Dibuat Oleh</label>
-              <div class="col-lg-8">
-                <p class="control-label" style="float: left;">{{$data->createdBy->name ?? ''}}</p>
-              </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-lg-2">Dibuat Oleh</label>
+            <div class="col-lg-8">
+              <p class="control-label" style="float: left;">{{$data->createdBy->name ?? ''}}</p>
             </div>
-            <div class="form-group">
-              <label class="control-label col-lg-2">Diupdate Oleh</label>
-              <div class="col-lg-8">
-                <p class="control-label" style="float: left;">{{$data->updatedBy->name ?? ''}}</p>
-              </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-lg-2">Diupdate Oleh</label>
+            <div class="col-lg-8">
+              <p class="control-label" style="float: left;">{{$data->updatedBy->name ?? ''}}</p>
             </div>
-            <div class="form-group">
-              <label class="control-label col-lg-2">Dibuat Tanggal</label>
-              <div class="col-lg-8">
-                <p class="control-label" style="float: left;">{{$data->created_at ?? ''}}</p>
-              </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-lg-2">Dibuat Tanggal</label>
+            <div class="col-lg-8">
+              <p class="control-label" style="float: left;">{{$data->created_at ?? ''}}</p>
             </div>
-            <div class="form-group">
-              <label class="control-label col-lg-2">Diupdate Tanggal</label>
-              <div class="col-lg-8">
-                <p class="control-label" style="float: left;">{{$data->updated_at ?? ''}}</p>
-              </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-lg-2">Diupdate Tanggal</label>
+            <div class="col-lg-8">
+              <p class="control-label" style="float: left;">{{$data->updated_at ?? ''}}</p>
             </div>
+          </div>
           @endif      
           <div class="form-actions no-margin-bottom" style="text-align:center;">
             <input type="submit" value="Simpan" name="simpan" class="btn btn-primary simpan"  style="display: none"/>
             <input type="submit" value="Simpan & Published" name="simpanpub" class="btn btn-primary simpan"  style="display: none"/>
             @if ($mode=='detail') 
-              <button type="button" class="btn btn-primary detail" id="ubah">Ubah</button>
-              <input type="submit" value="Hapus" name="delete" id="delete" class="btn btn-danger detail"/>
-              <button type="button" class="btn btn-danger simpan" id="cancel" style="display: none">Cancel</button>
+            <button type="button" class="btn btn-primary detail" id="ubah">Ubah</button>
+            <input type="submit" value="Hapus" name="delete" id="delete" class="btn btn-danger detail"/>
+            <button type="button" class="btn btn-danger simpan" id="cancel" style="display: none">Cancel</button>
             @endif
           </div>
         </form>
@@ -175,11 +175,11 @@
   $(document).ready(function() {
     
     $("#add-file").click(function(){
-        $("#group-file").append('<input type="file" name="files[]"  class="form-control"/>')
+      $("#group-file").append('<input type="file" name="files[]"  class="form-control"/>')
     });
 
     $("#remove-file").click(function(){
-        $('#group-file').children().last().remove();
+      $('#group-file').children().last().remove();
     });
 
     create_summernote();
@@ -192,8 +192,10 @@
       $(".hide-edit").hide();
 
       $('#delete').click(function(){
+       if(confirm('Apa Anda yakin akan menghapus abstract ini?')){  
          $('#form1').attr('action', '/bo/berita/delete');
-      });
+       }
+     });
 
       $("#ubah").click(function()
       {
@@ -231,7 +233,7 @@
 
   function create_summernote() {
     $(".summernote").summernote({
-        height: 300,
+      height: 300,
     });
   }
 
@@ -240,6 +242,5 @@
 @endsection
 
 @section('add-header')       
-  <link rel="stylesheet" href="{{asset('admin/css/img-check.css')}}"/>
+<link rel="stylesheet" href="{{asset('admin/css/img-check.css')}}"/>
 @endsection
-                    

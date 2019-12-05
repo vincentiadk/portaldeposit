@@ -12,6 +12,8 @@ use App\Rule;
 use App\Collection;
 use App\Galery;
 use App\Catalog;
+use App\AbstractCat;
+
 class HomeController extends Controller
 {
     public function homePage()
@@ -23,7 +25,9 @@ class HomeController extends Controller
         $data['sliders'] = $this->getSlider();
         $data['depositNewest'] = $this->depositNewest();
         $data['publication']= $this->publication();
-        return view('webpage.home', $data);
+
+        $data['abstracts'] = $this->abstract();
+        return view('web.home', $data);
     }
 
     public function faq()
@@ -45,7 +49,7 @@ class HomeController extends Controller
 
     private function newsNewest()
     {
-        $data = News::where('status', 'published')->orderby('created_at', 'desc')->take(3)->get();
+        $data = News::where('status', 'published')->latest()->take(5)->get();
         return $data;
     } 
 
@@ -55,25 +59,30 @@ class HomeController extends Controller
             $query->select('catalogs.id')->from('catalogs')
             ->join('catalog_ruas','catalog_ruas.catalogid','=','catalogs.id')
             ->join('collections','collections.catalog_id','=','catalogs.id')
-            ->where('collections.noinduk_deposit','!=',null)
+            ->where('collections.category_id', 4)
             ->where('coverurl','!=',null)
             ->where('tag','520')->whereRaw('LENGTH(value) > 10 ');
         })->latest()->take(16)->get();
         return $data;
     }
-    private function depositNewest(){
-        $collectionArray = Collection::where('noinduk_deposit','!=',null)
+    private function depositNewest()
+    {
+        $collectionArray = Collection::where('collections.category_id', 4)
             ->select('catalog_id')
             ->groupby('catalog_id','createdate')
             ->latest()
-            ->take(20)
+            ->take(24)
             ->get()
             ->toArray();
         $catIds = array_column($collectionArray,'catalog_id');
         $data = Catalog::whereIn('id',$catIds)->get();
         return $data;
     }
-
+    private function abstract()
+    {
+        $data = AbstractCat::where('status','published')->latest()->take(10)->get();
+        return $data;
+    }
     private function eventNewest()
     {
         $data = Event::where('status', 'published')->where('datetime', '>=', now())->orderby('created_at', 'desc')->take(5)->get();
@@ -108,7 +117,7 @@ class HomeController extends Controller
 
     private function publication()
     {
-        $data = Publication::latest()->take(6)->get();
+        $data = Publication::where('is_status','published')->latest()->take(6)->get();
         return $data;
     }
 }

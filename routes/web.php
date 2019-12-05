@@ -73,6 +73,12 @@ Route::group (['middleware' => ['auth']], function () {
   	Route::get ('/bo/slider', 'Admin\SliderWC@slider');
   	Route::post ('/bo/slider/update', 'Admin\SliderWC@update');
 
+  	Route::get ('/bo/abstract', 'Admin\AbstractWC@index');
+  	Route::get ('/bo/abstract/list', 'Admin\AbstractWC@list');
+	Route::get ('/bo/abstract/detail/{id}', 'Admin\AbstractWC@edit');
+	Route::post ('/bo/abstract/detail/{id}', 'Admin\AbstractWC@update');
+	Route::post ('/bo/abstract/delete', 'Admin\AbstractWC@delete');
+	Route::get ('/bo/abstract/getCatalog/{isbn}', 'Admin\AbstractWC@getCatalog');
 });
 
 

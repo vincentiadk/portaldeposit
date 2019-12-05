@@ -18,7 +18,7 @@
   <link href="/assets/css/font-awesome.css" rel="stylesheet">
   <link href="/assets/css/animate.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700" rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
   <link href="/assets/css/style.css" rel="stylesheet">
   <link href="/assets/color/color1.css" rel="stylesheet">
 
@@ -38,31 +38,30 @@
 </head>
 
 <body>
-    @include('layouts.header')
+    @include('web.layouts.header')
     @yield('content')
     <!-- footer   
        ================================================== -->
-       @include('layouts.footer')
-       <script src="/assets/js/jquery.js"></script>
-       <script src="/assets/js/modernizr.js"></script>
-       <script src="/assets/js/jquery.easing.1.3.js"></script>
-       <script src="/assets/js/google-code-prettify/prettify.js"></script>
-       <script src="/assets/js/bootstrap.js"></script>
-       <script src="/assets/js/jquery.prettyPhoto.js"></script>
-       <script src="/assets/js/portfolio/jquery.quicksand.js"></script>
-       <script src="/assets/js/portfolio/setting.js"></script>
-       <script src="/assets/js/hover/jquery-hover-effect.js"></script>
-       <script src="/assets/js/jquery.flexslider.js"></script>
-       <script src="/assets/js/classie.js"></script>
-       <script src="/assets/js/cbpAnimatedHeader.min.js"></script>
-       <script src="/assets/js/jquery.refineslide.js"></script>
-       <script src="/assets/js/jquery.ui.totop.js"></script>
-
+      @include('web.layouts.footer')
+      <script src="/assets/js/jquery.js"></script>
+      <script src="/assets/js/modernizr.js"></script>
+      <script src="/assets/js/jquery.easing.1.3.js"></script>
+      <script src="/assets/js/google-code-prettify/prettify.js"></script>
+      <script src="/assets/js/bootstrap.js"></script>
+      <script src="/assets/js/jquery.prettyPhoto.js"></script>
+      <script src="/assets/js/portfolio/jquery.quicksand.js"></script>
+      <script src="/assets/js/portfolio/setting.js"></script>
+      <script src="/assets/js/hover/jquery-hover-effect.js"></script>
+      <script src="/assets/js/jquery.flexslider.js"></script>
+      <script src="/assets/js/classie.js"></script>
+      <script src="/assets/js/cbpAnimatedHeader.min.js"></script>
+      <script src="/assets/js/jquery.refineslide.js"></script>
+      <script src="/assets/js/jquery.ui.totop.js"></script>
        <!-- Template Custom Javascript File -->
-       <script src="/assets/js/custom.js"></script>
-       <script type="text/javascript" src="/assets/js/jquery.lazy.min.js"></script>
-       <script type="text/javascript" src="/assets/js/jquery.lazy.plugins.min.js"></script>
-       <script>
+      <script src="/assets/js/custom.js"></script>
+      <script type="text/javascript" src="/assets/js/jquery.lazy.min.js"></script>
+      <script type="text/javascript" src="/assets/js/jquery.lazy.plugins.min.js"></script>
+      <script>
         $.ajaxSetup({
           headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),

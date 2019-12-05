@@ -52,7 +52,7 @@
                           <div class="box-comment__header">
                             <div class="box-comment__header-left">
                               <p class="box-comment__title">{{$comment->commentator_name}}</p>
-                              <time datetime="2017">4 April 2018</time>
+                              <time datetime="2017">{{$comment->created_at}}</time>
                             </div>
                           </div>
                           <p>{{$comment->message}}</p>
@@ -67,7 +67,7 @@
               <div>
               <section class="section-sm">
                 <h5>Tinggalkan Komentar</h5>
-                <form class="rd-mailform rd-mailform_style-1 text-left" id="form-comment">
+                <form class="rd-mailform rd-mailform_style-1 text-left" id="form-comment" method="post" action="/comment/submit">
                   <input type="text" name="relation_id" id="relation_id" class="hidden" hidden value="{{$datas->id}}">
                   <input type="text" name="relation_name" id="relation_name" class="hidden" hidden value="news">
                   <div class="form-wrap form-wrap_icon linear-icon-man">

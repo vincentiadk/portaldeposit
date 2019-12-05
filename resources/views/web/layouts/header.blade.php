@@ -9,7 +9,7 @@
                 <div class="span4">
                     <!-- logo -->
                     <div class="logo">
-                        <img data-src="/webpage/images/deposit.png" alt="" class="lazy" />
+                       <a href="/"> <img data-src="/webpage/images/deposit.png" alt="" class="lazy" /></a>
                     </div>
                     <!-- end logo -->
                 </div>
@@ -20,8 +20,12 @@
                         <div class="navbar-inner">
                             <nav>
                                 <ul class="nav topnav">
-                                    <li class="dropdown active">
-                                        <a href="/news">Berita</a>
+                                    <li class="dropdown">
+                                         <a href="#">Kegiatan</a>
+                                        <ul class="dropdown-menu">
+                                            <li> <a href="/news">Berita</a></li>
+                                       <li><a href="/event">Agenda</a></li>
+                                    </ul>
                                     </li>
                                     <li class="dropdown">
                                         <a href="#">Wajib Serah</a>
@@ -37,11 +41,12 @@
                                             <li><a href="/koleksi/statistik">Statistik</a></li>
                                         </ul>
                                     </li>
-                                    <li>
-                                        <a href="/publication">Publikasi Deposit</a>
-                                    </li>
-                                    <li>
-                                        <a href="/event">Kegiatan</a>
+                                    <li class="dropdown">
+                                        <a href="#">Publikasi Deposit</a>
+                                        <ul class="dropdown-menu">
+                                            <li> <a href="/publication">Publikasi Deposit</a></li>
+                                            <li><a href="/rule">Pedoman dan Peraturan</a></li>
+                                        </ul>
                                     </li>
                                 </ul>
                             </nav>
