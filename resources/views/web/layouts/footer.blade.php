@@ -12,7 +12,7 @@
                         <strong>Jalan Salemba Raya No 28.A</strong><br>
                         Gedung E Lantai 7<br>
                         Perpustakaan Nasional RI<br>
-                        <abbr title="Phone">P:</abbr> (021) 3922669, 3922749, 3922855, 3923116 Ext.231 </address>
+                        <abbr title="Phone">P:</abbr> (021) 3901 013 </address>
                     </div>
                 </div>
                 <div class="span3">
