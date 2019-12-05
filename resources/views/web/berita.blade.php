@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="span12">
-                <h3>Berita <strong> Direktorat Deposit Bahan Pustaka</strong></h3>
+                <h3>Berita <strong> Direktorat vdk</strong></h3>
             </div>
         </div>
     </div>
