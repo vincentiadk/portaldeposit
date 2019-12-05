@@ -12,7 +12,7 @@
                         <strong>Jalan Salemba Raya No 28.A</strong><br>
                         Gedung E Lantai 7<br>
                         Perpustakaan Nasional RI<br>
-                        <abbr title="Phone">P:</abbr> (021) 3901 013 </address>
+                        <abbr title="Phone">P:</abbr> (021) 3901 013 : branch baru</address>
                     </div>
                 </div>
                 <div class="span3">
