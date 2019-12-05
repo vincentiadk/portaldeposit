@@ -33,7 +33,7 @@ class UserWC extends Controller
     {
         $req=$request->all();
         $req = $this->setup_data($req);
-        if(Str::length($req['password']) > 5 ){
+        if(strlen($req['password']) > 5 ){
             if($req['password'] == $req['kpassword']){
                 $req['password'] = bcrypt($req['password']);
             }
@@ -53,7 +53,7 @@ class UserWC extends Controller
 
     function userTambah(Request $request) 
     {
-        $req=$request->all();
+        $req = $request->all();
         $req = $this->setup_data($req);
         unset($req['id']);
         $req['created_by'] = Auth::user()->id;
