@@ -36,7 +36,9 @@ class UserWC extends Controller
         if(strlen($req['password']) > 5 ){
             if($req['password'] == $req['kpassword']){
                 $req['password'] = bcrypt($req['password']);
+                unset($req['kpassword']);
             }
+            unset($req['password']);
         } else {
             unset($req['password']);
             unset($req['kpassword']);
