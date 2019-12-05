@@ -215,9 +215,9 @@ class AbstractWC extends Controller
 	function check_isbn($isbn)
 	{
 		$abstractcat = AbstractCat::where(DB::raw("replace(isbn,'-')"), "=", DB::raw("replace('".$isbn."','-')"))->first();
-		if($abstractcat){
+		if($abstractcat) {
 			return [0, $abstractcat->createdBy->name]; //sudah ada
-		}else {
+		} else {
 			return [1, 0]; // belum ada
 		}
 		
