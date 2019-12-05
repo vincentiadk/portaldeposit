@@ -55,13 +55,13 @@
             <div class="form-group">
               <label class="control-label col-lg-2">Password **</label>
               <div class="col-lg-8">
-                  <input type="text" id="password" name="password" class="form-control" readonly/>
+                  <input type="password" id="password" name="password" class="form-control" readonly/>
               </div>
             </div>
             <div class="form-group">
               <label class="control-label col-lg-2">Konfirmasi Password ***</label>
               <div class="col-lg-8">
-                  <input type="text" id="kpassword" name="kpassword" class="form-control" readonly/>
+                  <input type="password" id="kpassword" name="kpassword" class="form-control" readonly/>
               </div>
             </div>
             <div class="form-actions no-margin-bottom" style="text-align:center;">

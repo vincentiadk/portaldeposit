@@ -38,7 +38,6 @@ class UserWC extends Controller
                 $req['password'] = bcrypt($req['password']);
                 unset($req['kpassword']);
             }
-            unset($req['password']);
         } else {
             unset($req['password']);
             unset($req['kpassword']);
