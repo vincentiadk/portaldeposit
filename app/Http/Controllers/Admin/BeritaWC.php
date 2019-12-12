@@ -137,11 +137,11 @@ class BeritaWC extends Controller
           }
       }
 
-      return back()->with(["status"=>1,'files_error'=>$files_error]);
+      return redirect('/bo/berita/detail/'.$result_id)->with(["status"=>1,'files_error'=>$files_error]);
     }
     else
     {
-      return redirect('/bo/berita/detail/'.$result_id)->with("status",0);
+      return back()->with("status",0);
     }
   }
 
