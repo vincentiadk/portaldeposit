@@ -53,7 +53,7 @@ class DepositWC extends Controller
       if($request->hasFile('dokumen')){
       $dokumen = $request->dokumen;
       $file_name = Uuid::generate()->string.'.'.strtolower($dokumen->getClientOriginalExtension());
-        if (strtolower($dokumen->getClientOriginalExtension())== 'pdf' && $dokumen->getSize()<= 600000000) {
+        if (strtolower($dokumen->getClientOriginalExtension())== 'pdf' && $dokumen->getSize()<= 6000000000) {
           $dg = Publication::find($req['id']);
           if ($dg->files == null) {
             $dg->files = $file_name;
@@ -80,7 +80,7 @@ class DepositWC extends Controller
          $files = $request->file('files');
           $format = array('jpg','jpeg','png');
           foreach ($files as $file) {
-            if ($file->getSize()> 10000000) {
+            if ($file->getSize()> 6000000000) {
               $files_error++;
             }
             else if (!in_array(strtolower($file->getClientOriginalExtension()), $format)) {
@@ -130,7 +130,7 @@ class DepositWC extends Controller
       if($request->hasFile('dokumen')){
         $dokumen = $request->dokumen;
         $file_name = Uuid::generate()->string.'.'.strtolower($dokumen->getClientOriginalExtension());
-        if (strtolower($dokumen->getClientOriginalExtension())== 'pdf' && $dokumen->getSize()<= 600000000) {
+        if (strtolower($dokumen->getClientOriginalExtension())== 'pdf' && $dokumen->getSize()<= 6000000000) {
           $dg = Publication::find($result_id);
           $dg->files = $file_name;
           $dg->save();
@@ -144,7 +144,7 @@ class DepositWC extends Controller
           $files = $request->file('files');
           $format = array('jpg','jpeg','png');
           foreach ($files as $file) {
-            if ($file->getSize()> 10000000) {
+            if ($file->getSize()> 6000000000) {
               $files_error++;
             }
             else if (!in_array(strtolower($file->getClientOriginalExtension()), $format)) {
