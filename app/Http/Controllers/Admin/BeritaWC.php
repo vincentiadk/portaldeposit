@@ -141,7 +141,7 @@ class BeritaWC extends Controller
     }
     else
     {
-      return back()->with("status",0);
+      return redirect('/bo/berita/detail/'.$result_id)->with("status",0);
     }
   }
 
