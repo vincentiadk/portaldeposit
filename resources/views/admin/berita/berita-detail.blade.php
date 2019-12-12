@@ -60,73 +60,74 @@
             <div class="form-group">
                 <label class="control-label col-lg-2">Komentar</label>
                 <div class="col-lg-8">
-                  <select class="form-control activator" id="is_comment" name="is_comment" value="{{$data->is_comment ?? '1'}}" aria-describedby="basic-addon1" disabled>
-                    <option value="1">Diizinkan</option>
-                    <option value="0">Tidak diizinkan</option>
-                </select>
+                    <select class="form-control activator" id="is_comment" name="is_comment" value="{{$data->is_comment ?? '1'}}" aria-describedby="basic-addon1" disabled>
+                        <option value="1">Diizinkan</option>
+                        <option value="0">Tidak diizinkan</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-2">Waktu Berita</label>
+                <div class="col-lg-8">
+                    <input type="text" id="created_at" name="created_at" class="form-control activator input-date" value="{{$data->created_at ?? ''}}" readonly/>
+                </div>
+            </div>
+            <!-- List File -->
+            <div class="form-group">  
+                <label class="control-label col-lg-2">Gambar</label>
+                <div class="panel-group col-lg-8" id="accordion" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default hide-edit" >
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                Tambah gambar
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                      <div class="panel-body">
+                        <div class="form-group">
+                          <div class="col-lg-2 col-sm-4">
+                            <button type="button" class="btn btn-primary" id="add-file">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </button> 
+                            <button type="button" class="btn btn-danger" id="remove-file">
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="col-lg-10 col-sm-8 input-group" id='group-file'>
+                            <input type="file" name='files[]'  class="form-control"/>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- List File -->
-        <div class="form-group">  
-            <label class="control-label col-lg-2">Gambar</label>
-            <div class="panel-group col-lg-8" id="accordion" role="tablist" aria-multiselectable="true">
-              <div class="panel panel-default hide-edit" >
-                <div class="panel-heading" role="tab" id="headingOne">
-                    <h4 class="panel-title">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            Tambah gambar
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                  <div class="panel-body">
+        @if($mode == 'detail')
+        <div class="panel panel-default" id='list-file'>
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Daftar Gambar
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+
+                    <label class="hide-edit" style="color:red">*Pilih gambar yg akan dihapus</label>
                     <div class="form-group">
-                      <div class="col-lg-2 col-sm-4">
-                        <button type="button" class="btn btn-primary" id="add-file">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                        </button> 
-                        <button type="button" class="btn btn-danger" id="remove-file">
-                            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                        </button>
+                        @foreach($galeries as $gal)
+                        <div class="col-lg-3"><label class="btn"><img src="/storage/berita/berita{{$data->id}}/{{$gal->file_name}}" class="img-thumbnail img-check"><input type="checkbox" name="delete_id[]" value="{{$gal->id}}" class="hidden checkbox-delete" autocomplete="off" disabled></label></div>
+                        @endforeach
                     </div>
-                    <div class="col-lg-10 col-sm-8 input-group" id='group-file'>
-                        <input type="file" name='files[]'  class="form-control"/>
-                    </div>
+
                 </div>
             </div>
         </div>
+        @endif
     </div>
-    @if($mode == 'detail')
-    <div class="panel panel-default" id='list-file'>
-        <div class="panel-heading" role="tab" id="headingTwo">
-            <h4 class="panel-title">
-                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Daftar Gambar
-                </a>
-            </h4>
-        </div>
-        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-            <div class="panel-body">
+</div>
 
-                <label class="hide-edit" style="color:red">*Pilih gambar yg akan dihapus</label>
-                <div class="form-group">
-                    @foreach($galeries as $gal)
-                    <div class="col-lg-3"><label class="btn"><img src="/storage/berita/berita{{$data->id}}/{{$gal->file_name}}" class="img-thumbnail img-check"><input type="checkbox" name="delete_id[]" value="{{$gal->id}}" class="hidden checkbox-delete" autocomplete="off" disabled></label></div>
-                    @endforeach
-                </div>
-
-            </div>
-        </div>
-    </div>
-    @endif
-</div>
-</div>
-<div class="form-group">
-    <label class="control-label col-lg-2">Waktu Berita</label>
-    <div class="col-lg-8">
-        <input type="text" id="created_at" name="created_at" class="form-control activator input-date" value="{{$data->created_at ?? ''}}" readonly/>
-    </div>
-</div>
 @if($mode == 'detail')
 <div class="form-group">
     <label class="control-label col-lg-2">Status</label>
@@ -198,10 +199,10 @@
       $(".hide-edit").hide();
 
       $('#delete').click(function(){
-       if(confirm('Apa Anda yakin akan menghapus abstract ini?')){  
-         $('#form1').attr('action', '/bo/berita/delete');
-     }
- });
+         if(confirm('Apa Anda yakin akan menghapus abstract ini?')){  
+           $('#form1').attr('action', '/bo/berita/delete');
+       }
+   });
 
       $("#ubah").click(function()
       {
@@ -242,11 +243,11 @@
       height: 300,
   });
 }
-  function create_datepicker() {
-      $(".input-date").datetimepicker({
-          format: 'DD MMMM YYYY HH:mm:ss'
-      });
-  }
+function create_datepicker() {
+  $(".input-date").datetimepicker({
+      format: 'DD MMMM YYYY HH:mm:ss'
+  });
+}
 
 
 </script>
