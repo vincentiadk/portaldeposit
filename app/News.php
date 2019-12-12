@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class News extends Model
 {
   protected $table = 'news';
-  public $timestamps = false;
+  //public $timestamps = false;
   protected $connection='oracle2';
 
   public function createdBy()
