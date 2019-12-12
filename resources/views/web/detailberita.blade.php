@@ -36,7 +36,7 @@
 								<i class="icon-bg-dark icon-circled icon-file icon-3x active"></i>
 							</div>
 							<ul class="post-meta">
-								<li class="first"><i class="icon-calendar"></i><span>{{ date('d F Y', strtotime($datas->datetime))}}</span></li>
+								<li class="first"><i class="icon-calendar"></i><span>{{ date('d F Y', strtotime($datas->created_at))}}</span></li>
 								<li><i class="icon-list-alt"></i><span><a href="#">{{count($comments)}} komentar</a></span></li>
 								<li class="last"><i class="icon-user"></i><span><a href="#">{{$datas->createdBy->name}}</a></span></li>
 							</ul>

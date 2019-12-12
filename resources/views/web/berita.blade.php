@@ -52,7 +52,7 @@
                                     @endif
                                 </div>
                                 <ul class="span12 post-meta">
-                                    <li class="first"><i class="icon-calendar"></i><span>{{$new->datetime}}</span></li>
+                                    <li class="first"><i class="icon-calendar"></i><span>{{$new->created_at}}</span></li>
                                     @if($new->createdBy)
                                     <li><i class="icon-user"></i><span><a href="#">{{$new->createdBy->name}}</a></span></li>
                                     @endif
