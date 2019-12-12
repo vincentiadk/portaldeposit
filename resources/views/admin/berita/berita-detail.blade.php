@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-lg-2">Waktu Berita</label>
+                <label class="control-label col-lg-2">Waktu Berita Dibuat</label>
                 <div class="col-lg-8">
                     <input type="text" id="created_at" name="created_at" class="form-control activator input-date" value="{{$data->created_at ?? ''}}" readonly/>
                 </div>
