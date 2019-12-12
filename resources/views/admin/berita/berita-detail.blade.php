@@ -245,7 +245,7 @@
 }
 function create_datepicker() {
   $(".input-date").datetimepicker({
-      format: 'DD MMMM YYYY HH:mm:ss'
+    format: 'YYYY-MM-DD HH:mm:ss'
   });
 }
 
