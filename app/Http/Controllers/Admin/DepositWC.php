@@ -53,7 +53,7 @@ class DepositWC extends Controller
       if($request->hasFile('dokumen')){
       $dokumen = $request->dokumen;
       $file_name = Uuid::generate()->string.'.'.strtolower($dokumen->getClientOriginalExtension());
-        if (strtolower($dokumen->getClientOriginalExtension())== 'pdf' && $dokumen->getSize()<= 60000000) {
+        if (strtolower($dokumen->getClientOriginalExtension())== 'pdf' && $dokumen->getSize()<= 600000000) {
           $dg = Publication::find($req['id']);
           if ($dg->files == null) {
             $dg->files = $file_name;
@@ -130,7 +130,7 @@ class DepositWC extends Controller
       if($request->hasFile('dokumen')){
         $dokumen = $request->dokumen;
         $file_name = Uuid::generate()->string.'.'.strtolower($dokumen->getClientOriginalExtension());
-        if (strtolower($dokumen->getClientOriginalExtension())== 'pdf' && $dokumen->getSize()<= 60000000) {
+        if (strtolower($dokumen->getClientOriginalExtension())== 'pdf' && $dokumen->getSize()<= 600000000) {
           $dg = Publication::find($result_id);
           $dg->files = $file_name;
           $dg->save();
