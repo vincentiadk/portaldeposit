@@ -104,6 +104,7 @@ class BeritaWC extends Controller
     $req['slug'] = $slug;
     $req['created_by'] = Auth::user()->id;
     $req['updated_by'] = Auth::user()->id;
+    $req['updated_at'] = now();
     $result_id = News::insertGetId($req);
 
 
