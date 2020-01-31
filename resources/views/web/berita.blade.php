@@ -56,7 +56,7 @@
                                     @if($new->createdBy)
                                     <li><i class="icon-user"></i><span><a href="#">{{$new->createdBy->name}}</a></span></li>
                                     @endif
-                                    <li class="last"><i class="icon-tags"></i><span><a href="#">Design</a>, <a href="#">Blog</a>, <a href="#">Tutorial</a></span></li>
+                                    <li class="last"><i class="icon-tags"></i><span><a href="#">Sosialisasi</a>, <a href="#">FGD</a>, <a href="#">RPP</a></span></li>
                                 </ul>
                             </div>
                             <div class="clear"></div>

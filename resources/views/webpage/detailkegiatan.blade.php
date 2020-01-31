@@ -68,7 +68,7 @@
               <div class="col-sm-12 row">
                 <section class="section-sm">
                   <h5>{{count ($comment)}} komentar</h5>
-                  @foreach ($comment as $comment)
+                  @foreach ($comment as $comment_)
                   <div class="box-comment">
                     <div class="unit flex-sm-row unit-spacing-md">
                       <div class="unit__left">
@@ -78,11 +78,11 @@
                         <div class="box-comment__body">
                           <div class="box-comment__header">
                             <div class="box-comment__header-left">
-                              <p class="box-comment__title">{{$comment->commentator_name}}</p>
-                              <time datetime="2017">{{ date('d F Y', strtotime($comment->created_at))}}</time>
+                              <p class="box-comment__title">{{$comment_->commentator_name}}</p>
+                              <time datetime="2017">{{ date('d F Y', strtotime($comment_->created_at))}}</time>
                             </div>
                           </div>
-                          <p>{{$comment->message}}</p>
+                          <p>{{$comment_->message}}</p>
                         </div>
                       </div>
                     </div>
@@ -126,14 +126,14 @@
 
           <div class="col-sm-3 margin-bottom-40 animation animated-menu-6 section-divided__aside section-divided__aside-left">
             <p style="font-size:20px;"><b>Kegiatan lainnya</b></p>
-            @foreach($otherEvent as $otherEvent)
+            @foreach($otherEvent as $otherEvent_)
               <div class="row padding-20 padding-top-25">
-                <p class="txt-13"><b><b>Berita</b></b> - {{ date('d F Y', strtotime($otherEvent->datetime))}}</p>
+                <p class="txt-13"><b><b>Berita</b></b> - {{ date('d F Y', strtotime($otherEvent_->datetime))}}</p>
                 <a href="#">
                   @if(count($allgalerys) > 0)
                     <?php $counter = 0; ?>
                     @foreach($allgalerys as $allgalery)
-                      @if($allgalery->foreign_id == $otherEvent->id)
+                      @if($allgalery->foreign_id == $otherEvent_->id)
                           <img style="min-height:150px; max-height:150px" class="lazy" data-src="/storage/event/event{{$otherEvent->id}}/{{$allgalery->file_name}}">
                         <?php $counter++; ?>
                       @endif
@@ -146,9 +146,9 @@
                   @endif
                 </a><br>
                 <h6 class="txt-blue txt-left" style="font-size:13px">
-                  <a href="/{{$otherEvent->slug}}">
-                    <b>{{substr(preg_replace('#<[^>]+>#', ' ', $otherEvent['title']), 0, 50)}}
-                      @if(strlen($otherEvent['title']) > 50) ... @endif
+                  <a href="/{{$otherEvent_->slug}}">
+                    <b>{{substr(preg_replace('#<[^>]+>#', ' ', $otherEvent_['title']), 0, 50)}}
+                      @if(strlen($otherEvent_['title']) > 50) ... @endif
                     </b>
                   </a> 
                 </h6>               
