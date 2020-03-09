@@ -297,7 +297,7 @@
                                   
                                 </div>
                                 <div class="mini-layout-body">
-                                    <h4>{{$abstract->title}}</h4>
+                                    <a href="/wajibserah/terbitan/{{$abstract->id}}" ><h4>{{$abstract->title}}</h4></a>
                                     @php
                                     $abstracts_ = $abstract->catalog_ruas->where('tag','520')->first();
                                     $isbns = $data->catalog_ruas->where('tag','020')->first();

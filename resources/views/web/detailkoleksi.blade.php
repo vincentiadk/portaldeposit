@@ -93,7 +93,7 @@ if($abstracts){
                                     <li><label>Jumlah Eksempelar Deposit : </label>{{ $cols->count() }}  Copy</li>
                                 </ul>
                             </div>
-                            @if(strlen($abstract) > 5)
+                            @if(strlen($abstract) > 20)
                             <div class="widget">
                                 <h4>Abstrak</h4>
                                 <p>{{$abstract}}</p>
