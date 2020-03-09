@@ -80,7 +80,8 @@ class HomeController extends Controller
     }
     private function abstract()
     {
-        $data = AbstractCat::where('status','published')->latest()->take(10)->get();
+        $data = CatalogRuas::where('tag','520')->whereRaw('LENGTH(value) > 50')->groupBy('catalogid')->take(10)->get();
+       // $data = AbstractCat::where('status','published')->latest()->take(10)->get();
         return $data;
     }
     private function eventNewest()
