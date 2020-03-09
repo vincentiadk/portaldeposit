@@ -11,7 +11,9 @@ function getDetailCatalogById($id)
 {
 		$catalog = App\Catalog::find($id);
 		$col = $catalog->collections->where('category_id',4)->first();
-		$col->publisher = ($col->publisher_id ? $col->master_publisher->publisher_name : $col->publisher);
+		if($col->master_publisher){
+			$col->publisher = ($col->publisher_id ? $col->master_publisher->publisher_name : $col->publisher);
+	}
 		$abstract_="";
 		$abstract = $catalog->catalog_ruas->where('tag','520')->first();
 		if($abstract){

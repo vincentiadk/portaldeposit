@@ -13,6 +13,7 @@ use App\Collection;
 use App\Galery;
 use App\Catalog;
 use App\AbstractCat;
+use App\CatalogRuas;
 
 class HomeController extends Controller
 {
@@ -80,7 +81,13 @@ class HomeController extends Controller
     }
     private function abstract()
     {
-        $data = CatalogRuas::where('tag','520')->whereRaw('LENGTH(value) > 50')->groupBy('catalogid')->take(10)->get();
+        $data = Catalog::whereHas('collections',function($query){
+            $query->join('master_publisher','master_publisher.publisher_id','=','collections.publisher_id')
+                 ->where('category_id',4);
+        })->whereHas('catalog_ruas', function($q) {
+            $q->where('tag','520')
+            ->whereRaw('LENGTH(value) > 50');
+        })->latest()->take(10)->get();
        // $data = AbstractCat::where('status','published')->latest()->take(10)->get();
         return $data;
     }

@@ -284,24 +284,46 @@
                     <ul class="slides">
                         @foreach($abstracts as $abstract)
                         @php
-                        $col = getDetailCatalogById($abstract->catalog_id);
+                        $col = getDetailCatalogById($abstract->id);
                         @endphp
                         <li>
                             <div class="testimonial_item mini-layout fluid">
                                 <div class="mini-layout-sidebar hidden-phone ">
-                                    @if($abstract->images()->count() > 0)
-                                    <img data-src="/storage/abstract/{{$abstract->images->first()->file_name}}" class="lazy img-polaroid">
-                                    @else
-                                    <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" />
-                                    @endif
-                                    {{$abstract->all}}
+                                    @if($abstract->coverurl != null)
+                                <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/{{$abstract->worksheet->name}}/{{$abstract->coverurl}}" />
+                                @else
+                                <img class="lazy" data-src="https://opac.perpusnas.go.id/uploaded_files/sampul_koleksi/original/nophoto.jpg" />
+                                @endif
+                                  
                                 </div>
                                 <div class="mini-layout-body">
                                     <h4>{{$abstract->title}}</h4>
-                                    {!!$abstract->abstract!!}
-                                    <span class="author">Abstrak oleh  {{$abstract->createdBy->name}} <small><i>{{$abstract->created_at}}</i></small></span>
+                                    @php
+                                    $abstracts_ = $abstract->catalog_ruas->where('tag','520')->first();
+                                    $isbns = $data->catalog_ruas->where('tag','020')->first();
+                                    $issns = $data->catalog_ruas->where('tag','022')->first();
+                                    $abs = "";
+                                    if(preg_match('/[$]a(.*?)[$]/',$abstracts_->value, $match) == 1) {
+                                        $abs = trim($match[1]);
+                                    } else if(preg_match('/[$]a(.*)/', $abstracts_->value, $match) == 1) {
+                                        $abs = trim($match[1]);
+                                    }
+                                    if($isbns){
+                                        if(preg_match('/[$]a(.*?)[$]/',$isbns->value, $match) == 1) {
+                                            $isbn = trim($match[1]);
+                                        } else if(preg_match('/[$]a(.*)/', $isbns->value, $match) == 1) {
+                                            $isbn = trim($match[1]);
+                                        }
+                                    }
+
+                                    @endphp
+                                    <span style="color:black">{!!$abs!!}</span>
+                                    
                                     <span class="occupation">
-                                        ISBN : {{$abstract->isbn}}<br/>
+                                        @if($isbn != "")
+                                            ISBN : {{ $isbn }} <br/>
+                                        @endif
+                                    
                                         Penerbit : {{$col->publisher}}<br/>
                                         Tahun Terbit  : {{$col->publishyear}}<br/>
                                         Kepengarangan  : {{$col->author}}
