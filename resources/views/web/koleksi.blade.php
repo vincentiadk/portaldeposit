@@ -28,6 +28,11 @@
 								<option value="{{$w->id}}" @if($worksheet == $w->id ) selected @endif>{{$w->name}}</option>
 								@endforeach
 							</select>
+							@if($abstrak == "true")
+							<input type="checkbox" name="chkAbstrak" id="chkAbstrak" checked> Koleksi berabstrak
+							@else
+							<input type="checkbox" name="chkAbstrak" id="chkAbstrak" unchecked> Koleksi berabstrak
+							@endif
 							<input placeholder="Ketik Sesuatu.." type="text" name="search" class="input-medium search-query" value="{{$search}}">
 							<button type="submit" class="btn btn-flat btn-color">Search</button>
 						</form>
@@ -95,7 +100,7 @@
 						</a>
 						@endif 
 						<br/>
-						<i class="icon-info">{{ $dat->worksheet->name }}</i>
+						<i class="icon-info"> {{ $dat->worksheet->name }}</i>
 						@if($isbn != "")
 						<i class="icon-barcode"> ISBN {{ $isbn }} </i>
 						@endif

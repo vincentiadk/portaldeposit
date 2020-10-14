@@ -87,7 +87,7 @@ class HomeController extends Controller
         })->whereHas('catalog_ruas', function($q) {
             $q->where('tag','520')
             ->whereRaw('LENGTH(value) > 50');
-        })->latest()->take(10)->get();
+        })->take(10)->get();
        // $data = AbstractCat::where('status','published')->latest()->take(10)->get();
         return $data;
     }

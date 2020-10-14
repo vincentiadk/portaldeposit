@@ -300,19 +300,26 @@
                                     <a href="/wajibserah/terbitan/{{$abstract->id}}" ><h4>{{$abstract->title}}</h4></a>
                                     @php
                                     $abstracts_ = $abstract->catalog_ruas->where('tag','520')->first();
-                                    $isbns = $data->catalog_ruas->where('tag','020')->first();
-                                    $issns = $data->catalog_ruas->where('tag','022')->first();
-                                    $abs = "";
+                                    $isbns_ = $abstract->catalog_ruas->where('tag','020')->first();
+                                    $issns_ = $abstract->catalog_ruas->where('tag','022')->first();
+                                    $abs = ""; $issn_=""; $isbn_="";
                                     if(preg_match('/[$]a(.*?)[$]/',$abstracts_->value, $match) == 1) {
                                         $abs = trim($match[1]);
                                     } else if(preg_match('/[$]a(.*)/', $abstracts_->value, $match) == 1) {
                                         $abs = trim($match[1]);
                                     }
-                                    if($isbns){
-                                        if(preg_match('/[$]a(.*?)[$]/',$isbns->value, $match) == 1) {
-                                            $isbn = trim($match[1]);
-                                        } else if(preg_match('/[$]a(.*)/', $isbns->value, $match) == 1) {
-                                            $isbn = trim($match[1]);
+                                    if($isbns_){
+                                        if(preg_match('/[$]a(.*?)[$]/',$isbns_->value, $match) == 1) {
+                                            $isbn_ = trim($match[1]);
+                                        } else if(preg_match('/[$]a(.*)/', $isbns_->value, $match) == 1) {
+                                            $isbn_ = trim($match[1]);
+                                        }
+                                    }
+                                    if($issns_){
+                                        if(preg_match('/[$]a(.*?)[$]/',$issns_->value, $match) == 1) {
+                                            $issn_ = trim($match[1]);
+                                        } else if(preg_match('/[$]a(.*)/', $issns_->value, $match) == 1) {
+                                            $issn_ = trim($match[1]);
                                         }
                                     }
 
@@ -320,13 +327,16 @@
                                     <span style="color:black">{!!$abs!!}</span>
                                     
                                     <span class="occupation">
-                                        @if($isbn != "")
-                                            ISBN : {{ $isbn }} <br/>
+                                        @if($isbn_ != "")
+                                            ISBN : {{ $isbn_ }} <br/>
                                         @endif
-                                    
+                                        @if($issn_ != "")
+                                            ISSN : {{ $issn_ }} <br/>
+                                        @endif
                                         Penerbit : {{$col->publisher}}<br/>
                                         Tahun Terbit  : {{$col->publishyear}}<br/>
-                                        Kepengarangan  : {{$col->author}}
+                                        Kepengarangan  : {{$col->author}} <br/>
+                                        Tgl terima : {{ $col->createdate }}
                                     </span>
                                    
                                     

@@ -38,12 +38,19 @@ class KoleksiController extends Controller
         } else {
             $worksheet = $request->worksheet;
         }
+
+        if ($request->chkAbstrak == null) {
+            $abstrak = false;
+        } else {
+            $abstrak = true;
+        }
     //   var_dump($request->query('page'));die();
 
         $data['data'] = $this->getByPage($request);
 
         $data['search'] = $search;
         $data['type'] = $type;
+        $data['abstrak'] = $abstrak;
         $data['worksheet'] = $worksheet;
         $data['count'] = $data['data']->total();
         $data['page'] = $page; 
@@ -61,20 +68,33 @@ class KoleksiController extends Controller
     private function getByPage(Request $request)
     {
         $type = request('type'); $search = request('search'); $worksheet = request('worksheet');
+        $abstrak = request('chkAbstrak');
         $data = Catalog::whereHas('collections',function($query) use($type, $search, $worksheet) {
             $query->join('master_publisher','master_publisher.publisher_id','=','collections.publisher_id')
                  ->where('category_id',4);
             if($type != "") {
                 $query->where('type_of_publisher', $type);
             }
-            if($search != ""){
+            /*if($search != ""){
                 $query->where(DB::Raw('lower(collections.title)'), 'like', '%'.strtolower($search).'%');
-            }
+            }*/
+            
             if($worksheet != ""){
                 $query->where('worksheet_id',$worksheet);
             }
         });
-        return $data->paginate(16)->appends(\Request::only(['search','type','worksheet']))->setPath('');
+            if($search != ""){
+                $data->whereHas('catalog_ruas', function($query) use ($search){
+                    $query->whereRaw("lower(value) like '%".strtolower($search)."%'");
+                });
+            }
+            if($abstrak) {
+                $data->whereHas('catalog_ruas', function($query) use ($abstrak) {
+                    $query->where('tag', '520')->whereRaw('Length(value) > 50');
+                });
+            }
+
+        return $data->paginate(16)->appends(\Request::only(['search','type','worksheet','chkAbstrak']))->setPath('');
     }
 
     public function statistik(Request $req)

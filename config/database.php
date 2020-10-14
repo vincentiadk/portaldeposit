@@ -89,11 +89,11 @@ return [
             'database'  => 'inlis',
           //  'service_name' => 'INLISSTY',
             'username'  => 'inlis_tamu',
-            'password'  => 'inlistamu2019',
+            'password'  => 'r34D$inli5',
           //  'charset'   => 'AL16UTF16',
            // 'collation' => 'utf8_unicode_ci',
-            //'prefix'    => '',
-            //'strict'    => false,
+            'prefix'    => '',
+            //'strict'    => false,*/
      ],
         'oracle2' => [
             'driver'    => 'oracle',
@@ -102,7 +102,7 @@ return [
             'database'  => env('DB_DATABASE', ''),
             'service_name' => env('SERVICE_NAME','deposit'),
             'username'  => 'deposit',
-            'password'  => 'deposit',
+            'password'  => 'depositnew',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',

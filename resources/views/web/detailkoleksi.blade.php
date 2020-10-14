@@ -29,18 +29,14 @@ if($isbns){
 }
 
 if($issns){
-    if(preg_match('/[$]a(.*?)[$]/', $issns->value, $match) == 1) {
+    if(preg_match('/[$]a(.*?)[$]/', $issns->value, $match)  == 1) {
         $issn = trim($match[1]);
     } else if(preg_match('/[$]a(.*)/', $issns->value, $match) == 1) {
         $issn = trim($match[1]);
     }
 }
 if($abstracts){
-    if(preg_match('/[$]a(.*?)[$]/',$abstracts->value, $match) == 1) {
-        $abstract = trim($match[1]);
-    } else if(preg_match('/[$]a(.*)/', $abstracts->value, $match) == 1) {
-        $abstract = trim($match[1]);
-    }
+$abstract = str_replace(['$a','$3'],'',$abstracts->value);
 }
 @endphp
 <section id="subintro">
